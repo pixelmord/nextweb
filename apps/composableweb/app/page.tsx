@@ -1,10 +1,9 @@
-import { Button } from "ui";
+import { H1 } from "ui";
 
 export default function Docs() {
   return (
     <div>
-      <h1>Docs</h1>
-      <Button />
+      <H1>ComposableWeb</H1>
     </div>
   );
 }

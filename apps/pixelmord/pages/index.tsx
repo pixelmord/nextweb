@@ -1,10 +1,9 @@
-import { Button } from "ui";
+import { H1 } from "ui/Typography";
 
 export default function Web() {
   return (
     <div>
-      <h1>Web</h1>
-      <Button />
+      <H1>Pixelmord</H1>
     </div>
   );
 }
