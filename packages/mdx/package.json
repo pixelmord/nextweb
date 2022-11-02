@@ -1,8 +1,8 @@
 {
-  "name": "ui",
+  "name": "mdx",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\""
@@ -12,8 +12,16 @@
     "@types/react-dom": "^18.0.8",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
-    "react": "18.2",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.12",
+    "hasha": "^5.2.2",
+    "next-mdx-remote": "^4.1.0",
+    "node-cache": "^5.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.19.1"
   }
 }
