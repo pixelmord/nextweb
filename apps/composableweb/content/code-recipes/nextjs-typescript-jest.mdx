@@ -1,0 +1,76 @@
+---
+title: 'Setup NextJS Testing with Jest, React-Testing-Library and Typescript'
+layout: 'code-recipe'
+publishedAt: '2020-10-13'
+createdAt: '2020-09-06'
+summary: 'A quick code recipe regarding which files to create and what libraries to install to get up and running with a minimal configuration to test your nextJS project with Jest.'
+tags:
+  - NextJS
+  - Jest
+  - Typescript
+  - React-Testing-Library
+draft: false
+---
+
+See also the code in the [NextJS Example](https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest)
+
+## Install
+
+```bash
+yarn add -D @testing-library/react babel-jest jest jest-watch-typeahead
+```
+
+## Configure
+
+Create `./jest.config.js` as follows:
+
+```js:jest.config.js
+module.exports = {
+  roots: ['<rootDir>'],
+  moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
+  testPathIgnorePatterns: ['<rootDir>[/\\\\](node_modules|.next)[/\\\\]'],
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'babel-jest',
+  },
+  watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
+  moduleNameMapper: {
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
+    // replicate path mappings as in tsconfig.json
+    '^~lib/(.*)$': '<rootDir>/lib/$1',
+    '^~components/(.*)$': '<rootDir>/components/$1',
+  },
+  // required setup files, mocks
+  setupFiles: ['<rootDir>/test/__mocks__/matchMediaMock.js'],
+};
+```
+
+## Utility in case any context providers are needed for rendering
+
+Create `./test/testUtils.tsx` as follows (e.g. for ThemeProvider etc.):
+
+```js:testUtils.tsx
+import React from 'react';
+import { render } from '@testing-library/react';
+import { ChakraProvider as ThemeProvider } from '@chakra-ui/react';
+
+const ChakraRenderer: React.FC = ({ children }: React.PropsWithChildren<Record<string, any>>) => {
+  return <ThemeProvider>{children}</ThemeProvider>;
+};
+
+const customRender = (ui, options = {}) =>
+  render(ui, {
+    wrapper: ChakraRenderer,
+    ...options,
+  });
+
+export * from '@testing-library/react';
+export { customRender as render };
+```
+
+In the test spec files import the utilities from react-testing-library via the above module, especially render function:
+
+```js:MyComponent.spec.ts
+import { render } from '../test/testUtils';
+```
