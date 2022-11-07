@@ -22,9 +22,9 @@ jobs:
           with:
             fetch-depth: 2
 
-        - uses: pnpm/action-setup@v2.0.1
+        - uses: pnpm/action-setup@v2.2.4
           with:
-            version: 6.32.2
+            version: 7.14.1
 
         - name: Setup Node.js environment
           uses: actions/setup-node@v3
@@ -38,5 +38,5 @@ jobs:
         - name: Build
           run: pnpm build
 
-        - name: Test
+        - name: Lint
           run: pnpm lint
