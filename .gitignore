@@ -9,9 +9,10 @@ node_modules
 coverage
 
 # next.js
-.next/
+.next/**
 out/
-build
+dist/**
+build/**
 
 # misc
 .DS_Store
