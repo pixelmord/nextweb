@@ -1,16 +1,15 @@
-import { Archivo_Narrow, Barlow } from '@next/font/google'
+import { Lora } from '@next/font/google'
 import '@/styles/global.css'
 import Link from 'next/link'
-const archivo = Archivo_Narrow({subsets: ['latin']})
-const barlow = Barlow({weight: '400', subsets: ['latin']})
+const lora = Lora({subsets: ['latin'], variable: '--font-lora',})
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html className={`${archivo.className} ${barlow.className}`}>
-      <body><header><nav><Link href="/writing">Writing</Link></nav></header><main>{children}</main></body>
+    <html className={`${lora.variable}`}>
+      <body><header><nav><Link href="/blog">Blog</Link></nav></header><main>{children}</main></body>
     </html>
   )
 }

@@ -2,8 +2,8 @@ import { H1 } from "ui";
 
 export default function Docs() {
   return (
-    <div>
-      <H1>ComposableWeb</H1>
+    <div className="container mx-auto">
+      <H1 className="text-center">Willkommen bei AdamWorks 🏔</H1>
     </div>
   );
 }
