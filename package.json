@@ -4,6 +4,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
+    "type-check": "turbo run type-check",
     "lint": "turbo run lint"
   },
   "devDependencies": {
