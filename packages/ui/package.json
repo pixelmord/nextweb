@@ -5,14 +5,26 @@
   "types": "./index.tsx",
   "license": "MIT",
   "scripts": {
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-presets/jest/node"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@types/eslint": "^8.4.10",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
+    "jest": "^29.3.0",
+    "jest-environment-jsdom": "^29.3.0",
+    "jest-presets": "workspace:*",
     "react": "18.2",
+    "react-dom": "^18.2.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2"
   }

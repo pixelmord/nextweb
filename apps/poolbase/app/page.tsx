@@ -1,6 +1,6 @@
 import { H1 } from 'ui';
 
-export default function Docs() {
+export default function Home() {
   return (
     <div>
       <H1>Poolbase Reboot</H1>
