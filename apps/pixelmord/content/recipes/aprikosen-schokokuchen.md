@@ -1,6 +1,6 @@
 ---
-title: "Aprikosen-Schokokuchen"
-summary: "Aprikosen-Schokokuchen"
+title: 'Aprikosen-Schokokuchen'
+summary: 'Aprikosen-Schokokuchen'
 ingredients:
   - 100g griffiges Mehl
   - 1 Kaffeelöffel Backpulver
@@ -18,10 +18,11 @@ tags:
 preparationTime: 20
 difficulty: simpel
 coverImage:
-createdAt: "2021-07-27"
-publishedAt: "2021-07-27"
+createdAt: '2021-07-27'
+publishedAt: '2021-07-27'
 draft: true
 ---
+
 Für ein halbes Blech:
 
 Eidotter mit Puderzucker und Ei und Vanille schaumig rühren. Zerlassene lauwarme Margarine dazugeben und wieder schaumig rühren. Dann Mehr, Kakao, Backpulver und Zitronenschale vorsichtig unterrühre. (Weil es sonst staubt ;)
