@@ -9,7 +9,7 @@ draft: true
 
 ## Be honest, work hard and help others
 
-That is a sentence that packs a lot into it. 
+That is a sentence that packs a lot into it.
 
 Regarding honesty, I do not see that only as a means to treat others well, but that is also very important to my personal wellbeing, because lying is hard and and always finds a way of coming back to you. I just feel much better to communicate things straight even if that in some cases might lead to conflict at start, but in the long run relationships in business as well as personal life have just a better foundation.
 Working hard does not stand for stress and the shear amount of things that can be delivered, for me that is about intensity and striving for perfection, about doing things right by putting in the effort needed to achieve the best possible result.

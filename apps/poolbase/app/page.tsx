@@ -1,4 +1,4 @@
-import { H1 } from "ui";
+import { H1 } from 'ui';
 
 export default function Docs() {
   return (

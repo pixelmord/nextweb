@@ -1,23 +1,17 @@
-import { H1 } from "ui";
+import { H1 } from 'ui';
 
-import Link from "next/link"
+import Link from 'next/link';
 
-import { Blog } from "@/lib/mdx-sources"
-import { formatDate } from "@/lib/utils"
-
+import { Blog } from '@/lib/mdx-sources';
+import { formatDate } from '@/lib/utils';
 
 export default async function BlogPage() {
-  const posts = await Blog.getAllMdxNodes()
+  const posts = await Blog.getAllMdxNodes();
 
   return (
     <div className="container mx-auto max-w-3xl px-6 py-12 xl:px-8">
-      <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-      Blog
-      </h1>
-      <p className="mt-4 text-gray-700">
-        A blog built using MDX content
-        .
-      </p>
+      <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">Blog</h1>
+      <p className="mt-4 text-gray-700">A blog built using MDX content .</p>
       <hr className="mt-6 py-6" />
       {posts.map((post) => (
         <article key={post.slug} className="flex flex-col space-y-4">
@@ -28,17 +22,13 @@ export default async function BlogPage() {
               </h2>
             </Link>
             {post.frontMatter.createdAt && (
-              <p className="text-sm text-slate-600">
-                {formatDate(post.frontMatter.createdAt)}
-              </p>
+              <p className="text-sm text-slate-600">{formatDate(post.frontMatter.createdAt)}</p>
             )}
           </div>
-          {post.frontMatter.excerpt && (
-            <p className="text-slate-600">{post.frontMatter.excerpt}</p>
-          )}
+          {post.frontMatter.excerpt && <p className="text-slate-600">{post.frontMatter.excerpt}</p>}
           <hr className="mt-6 py-6" />
         </article>
       ))}
     </div>
-  )
+  );
 }
