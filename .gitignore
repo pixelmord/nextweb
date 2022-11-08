@@ -7,6 +7,12 @@ node_modules
 
 # testing
 coverage
+/test-results/
+**/playwright/videos
+**/playwright/screenshots
+**/playwright/artifacts
+**/playwright/results
+**/playwright/reports/*
 
 # next.js
 .next/**
@@ -22,12 +28,32 @@ build/**
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # local env files
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+# vercel
+.vercel
+
+# Webstorm
+.idea
+
+### VisualStudioCode template
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Typescript
+tsconfig.tsbuildinfo
 
 # turbo
 .turbo
