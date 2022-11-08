@@ -4,7 +4,7 @@ import { createSource } from "mdx"
 export const Blog = createSource({
   contentPath: "content/blog",
   basePath: "/blog",
-  sortBy: "date",
+  sortBy: "createdAt",
   sortOrder: "desc",
   frontMatter: z.object({
     title: z.string(),
