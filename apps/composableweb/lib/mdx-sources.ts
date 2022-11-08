@@ -1,10 +1,10 @@
 import * as z from "zod"
 import { createSource } from "mdx"
 
-export const Writing = createSource({
+export const Blog = createSource({
   contentPath: "content/blog",
-  basePath: "/writing",
-  sortBy: "date",
+  basePath: "/blog",
+  sortBy: "createdAt",
   sortOrder: "desc",
   frontMatter: z.object({
     title: z.string(),

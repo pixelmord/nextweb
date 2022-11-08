@@ -2,23 +2,20 @@ import { H1 } from "ui";
 
 import Link from "next/link"
 
-import { Writing } from "@/lib/mdx-sources"
+import { Blog } from "@/lib/mdx-sources"
 import { formatDate } from "@/lib/utils"
 
 
 export default async function BlogPage() {
-  const posts = await Writing.getAllMdxNodes()
+  const posts = await Blog.getAllMdxNodes()
 
   return (
     <div className="container mx-auto max-w-3xl px-6 py-12 xl:px-8">
       <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-      Writing
+      Blog
       </h1>
       <p className="mt-4 text-gray-700">
-        A blog built using MDX content. I copied some sample blog posts from my{" "}
-        <Link href="https://shadcn.com" target="_blank" className="underline">
-          personal site
-        </Link>
+        A blog built using MDX content
         .
       </p>
       <hr className="mt-6 py-6" />
