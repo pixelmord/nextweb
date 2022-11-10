@@ -1,5 +1,5 @@
 import { Blog } from '@/lib/mdx-sources';
-import { MdxContent } from '@/components/mdxContent';
+import { MdxContent } from 'ui/src/MdxContent';
 import { formatDate } from '@/lib/utils';
 
 // TODO: Properly type this file once the following fix lands.

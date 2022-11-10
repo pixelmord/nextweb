@@ -1,4 +1,4 @@
-import { Blog } from '@/lib/mdx-sources';
+import { Recipes } from '@/lib/mdx-sources';
 import { MdxContent } from 'ui/src/MdxContent';
 import { formatDate } from '@/lib/utils';
 
@@ -11,7 +11,7 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  const files = await Blog.getMdxFiles();
+  const files = await Recipes.getMdxFiles();
 
   return files?.map((file) => ({
     slug: file.slug.split('/'),
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export default async function PostPage({ params }) {
-  const post = await Blog.getMdxNode(params?.slug?.join('/'));
+  const post = await Recipes.getMdxNode(params?.slug?.join('/'));
 
   return (
     <article className="mx-auto max-w-2xl py-12">
