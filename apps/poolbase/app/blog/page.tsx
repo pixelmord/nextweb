@@ -25,7 +25,7 @@ export default async function BlogPage() {
               <p className="text-sm text-slate-600">{formatDate(post.frontMatter.createdAt)}</p>
             )}
           </div>
-          {post.frontMatter.excerpt && <p className="text-slate-600">{post.frontMatter.excerpt}</p>}
+          {post.frontMatter.summary && <p className="text-slate-600">{post.frontMatter.summary}</p>}
           <hr className="mt-6 py-6" />
         </article>
       ))}
