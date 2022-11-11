@@ -13,6 +13,7 @@ ingredients:
   - 125g Rosinen
 createdAt: '2020-09-06'
 publishedAt: '2020-09-06'
+coverImage:
 draft: true
 ---
 

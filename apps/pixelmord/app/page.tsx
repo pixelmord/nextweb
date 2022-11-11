@@ -1,4 +1,4 @@
-import { H1 } from 'ui/Typography';
+import { H1 } from 'ui';
 
 export default function Web() {
   return (

@@ -10,7 +10,7 @@ export const Blog = createSource({
     title: z.string(),
     createdAt: z.string(),
     publishedAt: z.string(),
-    excerpt: z.string().optional(),
+    summary: z.string().optional(),
     draft: z.boolean(),
   }),
 });

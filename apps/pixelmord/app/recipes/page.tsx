@@ -2,11 +2,11 @@ import { H1 } from 'ui';
 
 import Link from 'next/link';
 
-import { Blog } from '@/lib/mdx-sources';
+import { Recipes } from '@/lib/mdx-sources';
 import { formatDate } from '@/lib/utils';
 
 export default async function BlogPage() {
-  const posts = await Blog.getAllMdxNodes();
+  const posts = await Recipes.getAllMdxNodes();
 
   return (
     <div className="container mx-auto max-w-3xl px-6 py-12 xl:px-8">

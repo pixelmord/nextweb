@@ -9,7 +9,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header>
           <nav>
-            <Link href="/writing">Writing</Link>
+            <Link href="/blog">Blog</Link>
           </nav>
         </header>
         <main>{children}</main>
