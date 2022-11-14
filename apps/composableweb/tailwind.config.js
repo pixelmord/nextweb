@@ -12,9 +12,24 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-barlow)', ...fontFamily.sans],
-        headline: ['var(--font-archivo)', ...fontFamily.sans],
+        headline: ['var(--font-archivo)'],
         serif: [...fontFamily.serif],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            h1: {
+              fontFamily: theme('fontFamily.headline'),
+            },
+            h2: {
+              fontFamily: theme('fontFamily.headline'),
+            },
+            h3: {
+              fontFamily: theme('fontFamily.headline'),
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [

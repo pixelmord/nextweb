@@ -9,7 +9,7 @@ export default async function BlogPage() {
   const posts = await Blog.getAllMdxNodes();
 
   return (
-    <div className="container mx-auto max-w-3xl px-6 py-12 xl:px-8">
+    <div className="container mx-auto max-w-3xl px-6 py-12 xl:px-8 prose">
       <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">Blog</h1>
       <p className="mt-4 text-gray-700">A blog built using MDX content .</p>
       <hr className="mt-6 py-6" />
