@@ -100,19 +100,34 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
     };
   }
 
-  async function getAllMdxNodes() {
+  async function getAllMdxNodes(includeDraft = false) {
     const files = await getMdxFiles();
 
     if (!files.length) return [];
 
-    const nodes = await Promise.all(
+    let nodes = await Promise.all(
       files.map(async (file) => {
         return await getMdxNode(file.slug);
       })
     );
+    nodes = nodes.filter((node) => {
+      if (node !== null) {
+        if (!includeDraft && node.frontMatter.draft === true) {
+          return false;
+        }
+        return true;
+      }
+    });
+    if (!sortBy) {
+      return nodes;
+    }
 
     const adjust = sortOrder === 'desc' ? -1 : 1;
+
     return nodes.sort((a, b) => {
+      if (!a || !b) {
+        return 0;
+      }
       if (a.frontMatter[sortBy] < b.frontMatter[sortBy]) {
         return -1 * adjust;
       }
