@@ -4,4 +4,12 @@ module.exports = {
     transpilePackages: ['ui'],
     appDir: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+      },
+    ],
+  },
 };
