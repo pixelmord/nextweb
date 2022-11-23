@@ -16,15 +16,16 @@ export async function middleware(req: NextRequest) {
   if (session?.user) {
     // Authentication successful, forward request to protected route.
     res.headers.set('supabase-user-id', session.user.id);
+    if (req.nextUrl.pathname === '/login') {
+      return NextResponse.redirect('/base');
+    }
     return res;
   }
-
-  // Auth condition not met, redirect to home page.
-  const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = '/login';
-  redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname);
-  return NextResponse.redirect(redirectUrl);
+  if (req.nextUrl.pathname.includes('/base')) {
+    // Auth condition not met, redirect to login page.
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.pathname = '/login';
+    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname);
+    return NextResponse.redirect(redirectUrl);
+  }
 }
-export const config = {
-  matcher: '/base/:path*',
-};

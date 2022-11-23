@@ -5,8 +5,11 @@ import Image from 'next/image';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import type { Database } from '@/types/supabase';
+type Profile = Database['public']['Tables']['profiles']['Row'];
 const menuLinks = [{ href: '/#features', text: 'Features' }];
-export default function MainNavigation() {
+
+export default function MainNavigation({ user }: { user: null | Profile }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (
@@ -53,12 +56,14 @@ export default function MainNavigation() {
             {/* <Link href="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
               Sign in
             </Link> */}
-            <Link
-              href="/#join-waitlist"
-              className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            >
-              Join Waitlist
-            </Link>
+            {!user && (
+              <Link
+                href="/#join-waitlist"
+                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              >
+                Join Waitlist
+              </Link>
+            )}
           </div>
         </div>
       </div>
