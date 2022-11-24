@@ -2,16 +2,18 @@
 import { Menu, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { FiUser } from 'react-icons/fi';
-import { usePathname } from 'next/navigation';
-import { useProfileImage, useUserProfile } from '@/lib/api';
-import Image from 'next/image';
 
-export default function UserMenu({ links }: { links: { href: string; text: string }[] }) {
+import { usePathname } from 'next/navigation';
+import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import Image from 'next/image';
+import { IconType } from 'react-icons';
+import { Button } from '@/components/Form/Button';
+
+export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
   const { data: userProfile, isLoading, isIdle, isError } = useUserProfile();
   const avatarUrl = useProfileImage(userProfile?.avatar_url);
-
+  const logoutMutation = useLogOut();
   return (
     <Menu as="div">
       <div>
@@ -47,12 +49,15 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
                     active || pathname === link.href ? 'bg-violet-500 text-white' : 'text-gray-700'
                   } group flex px-4 py-2 text-sm `}
                 >
-                  <FiUser className="mr-2 h-5 w-5" aria-hidden="true" />
+                  <link.icon className="mr-2 h-5 w-5" aria-hidden="true" />
                   {link.text}
                 </Link>
               )}
             </Menu.Item>
           ))}
+          <Menu.Item>
+            <Button onClick={() => logoutMutation.mutate()}>Logout</Button>
+          </Menu.Item>
         </Menu.Items>
       </Transition>
     </Menu>

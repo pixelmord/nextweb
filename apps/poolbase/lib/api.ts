@@ -4,6 +4,7 @@ import supabase from './supabaseClient';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import type { Database } from '@/types/supabase';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 export async function getUserProfile(userId) {
@@ -100,9 +101,11 @@ const logout = async (client) => {
 export function useLogOut() {
   const queryClient = useQueryClient();
   const client = useSupabaseClient();
+  const router = useRouter();
   return useMutation(() => logout(client), {
     onSuccess: () => {
       queryClient.removeQueries();
+      router.push('/login');
     },
   });
 }

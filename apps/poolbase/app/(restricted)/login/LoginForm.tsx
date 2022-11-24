@@ -22,5 +22,13 @@ export default function LoginForm() {
     router.push('/base');
     return null;
   }
-  return <Auth redirectTo="/base" supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />;
+  return (
+    <Auth
+      redirectTo="/base"
+      supabaseClient={supabase}
+      appearance={{ theme: ThemeSupa }}
+      theme="dark"
+      providers={['github']}
+    />
+  );
 }

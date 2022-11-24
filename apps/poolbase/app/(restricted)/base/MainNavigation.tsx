@@ -6,13 +6,20 @@ import UserMenu from '@/components/UserMenu';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiBell, FiMenu } from 'react-icons/fi';
+import { FiBell, FiMenu, FiUser, FiPackage } from 'react-icons/fi';
 import { useState } from 'react';
+import { Button } from '@/components/Form';
 const menuLinks = [{ href: '/base', text: 'Dashboard' }];
 const userLinks = [
   {
-    href: '/base/profile',
+    href: '/base/settings/profile',
     text: 'Profile',
+    icon: FiUser,
+  },
+  {
+    href: '/base/settings/integrations',
+    text: 'Integrations',
+    icon: FiPackage,
   },
 ];
 export default function MainNavigation() {
@@ -150,12 +157,7 @@ export default function MainNavigation() {
                 {link.text}
               </Link>
             ))}
-            <button
-              onClick={() => logoutMutation.mutate()}
-              className={`text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium`}
-            >
-              Logout
-            </button>
+            <Button onClick={() => logoutMutation.mutate()}>Logout</Button>
           </div>
         </div>
       </div>
