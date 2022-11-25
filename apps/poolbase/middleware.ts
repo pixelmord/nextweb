@@ -17,7 +17,9 @@ export async function middleware(req: NextRequest) {
     // Authentication successful, forward request to protected route.
     res.headers.set('supabase-user-id', session.user.id);
     if (req.nextUrl.pathname === '/login') {
-      return NextResponse.redirect('/base');
+      const redirectUrl = req.nextUrl.clone();
+      redirectUrl.pathname = '/base';
+      return NextResponse.redirect(redirectUrl);
     }
     return res;
   }
