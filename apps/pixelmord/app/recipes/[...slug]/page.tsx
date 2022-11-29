@@ -1,6 +1,7 @@
 import { Recipes } from '@/lib/mdx-sources';
 import { MdxContent } from 'ui/src/MdxContent';
 import { formatDate } from '@/lib/utils';
+import { H1 } from 'ui';
 
 // TODO: Properly type this file once the following fix lands.
 // @see https://github.com/vercel/next.js/pull/42019
@@ -18,13 +19,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function PostPage({ params }) {
+export default async function PostPage({ params }: PostPageProps) {
   const post = await Recipes.getMdxNode(params?.slug?.join('/'));
 
   return (
     <article className="mx-auto max-w-2xl py-12">
       <div className="flex flex-col space-y-2">
-        <h1 className="max-w-[90%] text-4xl font-bold leading-normal">{post.frontMatter.title}</h1>
+        <H1>{post.frontMatter.title}</H1>
         {post.frontMatter.createdAt && (
           <p className="text-sm text-slate-600">{formatDate(post.frontMatter.createdAt)}</p>
         )}
