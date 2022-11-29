@@ -20,7 +20,7 @@ date: '2020-05-20T12:35:07.322Z'
 ogImage: /assets/recipes/tina-guina-s8_7AqkzCWY-unsplash.jpg
 createdAt: '2020-08-30'
 publishedAt: '2020-08-30'
-draft: true
+draft: false
 ---
 
 1. Eier mit Zucker schaumig rühren.
