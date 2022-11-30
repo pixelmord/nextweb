@@ -1,8 +1,8 @@
 'use client';
-import { useUserProfile, useUpdateProfile } from '@/lib/api';
-import { H2 } from 'ui';
+import { useUserProfile, useUpdateProfile, UpdateProfileData } from '@/lib/api';
+import { Button, H2 } from 'ui/client-only';
 import { Formik, Form } from 'formik';
-import { Button, FormElementText } from '@/components/Form';
+import { FormElementText } from '@/components/Form';
 import AvatarForm from './AvatarForm';
 export default function ProfileForm() {
   const { data, isLoading, isIdle, isError } = useUserProfile();
@@ -11,7 +11,7 @@ export default function ProfileForm() {
   if (isLoading || isIdle) {
     return <div>Loading</div>;
   }
-  if (isError) {
+  if (isError || !data) {
     return <div>Error</div>;
   }
 
@@ -19,17 +19,17 @@ export default function ProfileForm() {
     <div className="container">
       <H2>Edit your Profile </H2>
       <AvatarForm
-        url={data.avatar_url}
-        uid={data.id}
+        url={data.avatar_url as string}
+        uid={data.id as string}
         size={150}
         onUpload={(url) => {
-          mutation.mutate({ ...data, avatar_url: url });
+          mutation.mutate({ ...data, avatar_url: url } as UpdateProfileData);
         }}
       />
       <Formik
         initialValues={data}
         onSubmit={(values) => {
-          mutation.mutate({ ...data, ...values });
+          mutation.mutate({ ...data, ...values } as UpdateProfileData);
         }}
       >
         <Form>

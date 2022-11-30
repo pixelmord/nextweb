@@ -246,6 +246,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
+      utils: workspace:*
       zod: ^3.19.1
     dependencies:
       '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
@@ -272,6 +273,7 @@ importers:
       server-only: 0.0.1
       sharp: 0.31.2
       ui: link:../../packages/ui
+      utils: link:../../packages/utils
       zod: 3.19.1
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
@@ -402,6 +404,40 @@ importers:
       jest-environment-jsdom: 29.3.0
       jest-presets: link:../jest-presets
       next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tsconfig: link:../tsconfig
+      typescript: 4.8.4
+
+  packages/utils:
+    specifiers:
+      '@testing-library/jest-dom': ^5.16.5
+      '@testing-library/react': ^13.4.0
+      '@types/eslint': ^8.4.10
+      '@types/react': ^18.0.24
+      '@types/react-dom': ^18.0.8
+      '@types/testing-library__jest-dom': ^5.14.5
+      eslint: ^7.32.0
+      eslint-config-custom: workspace:*
+      jest: ^29.3.0
+      jest-environment-jsdom: ^29.3.0
+      jest-presets: workspace:*
+      react: '18.2'
+      react-dom: ^18.2.0
+      tsconfig: workspace:*
+      typescript: ^4.5.2
+    devDependencies:
+      '@testing-library/jest-dom': 5.16.5
+      '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+      '@types/eslint': 8.4.10
+      '@types/react': 18.0.25
+      '@types/react-dom': 18.0.8
+      '@types/testing-library__jest-dom': 5.14.5
+      eslint: 7.32.0
+      eslint-config-custom: link:../eslint-config-custom
+      jest: 29.3.0
+      jest-environment-jsdom: 29.3.0
+      jest-presets: link:../jest-presets
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tsconfig: link:../tsconfig

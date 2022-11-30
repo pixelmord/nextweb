@@ -3,7 +3,7 @@ import { H1 } from 'ui';
 import Link from 'next/link';
 
 import { Blog } from '@/lib/mdx-sources';
-import { formatDate } from '@/lib/utils';
+import { formatDate } from 'utils';
 
 export default async function BlogPage() {
   const posts = await Blog.getAllMdxNodes();
@@ -14,18 +14,18 @@ export default async function BlogPage() {
       <p className="mt-4 text-gray-700">stuff</p>
       <hr className="mt-6 py-6" />
       {posts.map((post) => (
-        <article key={post.slug} className="flex flex-col space-y-4">
+        <article key={post?.slug} className="flex flex-col space-y-4">
           <div className="flex flex-col space-y-2">
-            <Link href={post.url}>
+            <Link href={post?.url as string}>
               <h2 className="max-w-[90%] text-2xl font-bold leading-normal sm:text-3xl md:text-3xl">
-                {post.frontMatter.title}
+                {post?.frontMatter.title}
               </h2>
             </Link>
-            {post.frontMatter.createdAt && (
-              <p className="text-sm text-slate-600">{formatDate(post.frontMatter.createdAt)}</p>
+            {post?.frontMatter.createdAt && (
+              <p className="text-sm text-slate-600">{formatDate(post?.frontMatter.createdAt)}</p>
             )}
           </div>
-          {post.frontMatter.summary && <p className="text-slate-600">{post.frontMatter.summary}</p>}
+          {post?.frontMatter.summary && <p className="text-slate-600">{post?.frontMatter.summary}</p>}
           <hr className="mt-6 py-6" />
         </article>
       ))}

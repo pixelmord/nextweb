@@ -1,13 +1,11 @@
-import { H1, H2 } from 'ui';
+import { H1 } from 'ui';
 
 import Link from 'next/link';
 
-import { Recipes } from '@/lib/mdx-sources';
+import { Blog } from '@/lib/mdx-sources';
 import { formatDate } from 'utils';
 
-export default async function BlogPage() {
-  const posts = await Recipes.getAllMdxNodes();
-
+export default function BlogPage({ posts }) {
   return (
     <div className="container mx-auto max-w-3xl px-6 py-12 xl:px-8">
       <H1>Blog</H1>
@@ -17,9 +15,9 @@ export default async function BlogPage() {
         <article key={post?.slug} className="flex flex-col space-y-4">
           <div className="flex flex-col space-y-2">
             <Link href={post?.url as string}>
-              <H2 className="max-w-[90%] text-2xl font-bold leading-normal sm:text-3xl md:text-3xl">
+              <h2 className="max-w-[90%] text-2xl font-bold leading-normal sm:text-3xl md:text-3xl">
                 {post?.frontMatter.title}
-              </H2>
+              </h2>
             </Link>
             {post?.frontMatter.createdAt && (
               <p className="text-sm text-slate-600">{formatDate(post?.frontMatter.createdAt)}</p>
@@ -31,4 +29,11 @@ export default async function BlogPage() {
       ))}
     </div>
   );
+}
+
+export async function getStaticProps(context) {
+  const posts = await Blog.getAllMdxNodes();
+  return {
+    props: { posts },
+  };
 }

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiBell, FiMenu, FiUser, FiPackage } from 'react-icons/fi';
 import { useState } from 'react';
-import { Button } from '@/components/Form';
+import { Button } from 'ui';
 const menuLinks = [{ href: '/base', text: 'Dashboard' }];
 const userLinks = [
   {
@@ -24,7 +24,7 @@ const userLinks = [
 ];
 export default function MainNavigation() {
   const { data: userProfile, isLoading, isIdle, isError } = useUserProfile();
-  const avatarUrl = useProfileImage(userProfile?.avatar_url);
+  const avatarUrl = useProfileImage(userProfile?.avatar_url as string);
   const logoutMutation = useLogOut();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -57,7 +57,7 @@ export default function MainNavigation() {
                       pathname === link.href
                         ? 'bg-gray-900 text-white'
                         : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                    } px-3 py-2 rounded-md text-sm font-medium`}
+                    } rounded-md px-3 py-2 text-sm font-medium`}
                   >
                     {link.text}
                   </Link>
@@ -104,7 +104,7 @@ export default function MainNavigation() {
               key={link.href}
               className={`${
                 pathname === link.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-              }  block px-3 py-2 rounded-md text-base font-medium`}
+              }  block rounded-md px-3 py-2 text-base font-medium`}
             >
               {link.text}
             </Link>
@@ -122,7 +122,7 @@ export default function MainNavigation() {
                       className="rounded-full"
                       priority
                       src={avatarUrl}
-                      alt={userProfile.full_name}
+                      alt={userProfile.full_name || ''}
                     />
                   )}
                 </div>
@@ -142,7 +142,7 @@ export default function MainNavigation() {
             >
               <span className="sr-only">View notifications</span>
 
-              <FiBell className="w-6 h-6" />
+              <FiBell className="h-6 w-6" />
             </button>
           </div>
           <div className="mt-3 space-y-1 px-2">
@@ -152,7 +152,7 @@ export default function MainNavigation() {
                 key={link.href}
                 className={`${
                   pathname === link.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }  block px-3 py-2 rounded-md text-base font-medium`}
+                }  block rounded-md px-3 py-2 text-base font-medium`}
               >
                 {link.text}
               </Link>

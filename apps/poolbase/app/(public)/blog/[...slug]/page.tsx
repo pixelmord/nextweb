@@ -1,6 +1,6 @@
 import { Blog } from '@/lib/mdx-sources';
-import { MdxContent } from 'ui/src/MdxContent';
-import { formatDate } from '@/lib/utils';
+import { MdxContent } from 'ui/client-only';
+import { formatDate } from 'utils';
 
 // TODO: Properly type this file once the following fix lands.
 // @see https://github.com/vercel/next.js/pull/42019
@@ -18,9 +18,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function PostPage({ params }) {
+export default async function PostPage({ params }: PostPageProps) {
   const post = await Blog.getMdxNode(params?.slug?.join('/'));
-
+  if (!post) return null;
   return (
     <article className="mx-auto max-w-2xl py-12">
       <div className="flex flex-col space-y-2">

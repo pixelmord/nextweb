@@ -1,8 +1,9 @@
+'use client';
 import React, { useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import type { Database } from '@/types/supabase';
 type Profiles = Database['public']['Tables']['profiles']['Row'];
-import { buttonStyle } from '@/components/Form';
+import { buttonStyle } from 'ui/client-only';
 import { useProfileImage } from '@/lib/api';
 import Image from 'next/image';
 
@@ -13,7 +14,7 @@ export default function AvatarForm({
   onUpload,
 }: {
   uid: string;
-  url: Profiles['avatar_url'];
+  url?: Profiles['avatar_url'];
   size: number;
   onUpload: (url: string) => void;
 }) {
@@ -57,12 +58,12 @@ export default function AvatarForm({
         <Image
           src={avatarUrl}
           alt="Avatar"
-          className="rounded-full bg-gray-400 border border-pink-900 mb-6"
+          className="mb-6 rounded-full border border-pink-900 bg-gray-400"
           width={size}
           height={size}
         />
       ) : (
-        <div className="rounded-full bg-gray-400 border border-pink-900 mb-6" style={{ height: size, width: size }} />
+        <div className="mb-6 rounded-full border border-pink-900 bg-gray-400" style={{ height: size, width: size }} />
       )}
       <div style={{ width: size }}>
         <label className={buttonStyle({ intent: 'secondary', size: 'medium', className: 'block' })} htmlFor="single">
