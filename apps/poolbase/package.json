@@ -22,6 +22,7 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.8",
     "class-variance-authority": "^0.3.0",
+    "encoding": "^0.1.13",
     "formik": "^2.2.9",
     "mdx": "workspace:*",
     "next": "^13.0.1",
@@ -32,6 +33,7 @@
     "react-icons": "^4.6.0",
     "react-query": "^3.39.2",
     "server-only": "^0.0.1",
+    "sharp": "^0.31.2",
     "ui": "workspace:*",
     "zod": "^3.19.1"
   },

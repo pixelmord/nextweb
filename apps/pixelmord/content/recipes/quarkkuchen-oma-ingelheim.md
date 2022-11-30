@@ -14,7 +14,7 @@ ingredients:
 createdAt: '2020-09-06'
 publishedAt: '2020-09-06'
 coverImage:
-draft: true
+draft: false
 ---
 
 1. Eier mit Zucker schaumig rühren.
