@@ -393,11 +393,13 @@ importers:
       '@types/react': ^18.0.24
       '@types/react-dom': ^18.0.8
       '@types/testing-library__jest-dom': ^5.14.5
+      class-variance-authority: ^0.3.0
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
       jest: ^29.3.0
       jest-environment-jsdom: ^29.3.0
       jest-presets: workspace:*
+      next: ^13.0.1
       next-mdx-remote: ^4.1.0
       react: '18.2'
       react-dom: ^18.2.0
@@ -410,11 +412,13 @@ importers:
       '@types/react': 18.0.24
       '@types/react-dom': 18.0.8
       '@types/testing-library__jest-dom': 5.14.5
+      class-variance-authority: 0.3.0_typescript@4.8.4
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
       jest: 29.3.0
       jest-environment-jsdom: 29.3.0
       jest-presets: link:../jest-presets
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -2448,7 +2452,6 @@ packages:
         optional: true
     dependencies:
       typescript: 4.8.4
-    dev: false
 
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}

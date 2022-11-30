@@ -51,7 +51,7 @@ export const labelStyle = cva('block font-medium', {
 });
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement>, VariantProps<typeof labelStyle> {}
-export default function Label({ children, className, ...rest }: LabelProps) {
+export function Label({ children, className, ...rest }: LabelProps) {
   return (
     <label className={className} {...rest}>
       {children}
