@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    transpilePackages: ['ui'],
+    transpilePackages: ['ui', 'mdx', 'utils'],
     appDir: true,
   },
   images: {
