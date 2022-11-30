@@ -221,7 +221,7 @@ importers:
     specifiers:
       '@headlessui/react': ^1.7.4
       '@next/font': ^13.0.1
-      '@supabase/auth-helpers-nextjs': ^0.5.1
+      '@supabase/auth-helpers-nextjs': ^0.5.2
       '@supabase/auth-helpers-react': ^0.3.1
       '@supabase/auth-ui-react': ^0.2.6
       '@supabase/supabase-js': ^2.1.0
@@ -263,7 +263,7 @@ importers:
     dependencies:
       '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
       '@next/font': 13.0.1
-      '@supabase/auth-helpers-nextjs': 0.5.1_zj6vbgpit7u2xp5t7lhhtyhq6e
+      '@supabase/auth-helpers-nextjs': 0.5.2_zj6vbgpit7u2xp5t7lhhtyhq6e
       '@supabase/auth-helpers-react': 0.3.1_zj6vbgpit7u2xp5t7lhhtyhq6e
       '@supabase/auth-ui-react': 0.2.6_biqbaboplfbrettd7655fr4n2y
       '@supabase/supabase-js': 2.1.0_encoding@0.1.13
@@ -1523,8 +1523,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@supabase/auth-helpers-nextjs/0.5.1_zj6vbgpit7u2xp5t7lhhtyhq6e:
-    resolution: {integrity: sha512-aXpFlg3XUN70fX+uqsxZCTYe4u0c9yQuSYxTxvxZFAQuRPGxv86zoxUAslMFMIvQN8uwb8dUjlTsqb1e0qTEPQ==}
+  /@supabase/auth-helpers-nextjs/0.5.2_zj6vbgpit7u2xp5t7lhhtyhq6e:
+    resolution: {integrity: sha512-B+sQFVEImAYOJKyyNX1DWqTF2qVf9SocOM1GD4eGHon6ulvLOo2a8V+v1jZAuLOBF6yzVIYnZucuYKZCiNP/Eg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:

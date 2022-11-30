@@ -8,9 +8,9 @@ export type FormElementTextProps = {
 };
 export function FormElementText({ label, id, type = 'text' }: FormElementTextProps) {
   return (
-    <div>
+    <div className="my-4">
       <Label htmlFor={id}>{label}</Label>
-      <Field className={fieldStyle({ state: 'default' })} id={id} name={id} type={type} />
+      <Field className={fieldStyle({ state: 'default', className: 'mt-1' })} id={id} name={id} type={type} />
       <ErrorMessage component="p" className="text-sm text-red-500" name={id} />
     </div>
   );

@@ -1,14 +1,17 @@
 'use client';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import supabase from './supabaseClient';
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import supabase from './supabaseBrowserClient';
 import type { Database } from '@/types/supabase';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
-export async function getUserProfile(userId) {
+export async function getUserProfile() {
   try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userId = user?.id;
     let { data, error, status } = await supabase.from('profiles').select(`*`).eq('id', userId).single();
     if (error && status !== 406) {
       throw error;
@@ -19,12 +22,7 @@ export async function getUserProfile(userId) {
   }
 }
 export function useUserProfile() {
-  const user = useUser();
-  const userId = user?.id;
-  return useQuery(['userProfile', userId], () => getUserProfile(userId), {
-    // The query will not execute until the userId exists
-    enabled: !!userId,
-  });
+  return useQuery(['userProfile'], () => getUserProfile());
 }
 
 export function useProfileImage(url: string) {
@@ -48,14 +46,14 @@ export function useProfileImage(url: string) {
   return avatarUrl;
 }
 export type UpdateProfileData = Pick<Profiles, 'avatar_url' | 'full_name' | 'id' | 'username' | 'website'>;
-export async function updateProfile(client, data: UpdateProfileData) {
+export async function updateProfile(data: UpdateProfileData) {
   try {
     const updates = {
       ...data,
       updated_at: new Date().toISOString(),
     };
 
-    let { error } = await client.from('profiles').upsert(updates);
+    let { error } = await supabase.from('profiles').upsert(updates);
     if (error) throw error;
   } catch (error) {
     console.log(error);
@@ -64,8 +62,7 @@ export async function updateProfile(client, data: UpdateProfileData) {
 
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
-  const client = useSupabaseClient();
-  return useMutation((data: UpdateProfileData) => updateProfile(client, data), {
+  return useMutation((data: UpdateProfileData) => updateProfile(data), {
     onMutate: async (newProfileData) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries(['userProfile', newProfileData.id]);
@@ -90,8 +87,8 @@ export function useUpdateProfile() {
   });
 }
 
-const logout = async (client) => {
-  const { error } = await client.auth.signOut();
+const logout = async () => {
+  const { error } = await supabase.auth.signOut();
 
   if (error) {
     throw error;
@@ -100,9 +97,8 @@ const logout = async (client) => {
 
 export function useLogOut() {
   const queryClient = useQueryClient();
-  const client = useSupabaseClient();
   const router = useRouter();
-  return useMutation(() => logout(client), {
+  return useMutation(() => logout(), {
     onSuccess: () => {
       queryClient.removeQueries();
       router.push('/login');

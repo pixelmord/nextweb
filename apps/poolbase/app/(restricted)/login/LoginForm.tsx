@@ -1,12 +1,9 @@
 'use client';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
-import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
+import supabase from '@/lib/supabaseBrowserClient';
 export default function LoginForm() {
-  const supabase = useSupabaseClient();
-  const session = useSession();
   const router = useRouter();
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -18,10 +15,10 @@ export default function LoginForm() {
     return null;
   }
 
-  if (session) {
-    router.push('/base');
-    return null;
-  }
+  // if (session) {
+  //   router.push('/base');
+  //   return null;
+  // }
   return (
     <Auth
       redirectTo="/base"
