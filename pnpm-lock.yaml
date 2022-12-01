@@ -36,6 +36,7 @@ importers:
       '@types/react-dom': ^18.0.7
       '@types/testing-library__jest-dom': ^5.14.5
       autoprefixer: ^10.4.13
+      class-variance-authority: ^0.3.0
       encoding: ^0.1.13
       eslint-config-custom: workspace:*
       jest: ^29.3.0
@@ -51,6 +52,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
+      utils: workspace:*
       zod: ^3.19.1
     dependencies:
       '@next/font': 13.0.1
@@ -58,6 +60,7 @@ importers:
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.1
       '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.1
       '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.1
+      class-variance-authority: 0.3.0_typescript@4.8.4
       encoding: 0.1.13
       mdx: link:../../packages/mdx
       next: 13.0.1_biqbaboplfbrettd7655fr4n2y
@@ -66,6 +69,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sharp: 0.31.2
       ui: link:../../packages/ui
+      utils: link:../../packages/utils
       zod: 3.19.1
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
@@ -97,6 +101,7 @@ importers:
       '@types/react-dom': ^18.0.7
       '@types/testing-library__jest-dom': ^5.14.5
       autoprefixer: ^10.4.13
+      class-variance-authority: ^0.3.0
       encoding: ^0.1.13
       eslint-config-custom: workspace:*
       jest: ^29.3.0
@@ -112,6 +117,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
+      utils: workspace:*
       zod: ^3.19.1
     dependencies:
       '@next/font': 13.0.1
@@ -119,6 +125,7 @@ importers:
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.1
       '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.1
       '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.1
+      class-variance-authority: 0.3.0_typescript@4.8.4
       encoding: 0.1.13
       mdx: link:../../packages/mdx
       next: 13.0.1_biqbaboplfbrettd7655fr4n2y
@@ -127,6 +134,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sharp: 0.31.2
       ui: link:../../packages/ui
+      utils: link:../../packages/utils
       zod: 3.19.1
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
@@ -158,6 +166,7 @@ importers:
       '@types/react-dom': ^18.0.7
       '@types/testing-library__jest-dom': ^5.14.5
       autoprefixer: ^10.4.13
+      class-variance-authority: ^0.3.0
       encoding: ^0.1.13
       eslint-config-custom: workspace:*
       jest: ^29.3.0
@@ -173,6 +182,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
+      utils: workspace:*
       zod: ^3.19.1
     dependencies:
       '@next/font': 13.0.1
@@ -180,6 +190,7 @@ importers:
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.1
       '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.1
       '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.1
+      class-variance-authority: 0.3.0_typescript@4.8.4
       encoding: 0.1.13
       mdx: link:../../packages/mdx
       next: 13.0.1_biqbaboplfbrettd7655fr4n2y
@@ -188,6 +199,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sharp: 0.31.2
       ui: link:../../packages/ui
+      utils: link:../../packages/utils
       zod: 3.19.1
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
@@ -209,7 +221,7 @@ importers:
     specifiers:
       '@headlessui/react': ^1.7.4
       '@next/font': ^13.0.1
-      '@supabase/auth-helpers-nextjs': ^0.5.1
+      '@supabase/auth-helpers-nextjs': ^0.5.2
       '@supabase/auth-helpers-react': ^0.3.1
       '@supabase/auth-ui-react': ^0.2.6
       '@supabase/supabase-js': ^2.1.0
@@ -246,11 +258,12 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
+      utils: workspace:*
       zod: ^3.19.1
     dependencies:
       '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
       '@next/font': 13.0.1
-      '@supabase/auth-helpers-nextjs': 0.5.1_zj6vbgpit7u2xp5t7lhhtyhq6e
+      '@supabase/auth-helpers-nextjs': 0.5.2_zj6vbgpit7u2xp5t7lhhtyhq6e
       '@supabase/auth-helpers-react': 0.3.1_zj6vbgpit7u2xp5t7lhhtyhq6e
       '@supabase/auth-ui-react': 0.2.6_biqbaboplfbrettd7655fr4n2y
       '@supabase/supabase-js': 2.1.0_encoding@0.1.13
@@ -272,6 +285,7 @@ importers:
       server-only: 0.0.1
       sharp: 0.31.2
       ui: link:../../packages/ui
+      utils: link:../../packages/utils
       zod: 3.19.1
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
@@ -379,11 +393,13 @@ importers:
       '@types/react': ^18.0.24
       '@types/react-dom': ^18.0.8
       '@types/testing-library__jest-dom': ^5.14.5
+      class-variance-authority: ^0.3.0
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
       jest: ^29.3.0
       jest-environment-jsdom: ^29.3.0
       jest-presets: workspace:*
+      next: ^13.0.1
       next-mdx-remote: ^4.1.0
       react: '18.2'
       react-dom: ^18.2.0
@@ -396,12 +412,48 @@ importers:
       '@types/react': 18.0.24
       '@types/react-dom': 18.0.8
       '@types/testing-library__jest-dom': 5.14.5
+      class-variance-authority: 0.3.0_typescript@4.8.4
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
       jest: 29.3.0
       jest-environment-jsdom: 29.3.0
       jest-presets: link:../jest-presets
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tsconfig: link:../tsconfig
+      typescript: 4.8.4
+
+  packages/utils:
+    specifiers:
+      '@testing-library/jest-dom': ^5.16.5
+      '@testing-library/react': ^13.4.0
+      '@types/eslint': ^8.4.10
+      '@types/react': ^18.0.24
+      '@types/react-dom': ^18.0.8
+      '@types/testing-library__jest-dom': ^5.14.5
+      eslint: ^7.32.0
+      eslint-config-custom: workspace:*
+      jest: ^29.3.0
+      jest-environment-jsdom: ^29.3.0
+      jest-presets: workspace:*
+      react: '18.2'
+      react-dom: ^18.2.0
+      tsconfig: workspace:*
+      typescript: ^4.5.2
+    devDependencies:
+      '@testing-library/jest-dom': 5.16.5
+      '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+      '@types/eslint': 8.4.10
+      '@types/react': 18.0.25
+      '@types/react-dom': 18.0.8
+      '@types/testing-library__jest-dom': 5.14.5
+      eslint: 7.32.0
+      eslint-config-custom: link:../eslint-config-custom
+      jest: 29.3.0
+      jest-environment-jsdom: 29.3.0
+      jest-presets: link:../jest-presets
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tsconfig: link:../tsconfig
@@ -1471,8 +1523,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@supabase/auth-helpers-nextjs/0.5.1_zj6vbgpit7u2xp5t7lhhtyhq6e:
-    resolution: {integrity: sha512-aXpFlg3XUN70fX+uqsxZCTYe4u0c9yQuSYxTxvxZFAQuRPGxv86zoxUAslMFMIvQN8uwb8dUjlTsqb1e0qTEPQ==}
+  /@supabase/auth-helpers-nextjs/0.5.2_zj6vbgpit7u2xp5t7lhhtyhq6e:
+    resolution: {integrity: sha512-B+sQFVEImAYOJKyyNX1DWqTF2qVf9SocOM1GD4eGHon6ulvLOo2a8V+v1jZAuLOBF6yzVIYnZucuYKZCiNP/Eg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.0.4
     dependencies:
@@ -2400,7 +2452,6 @@ packages:
         optional: true
     dependencies:
       typescript: 4.8.4
-    dev: false
 
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}

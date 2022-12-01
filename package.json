@@ -8,6 +8,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --no-cache --parallel --continue",
+    "dev:adamworks": "turbo run dev --no-cache --scope='adamworks' --continue",
+    "dev:composableweb": "turbo run dev --no-cache --scope='composableweb' --continue",
+    "dev:pixelmord": "turbo run dev --no-cache --scope='pixelmord' --continue",
     "dev:poolbase": "turbo run dev --no-cache --scope='poolbase' --continue",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
     "lint": "turbo run lint",

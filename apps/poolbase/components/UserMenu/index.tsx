@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
 import Image from 'next/image';
 import { IconType } from 'react-icons';
-import { Button } from '@/components/Form/Button';
+import { Button } from 'ui';
 
 export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
@@ -39,7 +39,7 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none py-2">
+        <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white py-2 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {links.map((link) => (
             <Menu.Item key={link.href}>
               {({ active }) => (

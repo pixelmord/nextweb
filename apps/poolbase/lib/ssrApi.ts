@@ -1,43 +1,29 @@
 import 'server-only';
-import supabaseClient from './supabaseClient';
-import { cookies } from 'next/headers';
+import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { headers, cookies } from 'next/headers';
+import { Database } from '@/types/supabase';
 
-export async function setSession() {
-  const nextCookies = cookies();
+export async function fetchUserProfile() {
   try {
-    const cookie = nextCookies.get('supabase-auth-token');
-    if (!cookie) {
-      return { supabase: supabaseClient, session: null };
-    }
+    const supabase = createServerComponentSupabaseClient<Database>({
+      headers,
+      cookies,
+    });
 
-    const authTokens = JSON.parse(cookie.value);
-    const refreshToken = authTokens[1];
-    const accessToken = authTokens[0];
     const {
       data: { session },
-      error,
-    } = await supabaseClient.auth.setSession({
-      refresh_token: refreshToken,
-      access_token: accessToken,
-    });
+    } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('No session found');
+    }
+    const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+
     if (error) {
       throw error;
     }
-    return { supabase: supabaseClient, session };
-  } catch (err) {
-    console.error(err);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
-}
-
-export async function fetchUserProfile() {
-  const { session, supabase } = await setSession();
-  if (!session) {
-    throw new Error('No session found');
-  }
-  const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-
-  if (error) {
-    throw error;
-  }
-  return data;
 }

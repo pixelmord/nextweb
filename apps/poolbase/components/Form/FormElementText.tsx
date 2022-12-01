@@ -1,4 +1,5 @@
 import { Field, ErrorMessage } from 'formik';
+import { Label, fieldStyle } from 'ui';
 
 export type FormElementTextProps = {
   label: string;
@@ -7,17 +8,10 @@ export type FormElementTextProps = {
 };
 export function FormElementText({ label, id, type = 'text' }: FormElementTextProps) {
   return (
-    <div>
-      <label className="block text-gray-700 text-sm font-bold pt-2 pb-1" htmlFor={id}>
-        {label}
-      </label>
-      <Field
-        className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none'"
-        id={id}
-        name={id}
-        type={type}
-      />
-      <ErrorMessage component="p" className="text-red-500 text-sm" name={id} />
+    <div className="my-4">
+      <Label htmlFor={id}>{label}</Label>
+      <Field className={fieldStyle({ state: 'default', className: 'mt-1' })} id={id} name={id} type={type} />
+      <ErrorMessage component="p" className="text-sm text-red-500" name={id} />
     </div>
   );
 }
