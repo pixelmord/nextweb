@@ -1,12 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import type { Database } from '@/types/supabase';
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 import { buttonStyle } from 'ui/client-only';
 import { useProfileImage } from '@/lib/api';
 import Image from 'next/image';
-
+import supabase from '@/lib/supabaseBrowserClient';
 export default function AvatarForm({
   uid,
   url,
@@ -18,7 +17,6 @@ export default function AvatarForm({
   size: number;
   onUpload: (url: string) => void;
 }) {
-  const supabase = useSupabaseClient<Database>();
   const [uploading, setUploading] = useState(false);
   const avatarUrl = useProfileImage(url);
 
