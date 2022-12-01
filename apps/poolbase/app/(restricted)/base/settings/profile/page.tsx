@@ -1,5 +1,14 @@
+import PageHeader from '@/components/PageHeader';
+import { H1 } from 'ui';
 import ProfileForm from './ProfileForm';
 
 export default async function ProfilePage() {
-  return <ProfileForm />;
+  return (
+    <>
+      <PageHeader>
+        <H1>Edit your Profile</H1>
+      </PageHeader>
+      <ProfileForm />
+    </>
+  );
 }

@@ -65,24 +65,24 @@ export function useUpdateProfile() {
   return useMutation((data: UpdateProfileData) => updateProfile(data), {
     onMutate: async (newProfileData) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries(['userProfile', newProfileData.id]);
+      await queryClient.cancelQueries(['userProfile']);
 
       // Snapshot the previous value
-      const previousProfile = queryClient.getQueryData<UpdateProfileData>(['userProfile', newProfileData.id]);
+      const previousProfile = queryClient.getQueryData<UpdateProfileData>(['userProfile']);
 
       // Optimistically update to the new value
-      queryClient.setQueryData(['userProfile', newProfileData.id], { ...previousProfile, ...newProfileData });
+      queryClient.setQueryData(['userProfile'], { ...previousProfile, ...newProfileData });
 
       // Return a context object with the snapshotted value
       return { previousProfile };
     },
     // If the mutation fails, use the context returned from onMutate to roll back
     onError: (err, newProfileData, context) => {
-      queryClient.setQueryData(['userProfile', newProfileData.id], context.previousProfile);
+      queryClient.setQueryData(['userProfile'], context.previousProfile);
     },
     // Always refetch after error or success:
-    onSettled: (data, err, variables) => {
-      queryClient.invalidateQueries(['userProfile', variables.id]);
+    onSettled: () => {
+      queryClient.invalidateQueries(['userProfile']);
     },
   });
 }
