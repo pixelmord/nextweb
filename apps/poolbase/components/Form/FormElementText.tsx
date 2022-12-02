@@ -19,7 +19,7 @@ export const FormElementText = React.forwardRef<HTMLInputElement, FormElementTex
           </Label>
         )}
         <FormFieldText id={id} name={id} type={type} state={state} ref={ref} {...rest} />
-        {!!error?.message && <p className="px-1 text-xs text-red-600">{error.message}</p>}
+        {!!error?.message && <p className="mt-1 px-1 text-xs text-red-600">{error.message}</p>}
       </div>
     );
   }
