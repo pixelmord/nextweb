@@ -34,7 +34,7 @@ export default function MainNavigation() {
   }
   const pathname = usePathname();
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-base-800 dark:bg-base-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -55,8 +55,8 @@ export default function MainNavigation() {
                     key={link.href}
                     className={`${
                       pathname === link.href
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                        ? 'bg-base-900 text-white'
+                        : 'text-base-300 hover:bg-base-700 hover:text-white'
                     } rounded-md px-3 py-2 text-sm font-medium`}
                   >
                     {link.text}
@@ -69,7 +69,7 @@ export default function MainNavigation() {
             <div className="ml-4 flex items-center md:ml-6">
               <button
                 type="button"
-                className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                className="bg-base-800 text-base-400 focus:ring-offset-base-800 rounded-full p-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
               >
                 <span className="sr-only">View notifications</span>
                 <FiBell className="h-6 w-6" />
@@ -83,7 +83,7 @@ export default function MainNavigation() {
           <div className="-mr-2 flex md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="bg-base-800 text-base-400 hover:bg-base-700 focus:ring-offset-base-800 inline-flex items-center justify-center rounded-md p-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
               aria-controls="mobile-menu"
               aria-expanded="false"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -103,14 +103,14 @@ export default function MainNavigation() {
               href={link.href}
               key={link.href}
               className={`${
-                pathname === link.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                pathname === link.href ? 'bg-base-900 text-white' : 'text-base-300 hover:bg-base-700 hover:text-white'
               }  block rounded-md px-3 py-2 text-base font-medium`}
             >
               {link.text}
             </Link>
           ))}
         </div>
-        <div className="border-t border-gray-700 pt-4 pb-3">
+        <div className="border-base-700 border-t pt-4 pb-3">
           <div className="flex items-center px-5">
             {!!userProfile && (
               <>
@@ -131,14 +131,14 @@ export default function MainNavigation() {
                     <div className="text-base font-medium leading-none text-white">{userProfile.full_name}</div>
                   )}
                   {!!userProfile.website && (
-                    <div className="text-sm font-medium leading-none text-gray-400">{userProfile.website}</div>
+                    <div className="text-base-400 text-sm font-medium leading-none">{userProfile.website}</div>
                   )}
                 </div>
               </>
             )}
             <button
               type="button"
-              className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="bg-base-800 text-base-400 focus:ring-offset-base-800 ml-auto flex-shrink-0 rounded-full p-1 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
             >
               <span className="sr-only">View notifications</span>
 
@@ -151,7 +151,7 @@ export default function MainNavigation() {
                 href={link.href}
                 key={link.href}
                 className={`${
-                  pathname === link.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  pathname === link.href ? 'bg-base-900 text-white' : 'text-base-300 hover:bg-base-700 hover:text-white'
                 }  block rounded-md px-3 py-2 text-base font-medium`}
               >
                 {link.text}

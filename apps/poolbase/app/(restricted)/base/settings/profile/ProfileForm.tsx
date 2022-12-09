@@ -30,8 +30,7 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className="container">
-      <H2>Edit your Profile </H2>
+    <>
       <AvatarForm
         url={data.avatar_url as string}
         uid={data.id as string}
@@ -49,11 +48,11 @@ export default function ProfileForm() {
         <FormElementText id="username" label="Username" {...register('username')} error={errors.username} />
         <FormElementText id="website" label="Website" {...register('website')} error={errors.website} />
         <div className="mt-8">
-          <Button type="submit" intent="primary" disabled={!isValid}>
+          <Button type="submit" intent="primary">
             Save
           </Button>
         </div>
       </form>
-    </div>
+    </>
   );
 }

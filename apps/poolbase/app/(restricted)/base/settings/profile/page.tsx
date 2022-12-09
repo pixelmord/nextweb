@@ -1,5 +1,5 @@
 import PageHeader from '@/components/PageHeader';
-import { H1 } from 'ui';
+import { Container, H1 } from 'ui';
 import ProfileForm from './ProfileForm';
 
 export default async function ProfilePage() {
@@ -8,7 +8,9 @@ export default async function ProfilePage() {
       <PageHeader>
         <H1>Edit your Profile</H1>
       </PageHeader>
-      <ProfileForm />
+      <Container>
+        <ProfileForm />
+      </Container>
     </>
   );
 }

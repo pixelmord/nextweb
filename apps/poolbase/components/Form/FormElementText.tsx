@@ -14,12 +14,12 @@ export const FormElementText = React.forwardRef<HTMLInputElement, FormElementTex
     return (
       <div className="my-4">
         {!!label && (
-          <Label htmlFor={id} state={state}>
+          <Label htmlFor={id} state={state} className="px-1">
             {label}
           </Label>
         )}
         <FormFieldText id={id} name={id} type={type} state={state} ref={ref} {...rest} />
-        {!!error?.message && <p className="mt-1 px-1 text-xs text-red-600">{error.message}</p>}
+        {!!error?.message && <p className="text-danger-600 dark:text-danger-400 mt-1 px-1 text-xs">{error.message}</p>}
       </div>
     );
   }

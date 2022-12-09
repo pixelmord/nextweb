@@ -3,11 +3,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 export const labelStyle = cva('block font-medium', {
   variants: {
     state: {
-      default: ['text-gray-700'],
-      warning: ['text-orange-700'],
-      info: ['text-blue-700'],
-      success: ['text-green-700'],
-      error: ['text-red-700'],
+      default: ['text-base-700', 'dark:text-base-300'],
+      warning: ['text-warning-700', 'dark:text-warning-300'],
+      info: ['text-info-700', 'dark:text-info-300'],
+      success: ['text-success-700', 'dark:text-success-300'],
+      error: ['text-danger-700', 'dark:text-danger-400'],
     },
     size: {
       xsmall: ['text-xs'],
@@ -51,7 +51,8 @@ export const labelStyle = cva('block font-medium', {
 });
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement>, VariantProps<typeof labelStyle> {}
-export function Label({ children, className, ...rest }: LabelProps) {
+export function Label({ children, className, state, ...rest }: LabelProps) {
+  className = labelStyle({ state, className });
   return (
     <label className={className} {...rest}>
       {children}
