@@ -6,7 +6,7 @@ import { fetchUserProfile } from '@/lib/ssrApi';
 import ProfileForm from './ProfileForm';
 
 export default async function ProfilePage() {
-  const user = await fetchUserProfile();
+  const { data: user } = await fetchUserProfile();
   return (
     <>
       <PageHeader>

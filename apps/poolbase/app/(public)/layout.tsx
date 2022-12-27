@@ -1,10 +1,13 @@
 import 'server-only';
+
 import Link from 'next/link';
-import MainNavigation from './MainNavigation';
 
 import { fetchUserProfile } from '@/lib/ssrApi';
+
+import MainNavigation from './MainNavigation';
+
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const user = await fetchUserProfile();
+  const { data: user } = await fetchUserProfile();
 
   return (
     <div className="bg-base-100 dark:bg-base-800 h-full">

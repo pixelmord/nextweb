@@ -1,14 +1,18 @@
 'use client';
-import { useUserProfile, useLogOut, useProfileImage } from '@/lib/api';
-import type { Database } from '@/types/supabase';
-type Profiles = Database['public']['Tables']['profiles']['Row'];
-import UserMenu from '@/components/UserMenu';
-import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
+
 import Image from 'next/image';
-import { FiBell, FiMenu, FiUser, FiPackage } from 'react-icons/fi';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { FiBell, FiMenu, FiPackage, FiUser } from 'react-icons/fi';
 import { Button } from 'ui';
+
+import UserMenu from '@/components/UserMenu';
+import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import type { Database } from '@/types/supabase';
+
+type Profile = Database['public']['Tables']['profiles']['Row'];
+
 const menuLinks = [{ href: '/base', text: 'Dashboard' }];
 const userLinks = [
   {
@@ -22,8 +26,8 @@ const userLinks = [
     icon: FiPackage,
   },
 ];
-export default function MainNavigation() {
-  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile();
+export default function MainNavigation({ user }: { user: Profile }) {
+  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
   const avatarUrl = useProfileImage(userProfile?.avatar_url as string);
   const logoutMutation = useLogOut();
   const router = useRouter();
@@ -76,7 +80,7 @@ export default function MainNavigation() {
               </button>
 
               <div className="relative ml-3">
-                <UserMenu links={userLinks} />
+                <UserMenu links={userLinks} user={user} />
               </div>
             </div>
           </div>
