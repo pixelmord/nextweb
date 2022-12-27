@@ -1,9 +1,13 @@
 'use client';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import supabase from './supabaseBrowserClient';
-import type { Database } from '@/types/supabase';
-import { useEffect, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+
+import type { Database } from '@/types/supabase';
+
+import supabase from './supabaseBrowserClient';
+
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 export async function getUserProfile() {
@@ -21,8 +25,8 @@ export async function getUserProfile() {
     console.log(error);
   }
 }
-export function useUserProfile() {
-  return useQuery(['userProfile'], () => getUserProfile());
+export function useUserProfile(options: { initialData?: Profiles }) {
+  return useQuery(['userProfile'], () => getUserProfile(), { initialData: options?.initialData || null });
 }
 
 export function useProfileImage(url: string) {

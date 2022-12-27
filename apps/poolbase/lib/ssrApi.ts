@@ -1,29 +1,84 @@
 import 'server-only';
+
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import { headers, cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
+import { Octokit } from 'octokit';
+
 import { Database } from '@/types/supabase';
 
-export async function fetchUserProfile() {
-  try {
-    const supabase = createServerComponentSupabaseClient<Database>({
-      headers,
-      cookies,
-    });
+export async function createClientWithSession() {
+  const supabase = createServerComponentSupabaseClient<Database>({
+    headers,
+    cookies,
+  });
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (!session) {
-      throw new Error('No session found');
-    }
-    const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-
-    if (error) {
-      throw error;
-    }
-    return data;
-  } catch (error) {
-    console.log(error);
-    return null;
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (!session) {
+    throw new Error('No session found');
   }
+  return { session, supabase };
 }
+
+function handleError(error) {
+  console.log(error);
+  return null;
+}
+
+export async function fetchUserProfile() {
+  const { session, supabase } = await createClientWithSession();
+  const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+
+  return { data, error };
+}
+
+export async function fetchIntegration(provider: string) {
+  const { session, supabase } = await createClientWithSession();
+  const { data, error } = await supabase
+    .from('integrations')
+    .select('*')
+    .eq('uid', session.user.id)
+    .eq('provider', provider)
+    .single();
+
+  return { data, error };
+}
+export const fetchGithubStars = async () => {
+  const { data: integration, error } = await fetchIntegration('github');
+  const octokit = new Octokit({ auth: integration.access_token });
+  // const data = await octokit.paginate('GET /user/starred', { per_page: 100 });
+  const data = await octokit.graphql<any>(
+    `
+    query viewerStars($cursor: String) {
+      viewer {
+        login
+        starredRepositories(
+          first: 100
+          orderBy: {field: STARRED_AT, direction: DESC}
+          after: $cursor
+        ) {
+          totalCount
+          pageInfo {
+            endCursor
+            startCursor
+            hasNextPage
+          }
+          nodes {
+            name
+            id
+            description
+            url
+            openGraphImageUrl
+          }
+        }
+      }
+    }
+    `,
+    {
+      cursor: '',
+    }
+  );
+
+  return { data, error };
+};

@@ -7,20 +7,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormElementText } from '@/components/Form';
 import { Database } from '@/types';
 import supabase from '@/lib/supabaseBrowserClient';
+import { IntegrationSchema } from '@/types';
 export type Integration = Database['public']['Tables']['integrations']['Row'];
-const IntegrationFormSchema = z.object({
-  display_name: z.string().min(1).max(255),
-  provider: z.string().min(1).max(255),
-  api_username: z.string().min(1).max(255),
-  access_token: z.string().min(1),
-});
+
 export default function IntegrationForm({ initialData }: { initialData: Integration }) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
-    resolver: zodResolver(IntegrationFormSchema),
+    resolver: zodResolver(IntegrationSchema),
     defaultValues: initialData,
   });
   return (
