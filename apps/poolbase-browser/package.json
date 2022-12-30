@@ -10,7 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.1.0",
+    "@supabase/supabase-js": "^2.2.2",
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/typography": "0.5.8",
     "plasmo": "0.59.3",

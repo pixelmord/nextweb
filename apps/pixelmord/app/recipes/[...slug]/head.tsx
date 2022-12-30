@@ -1,5 +1,6 @@
-import DefaultHeadTags from '../../DefaultHeadTags';
 import { Recipes } from '@/lib/mdx-sources';
+
+import DefaultHeadTags from '../../DefaultHeadTags';
 
 export default async function Head({ params }) {
   // console.log(params?.slug?.join('/'));

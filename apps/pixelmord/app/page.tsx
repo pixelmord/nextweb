@@ -1,4 +1,5 @@
 import { H1 } from 'ui';
+
 import { Container } from '@/components/Container';
 
 export default function Home() {

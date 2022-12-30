@@ -1,12 +1,12 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    '../../packages/ui/**/*.{js,ts,jsx,tsx}',
+    '../../packages/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -23,7 +23,6 @@ module.exports = {
         danger: colors.red,
       },
     },
-
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],
       sm: ['0.875rem', { lineHeight: '1.5rem' }],
@@ -84,7 +83,6 @@ module.exports = {
           '--tw-prose-pre-border': 'transparent',
           '--tw-prose-th-borders': theme('colors.base.200'),
           '--tw-prose-td-borders': theme('colors.base.100'),
-
           '--tw-prose-invert-body': theme('colors.base.400'),
           '--tw-prose-invert-headings': theme('colors.base.200'),
           '--tw-prose-invert-links': theme('colors.accent.400'),
@@ -104,7 +102,6 @@ module.exports = {
           '--tw-prose-invert-pre-border': theme('colors.base.200 / 0.1'),
           '--tw-prose-invert-th-borders': theme('colors.base.700'),
           '--tw-prose-invert-td-borders': theme('colors.base.800'),
-
           // Base
           color: 'var(--tw-prose-body)',
           lineHeight: theme('lineHeight.7'),
@@ -116,7 +113,6 @@ module.exports = {
             marginTop: theme('spacing.3'),
             marginBottom: theme('spacing.3'),
           },
-
           // Headings
           'h2, h3': {
             color: 'var(--tw-prose-headings)',
@@ -137,12 +133,10 @@ module.exports = {
           ':is(h2, h3) + *': {
             marginTop: 0,
           },
-
           // Images
           img: {
             borderRadius: theme('borderRadius.3xl'),
           },
-
           // Inline elements
           a: {
             color: 'var(--tw-prose-links)',
@@ -177,7 +171,6 @@ module.exports = {
           ':is(h2, h3) code': {
             fontWeight: theme('fontWeight.bold'),
           },
-
           // Quotes
           blockquote: {
             paddingLeft: theme('spacing.6'),
@@ -185,7 +178,6 @@ module.exports = {
             borderLeftColor: 'var(--tw-prose-quote-borders)',
             fontStyle: 'italic',
           },
-
           // Figures
           figcaption: {
             color: 'var(--tw-prose-captions)',
@@ -196,7 +188,6 @@ module.exports = {
           'figcaption > p': {
             margin: 0,
           },
-
           // Lists
           ul: {
             listStyleType: 'disc',
@@ -230,7 +221,6 @@ module.exports = {
             marginTop: theme('spacing.3'),
             marginBottom: theme('spacing.3'),
           },
-
           // Code blocks
           pre: {
             color: 'var(--tw-prose-pre-code)',
@@ -252,7 +242,6 @@ module.exports = {
             borderRadius: 0,
             padding: 0,
           },
-
           // Horizontal rules
           hr: {
             marginTop: theme('spacing.20'),
@@ -264,7 +253,6 @@ module.exports = {
               marginRight: `calc(${theme('spacing.12')} * -1)`,
             },
           },
-
           // Tables
           table: {
             width: '100%',

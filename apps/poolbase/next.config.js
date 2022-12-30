@@ -5,10 +5,11 @@ if (process.env.NODE_ENV === 'development') {
 
   console.log('test console message from development');
 }
-module.exports = {
+
+const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ['ui', 'mdx', 'utils'],
   experimental: {
-    transpilePackages: ['ui', 'mdx', 'utils'],
     appDir: true,
   },
   images: {
@@ -20,3 +21,4 @@ module.exports = {
     ],
   },
 };
+module.exports = nextConfig;

@@ -1,8 +1,9 @@
-import { Recipes } from '@/lib/mdx-sources';
-import { MdxContent } from 'ui/client-only';
+import { MdxContent } from 'mdx/MdxContent';
 import { H1 } from 'ui';
-import { Container } from '@/components/Container';
 import { formatDate } from 'utils';
+
+import { Container } from '@/components/Container';
+import { Recipes } from '@/lib/mdx-sources';
 
 // TODO: Properly type this file once the following fix lands.
 // @see https://github.com/vercel/next.js/pull/42019
@@ -30,9 +31,7 @@ export default async function PostPage({ params }: PostPageProps) {
         {post.frontMatter.createdAt && <p className="text-sm ">{formatDate(post.frontMatter.createdAt)}</p>}
       </div>
       <hr className="my-6" />
-      <div className="max-w-none">
-        <MdxContent source={post.mdx} />
-      </div>
+      <div className="max-w-none">{/* <MdxContent source={post.mdx} /> */}</div>
     </Container>
   );
 }
