@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     data: { session },
   } = await supabase.auth.getSession();
   return (
-    <html className={`${lato.variable} h-full`}>
+    <html className={`${lato.variable} h-full dark:text-base-200`}>
       <body className="h-full">
         <SupabaseListener accessToken={session?.access_token} />
         {children}

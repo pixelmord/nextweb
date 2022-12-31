@@ -5,15 +5,14 @@ import { formatDate } from 'utils';
 import { Container } from '@/components/Container';
 import { Recipes } from '@/lib/mdx-sources';
 
-// TODO: Properly type this file once the following fix lands.
-// @see https://github.com/vercel/next.js/pull/42019
-interface PostPageProps {
-  params: {
-    slug: string[];
-  };
-}
+type PageParams = {
+  slug: string[];
+};
 
-export async function generateStaticParams() {
+type PostPageProps = {
+  params: PageParams;
+};
+export async function generateStaticParams(): Promise<PageParams[]> {
   const files = await Recipes.getMdxFiles();
 
   return files?.map((file) => ({
