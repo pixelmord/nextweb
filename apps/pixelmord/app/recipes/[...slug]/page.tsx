@@ -31,7 +31,9 @@ export default async function PostPage({ params }: PostPageProps) {
         {post.frontMatter.createdAt && <p className="text-sm ">{formatDate(post.frontMatter.createdAt)}</p>}
       </div>
       <hr className="my-6" />
-      <div className="max-w-none">{/* <MdxContent source={post.mdx} /> */}</div>
+      <div className="max-w-none">
+        <MdxContent source={post.mdx} />
+      </div>
     </Container>
   );
 }
