@@ -1,8 +1,8 @@
-import { Blog } from '@/lib/mdx-sources';
-import { MdxContent } from 'ui/client-only';
+import { MdxContent } from 'mdx/MdxContent';
 import { H1 } from 'ui';
 import { formatDate } from 'utils';
-import { AnyARecord } from 'dns';
+
+import { Blog } from '@/lib/mdx-sources';
 
 // TODO: Properly type this file once the following fix lands.
 // @see https://github.com/vercel/next.js/pull/42019
@@ -21,6 +21,7 @@ interface PostPageProps {
 export default function PostPage({ post }: PostPageProps) {
   //
   if (!post) return null;
+
   return (
     <article className="mx-auto max-w-2xl py-12">
       <div className="flex flex-col space-y-2">

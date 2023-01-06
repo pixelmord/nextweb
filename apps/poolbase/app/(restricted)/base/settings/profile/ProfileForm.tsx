@@ -33,16 +33,16 @@ export default function ProfileForm({ user }: { user: Profiles }) {
   return (
     <>
       <AvatarForm
-        url={user.avatar_url as string}
-        uid={user.id as string}
+        url={data.avatar_url as string}
+        uid={data.id as string}
         size={150}
         onUpload={(url) => {
-          mutation.mutate({ ...user, avatar_url: url } as UpdateProfileData);
+          mutation.mutate({ ...data, avatar_url: url } as UpdateProfileData);
         }}
       />
       <form
         onSubmit={handleSubmit((values) => {
-          mutation.mutate({ ...user, ...values } as UpdateProfileData);
+          mutation.mutate({ ...data, ...values } as UpdateProfileData);
         })}
       >
         <FormElementText id="full_name" label="Full Name" {...register('full_name')} error={errors.full_name} />

@@ -1,18 +1,18 @@
-import { Recipes } from '@/lib/mdx-sources';
-import { MdxContent } from 'ui/client-only';
+import { MdxContent } from 'mdx/MdxContent';
 import { H1 } from 'ui';
-import { Container } from '@/components/Container';
 import { formatDate } from 'utils';
 
-// TODO: Properly type this file once the following fix lands.
-// @see https://github.com/vercel/next.js/pull/42019
-interface PostPageProps {
-  params: {
-    slug: string[];
-  };
-}
+import { Container } from '@/components/Container';
+import { Recipes } from '@/lib/mdx-sources';
 
-export async function generateStaticParams() {
+type PageParams = {
+  slug: string[];
+};
+
+type PostPageProps = {
+  params: PageParams;
+};
+export async function generateStaticParams(): Promise<PageParams[]> {
   const files = await Recipes.getMdxFiles();
 
   return files?.map((file) => ({

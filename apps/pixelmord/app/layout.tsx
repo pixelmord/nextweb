@@ -1,8 +1,10 @@
 import { Lato } from '@next/font/google';
+
 import '@/styles/global.css';
 import 'focus-visible';
-import Header from '@/components/Header';
+
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 const modeScript = `
   let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -43,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html className={`${lato.variable}`}>
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
-        {' '}
         <>
           <div className="fixed inset-0 flex justify-center sm:px-8">
             <div className="flex w-full max-w-7xl lg:px-8">

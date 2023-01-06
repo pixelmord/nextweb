@@ -7,7 +7,7 @@ import MainNavigation from './MainNavigation';
 export default async function BaseLayout({ children }: React.PropsWithChildren) {
   const { data: user } = await fetchUserProfile();
   return (
-    <div className="dark:bg-base-800 bg-base-100 flex flex-col">
+    <div className="dark:bg-base-800 bg-base-100 flex flex-col h-full">
       <header>
         <MainNavigation user={user} />
       </header>

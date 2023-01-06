@@ -15,9 +15,7 @@ export async function createClientWithSession() {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  if (!session) {
-    throw new Error('No session found');
-  }
+
   return { session, supabase };
 }
 
@@ -28,6 +26,9 @@ function handleError(error) {
 
 export async function fetchUserProfile() {
   const { session, supabase } = await createClientWithSession();
+  if (!session) {
+    return { data: null, error: new Error('No session') };
+  }
   const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
 
   return { data, error };
@@ -35,6 +36,9 @@ export async function fetchUserProfile() {
 
 export async function fetchIntegration(provider: string) {
   const { session, supabase } = await createClientWithSession();
+  if (!session) {
+    return { data: null, error: new Error('No session') };
+  }
   const { data, error } = await supabase
     .from('integrations')
     .select('*')

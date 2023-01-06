@@ -1,7 +1,12 @@
 @tailwind base;
 @layer base {
-  html {
+  #font-wrapper {
     @apply font-serif;
+  }
+  html,
+  body,
+  #__next {
+    @apply h-full;
   }
 }
 @tailwind components;

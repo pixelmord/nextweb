@@ -1,10 +1,10 @@
+import glob from 'fast-glob';
 import { promises as fs } from 'fs';
 import hasha from 'hasha';
-import glob from 'fast-glob';
-import path from 'path';
-import NodeCache from 'node-cache';
+import { MDXRemoteSerializeResult, SerializeOptions } from 'next-mdx-remote/dist/types';
 import { serialize } from 'next-mdx-remote/serialize';
-import { SerializeOptions, MDXRemoteSerializeResult } from 'next-mdx-remote/dist/types';
+import NodeCache from 'node-cache';
+import path from 'path';
 import * as z from 'zod';
 
 const mdxCache = new NodeCache();
@@ -65,7 +65,12 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
 
     const mdx = await serialize(raw, {
       parseFrontmatter: true,
-      ...mdxOptions,
+      mdxOptions: {
+        remarkPlugins: [],
+        rehypePlugins: [],
+        development: false,
+      },
+      // ...mdxOptions,
     });
     const frontMatter = mdx.frontmatter ? (source.frontMatter.parse(mdx.frontmatter) as z.infer<T>) : null;
 
