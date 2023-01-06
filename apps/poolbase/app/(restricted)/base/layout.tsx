@@ -1,14 +1,17 @@
 import * as React from 'react';
+
+import { fetchUserProfile } from '@/lib/ssrApi';
+
 import MainNavigation from './MainNavigation';
+
 export default async function BaseLayout({ children }: React.PropsWithChildren) {
+  const { data: user } = await fetchUserProfile();
   return (
-    <div className="h-full flex flex-col">
+    <div className="dark:bg-base-800 bg-base-100 flex flex-col h-full">
       <header>
-        <MainNavigation />
+        <MainNavigation user={user} />
       </header>
-      <main className="flex-grow">
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{children}</div>
-      </main>
+      <main className="flex-grow">{children}</main>
     </div>
   );
 }

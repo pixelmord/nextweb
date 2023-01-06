@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
+  transpilePackages: ['ui', 'mdx', 'utils'],
   experimental: {
-    transpilePackages: ['ui', 'mdx', 'utils'],
     appDir: true,
   },
 };

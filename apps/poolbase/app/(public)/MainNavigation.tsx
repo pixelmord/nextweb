@@ -6,6 +6,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import type { Database } from '@/types/supabase';
+import { LinkButton } from 'ui';
 type Profile = Database['public']['Tables']['profiles']['Row'];
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 
@@ -13,12 +14,12 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (
-    <div className="relative bg-white">
+    <div className="relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div className="border-base-100 dark:border-base-700 flex items-center justify-between border-b-2 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Poolbase</span>
               <Image
                 className="h-8 w-8"
                 width="32"
@@ -31,7 +32,7 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
           <div className="-my-2 -mr-2 md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="text-base-400 hover:bg-base-100 hover:text-base-500 focus:ring-accent-500 inline-flex items-center justify-center rounded-md bg-white p-2 focus:outline-none focus:ring-2 focus:ring-inset"
               aria-expanded="false"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
@@ -45,7 +46,9 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
                 href={link.href}
                 key={link.href}
                 className={`${
-                  pathname === link.href ? ' text-green-900 hover:text-green-700' : 'text-gray-500 hover:text-gray-900'
+                  pathname === link.href
+                    ? ' text-accent-900 hover:text-accent-700'
+                    : 'text-base-500 hover:text-base-900 dark:text-base-100 dark:hover:text-base-300'
                 }  text-base font-medium`}
               >
                 {link.text}
@@ -53,16 +56,14 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
             ))}
           </nav>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            {/* <Link href="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              Sign in
-            </Link> */}
-            {!user && (
-              <Link
-                href="/#join-waitlist"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-              >
+            {!user ? (
+              <LinkButton href="/#join-waitlist" intent="primary">
                 Join Waitlist
-              </Link>
+              </LinkButton>
+            ) : (
+              <LinkButton href="/base" intent="primary">
+                Dashboard
+              </LinkButton>
             )}
           </div>
         </div>
@@ -73,7 +74,7 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
           mobileMenuOpen ? '' : 'hidden'
         } absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden`}
       >
-        <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <div className="divide-base-50 divide-y-2 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div className="px-5 pt-5 pb-6">
             <div className="flex items-center justify-between">
               <div>
@@ -88,7 +89,7 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
               <div className="-mr-2">
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                  className="text-base-400 hover:bg-base-100 hover:text-base-500 focus:ring-accent-500 inline-flex items-center justify-center rounded-md bg-white p-2 focus:outline-none focus:ring-2 focus:ring-inset"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="sr-only">Close menu</span>
@@ -99,8 +100,8 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
             </div>
             <div className="mt-6">
               <nav className="grid gap-y-8">
-                <a href="#" className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50">
-                  <span className="ml-3 text-base font-medium text-gray-900">Analytics</span>
+                <a href="#" className="hover:bg-base-50 -m-3 flex items-center rounded-md p-3">
+                  <span className="text-base-900 ml-3 text-base font-medium">Analytics</span>
                 </a>
               </nav>
             </div>
@@ -113,8 +114,8 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
                   key={link.href}
                   className={`${
                     pathname === link.href
-                      ? ' text-green-900 hover:text-green-700'
-                      : ' text-gray-900 hover:text-gray-700'
+                      ? ' text-accent-900 hover:text-accent-700'
+                      : ' text-base-900 hover:text-base-700'
                   }  text-base font-medium`}
                 >
                   {link.text}
@@ -124,13 +125,13 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
             <div>
               <Link
                 href="/#join-waitlist"
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                className="bg-accent-600 hover:bg-accent-700 flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm"
               >
                 Join Waitlist
               </Link>
-              <p className="mt-6 text-center text-base font-medium text-gray-500">
+              <p className="text-base-500 mt-6 text-center text-base font-medium">
                 Existing customer?
-                <Link href="/login" className="text-indigo-600 hover:text-indigo-500">
+                <Link href="/login" className="text-accent-600 hover:text-accent-500">
                   Sign in
                 </Link>
               </p>

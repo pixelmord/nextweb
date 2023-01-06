@@ -1,9 +1,13 @@
 'use client';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import supabase from './supabaseBrowserClient';
-import type { Database } from '@/types/supabase';
-import { useEffect, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+
+import type { Database } from '@/types/supabase';
+
+import supabase from './supabaseBrowserClient';
+
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 export async function getUserProfile() {
@@ -21,8 +25,8 @@ export async function getUserProfile() {
     console.log(error);
   }
 }
-export function useUserProfile() {
-  return useQuery(['userProfile'], () => getUserProfile());
+export function useUserProfile(options: { initialData?: Profiles }) {
+  return useQuery(['userProfile'], () => getUserProfile(), { initialData: options?.initialData || null });
 }
 
 export function useProfileImage(url: string) {
@@ -65,24 +69,24 @@ export function useUpdateProfile() {
   return useMutation((data: UpdateProfileData) => updateProfile(data), {
     onMutate: async (newProfileData) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries(['userProfile', newProfileData.id]);
+      await queryClient.cancelQueries(['userProfile']);
 
       // Snapshot the previous value
-      const previousProfile = queryClient.getQueryData<UpdateProfileData>(['userProfile', newProfileData.id]);
+      const previousProfile = queryClient.getQueryData<UpdateProfileData>(['userProfile']);
 
       // Optimistically update to the new value
-      queryClient.setQueryData(['userProfile', newProfileData.id], { ...previousProfile, ...newProfileData });
+      queryClient.setQueryData(['userProfile'], { ...previousProfile, ...newProfileData });
 
       // Return a context object with the snapshotted value
       return { previousProfile };
     },
     // If the mutation fails, use the context returned from onMutate to roll back
     onError: (err, newProfileData, context) => {
-      queryClient.setQueryData(['userProfile', newProfileData.id], context.previousProfile);
+      queryClient.setQueryData(['userProfile'], context.previousProfile);
     },
     // Always refetch after error or success:
-    onSettled: (data, err, variables) => {
-      queryClient.invalidateQueries(['userProfile', variables.id]);
+    onSettled: () => {
+      queryClient.invalidateQueries(['userProfile']);
     },
   });
 }
