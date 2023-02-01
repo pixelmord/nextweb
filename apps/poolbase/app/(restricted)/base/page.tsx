@@ -1,5 +1,8 @@
+import { Container, H1 } from 'ui';
+
 import PageHeader from '@/components/PageHeader';
-import { H1, Container } from 'ui';
+
+import AddResourceForm from './AddResourceForm';
 
 export default async function BaseDashboard() {
   return (
@@ -7,7 +10,9 @@ export default async function BaseDashboard() {
       <PageHeader>
         <H1>Dashboard</H1>
       </PageHeader>
-      <Container>whatever</Container>
+      <Container>
+        <AddResourceForm />
+      </Container>
     </>
   );
 }

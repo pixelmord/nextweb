@@ -69,11 +69,15 @@ export const fetchGithubStars = async () => {
             hasNextPage
           }
           nodes {
-            name
             id
+            name
+            nameWithOwner
+            pushedAt
             description
             url
             openGraphImageUrl
+            shortDescriptionHTML
+            stargazerCount
           }
         }
       }

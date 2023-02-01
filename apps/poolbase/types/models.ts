@@ -2,23 +2,21 @@ import * as zod from 'zod';
 
 export const ResourceSchema = zod.object({
   id: zod.string(),
-  url: zod.string().url(),
+  url: zod.string().url().min(1),
   uid: zod.string(),
   title: zod.string().optional(),
   status: zod.string().nullable(),
-  metaKeywords: zod.array(zod.string()).nullable().optional(),
-  metaDescription: zod.string().nullable().optional(),
-  metaTitle: zod.string().nullable().optional(),
-  metaAuthor: zod.string().nullable().optional(),
-  metaPublisher: zod.string().nullable().optional(),
-  mainText: zod.string().nullable().optional(),
-  metaIconUrl: zod.string().nullable().optional(),
-  mainImageUrl: zod.string().nullable().optional(),
-  screenshotFullUrl: zod.string().optional(),
-  screenshotPreviewUrl: zod.string().optional(),
-  processed: zod.object({
-    html: zod.boolean().nullable().optional(),
-  }),
+  meta_keywords: zod.array(zod.string()).nullable().optional(),
+  meta_description: zod.string().nullable().optional(),
+  meta_title: zod.string().nullable().optional(),
+  meta_author: zod.string().nullable().optional(),
+  meta_publisher: zod.string().nullable().optional(),
+  main_text: zod.string().nullable().optional(),
+  meta_icon_url: zod.string().nullable().optional(),
+  main_image_url: zod.string().nullable().optional(),
+  screenshot_full_url: zod.string().optional(),
+  screenshot_storage_path: zod.string().optional(),
+  processed: zod.string().array().nullable().optional(),
 });
 
 export type ResourceData = zod.infer<typeof ResourceSchema>;
