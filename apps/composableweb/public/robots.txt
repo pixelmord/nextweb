@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://composableweb.com/sitemap.xml

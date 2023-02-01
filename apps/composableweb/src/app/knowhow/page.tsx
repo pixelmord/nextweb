@@ -1,8 +1,6 @@
-import { H1 } from 'ui';
-
 import Link from 'next/link';
-
-import { Blog } from '@/lib/mdx-sources';
+import { Blog } from 'src/lib/mdx-sources';
+import { H1 } from 'ui';
 import { formatDate } from 'utils';
 
 export default async function BlogPage() {
