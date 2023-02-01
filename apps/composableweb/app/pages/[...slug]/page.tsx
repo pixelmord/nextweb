@@ -1,6 +1,7 @@
-import { Blog } from '@/lib/mdx-sources';
-import { MdxContent } from 'ui/client-only';
+import { MdxContent } from 'mdx/MdxContent';
 import { formatDate } from 'utils';
+
+import { Blog } from '@/lib/mdx-sources';
 
 // TODO: Properly type this file once the following fix lands.
 // @see https://github.com/vercel/next.js/pull/42019

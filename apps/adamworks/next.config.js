@@ -1,6 +1,5 @@
 module.exports = {
   reactStrictMode: true,
-  experimental: {
-    transpilePackages: ['ui', 'mdx', 'utils'],
-  },
+  transpilePackages: ['ui', 'utils', 'mdx'],
+  experimental: {},
 };

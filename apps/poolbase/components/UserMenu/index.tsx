@@ -1,17 +1,26 @@
 'use client';
-import { Menu, Transition } from '@headlessui/react';
-import Link from 'next/link';
-import { Fragment } from 'react';
 
-import { usePathname } from 'next/navigation';
-import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Fragment } from 'react';
 import { IconType } from 'react-icons';
 import { Button } from 'ui';
 
-export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
+import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import type { Database } from '@/types/supabase';
+
+type Profile = Database['public']['Tables']['profiles']['Row'];
+export default function UserMenu({
+  links,
+  user,
+}: {
+  links: { href: string; text: string; icon: IconType }[];
+  user: Profile;
+}) {
   const pathname = usePathname();
-  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile();
+  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
   const avatarUrl = useProfileImage(userProfile?.avatar_url);
   const logoutMutation = useLogOut();
   return (
