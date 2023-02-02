@@ -85,7 +85,7 @@ module.exports = {
           '--tw-prose-th-borders': theme('colors.base.200'),
           '--tw-prose-td-borders': theme('colors.base.100'),
 
-          '--tw-prose-invert-body': theme('colors.base.400'),
+          '--tw-prose-invert-body': theme('colors.base.300'),
           '--tw-prose-invert-headings': theme('colors.base.200'),
           '--tw-prose-invert-links': theme('colors.accent.400'),
           '--tw-prose-invert-links-hover': theme('colors.accent.400'),
@@ -118,23 +118,29 @@ module.exports = {
           },
 
           // Headings
-          'h2, h3': {
+          'h1,h2, h3': {
             color: 'var(--tw-prose-headings)',
             fontWeight: theme('fontWeight.semibold'),
+          },
+          h1: {
+            fontSize: theme('fontSize.2xl')[0],
+            lineHeight: theme('lineHeight.7'),
+            marginTop: theme('spacing.10'),
+            marginBottom: theme('spacing.4'),
           },
           h2: {
             fontSize: theme('fontSize.xl')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.20'),
+            marginTop: theme('spacing.10'),
             marginBottom: theme('spacing.4'),
           },
           h3: {
             fontSize: theme('fontSize.base')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.16'),
+            marginTop: theme('spacing.6'),
             marginBottom: theme('spacing.4'),
           },
-          ':is(h2, h3) + *': {
+          ':is(h1,h2, h3) + *': {
             marginTop: 0,
           },
 
@@ -255,14 +261,10 @@ module.exports = {
 
           // Horizontal rules
           hr: {
-            marginTop: theme('spacing.20'),
-            marginBottom: theme('spacing.20'),
+            marginTop: theme('spacing.6'),
+            marginBottom: theme('spacing.6'),
             borderTopWidth: '1px',
             borderColor: 'var(--tw-prose-hr)',
-            '@screen lg': {
-              marginLeft: `calc(${theme('spacing.12')} * -1)`,
-              marginRight: `calc(${theme('spacing.12')} * -1)`,
-            },
           },
 
           // Tables

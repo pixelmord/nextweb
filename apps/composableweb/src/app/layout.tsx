@@ -15,8 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html className={`${archivo.variable} ${barlow.variable} h-full`}>
       <body className="flex flex-col lg:flex-row bg-base-50 dark:bg-base-800 h-full">
-        <header className="bg-primary-200 dark:bg-primary-900/25 relative shrink-0 w-full lg:w-[350px] xl:w-[450px]">
-          <div className="flex flex-col relative lg:fixed justify-start lg:justify-between  h-full top-0 left-0 bottom-0 z-10  w-full lg:w-[350px] xl:w-[450px]">
+        <header className="relative shrink-0 w-full lg:w-[350px] xl:w-[450px]">
+          <div className="bg-primary-200 dark:bg-primary-900/25 flex flex-col relative lg:fixed justify-start lg:justify-between  h-full top-0 left-0 bottom-0 z-10  w-full lg:w-[350px] xl:w-[450px]">
             <div className="flex flex-row lg:flex-col lg:text-center lg:m-1 lg:mt-5 h-[60px] lg:h-auto opacity-75 items-center">
               <Link href="/" className="inline-block mr-1 sm:mr-4 lg:mr-0 ">
                 <Image
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MainNavigation />
           </div>
         </header>
-        <main className="flex flex-grow">{children}</main>
+        <main className="flex flex-grow px-3 lg:px-8">{children}</main>
       </body>
     </html>
   );

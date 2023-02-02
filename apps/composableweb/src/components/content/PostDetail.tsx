@@ -5,15 +5,13 @@ import { formatDate } from 'utils';
 
 export default function PostDetail({ post }) {
   return (
-    <article className="mx-auto max-w-2xl py-12">
+    <article className="prose dark:prose-invert mx-auto max-w-4xl py-12 flex-grow">
       <div className="flex flex-col space-y-2">
-        <h1 className="max-w-[90%] text-4xl font-bold leading-normal">{post.frontMatter.title}</h1>
-        {post.frontMatter.createdAt && (
-          <p className="text-sm text-slate-600">{formatDate(post.frontMatter.createdAt)}</p>
-        )}
+        <h1 className="">{post.frontMatter.title}</h1>
+        {post.frontMatter.createdAt && <p className="text-sm ">{formatDate(post.frontMatter.createdAt)}</p>}
       </div>
       <hr className="my-6" />
-      <div className="prose max-w-none">
+      <div className="">
         <MdxContent source={post.mdx} />
       </div>
     </article>
