@@ -1,8 +1,8 @@
-import * as z from 'zod';
 import { createSource } from 'mdx';
+import * as z from 'zod';
 
 export const Blog = createSource({
-  contentPath: 'content/blog',
+  contentPath: 'src/content/blog',
   basePath: '/blog',
   sortBy: 'createdAt',
   sortOrder: 'desc',
@@ -16,7 +16,7 @@ export const Blog = createSource({
 });
 
 export const CodeRecipes = createSource({
-  contentPath: 'content/code-recipes',
+  contentPath: 'src/content/code-recipes',
   basePath: '/code-recipes',
   sortBy: 'createdAt',
   sortOrder: 'desc',
@@ -30,7 +30,7 @@ export const CodeRecipes = createSource({
 });
 
 export const Knowhow = createSource({
-  contentPath: 'content/knowhow',
+  contentPath: 'src/content/knowhow',
   basePath: '/knowhow',
   sortBy: 'createdAt',
   sortOrder: 'desc',
@@ -43,7 +43,7 @@ export const Knowhow = createSource({
   }),
 });
 export const Pages = createSource({
-  contentPath: 'content/pages',
+  contentPath: 'src/content/pages',
   basePath: '/pages',
   sortBy: 'createdAt',
   sortOrder: 'desc',

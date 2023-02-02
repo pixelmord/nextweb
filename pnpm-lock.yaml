@@ -91,6 +91,7 @@ importers:
 
   apps/composableweb:
     specifiers:
+      '@headlessui/react': ^1.7.8
       '@next/font': ^13.1.6
       '@tailwindcss/aspect-ratio': ^0.4.2
       '@tailwindcss/forms': ^0.5.3
@@ -115,6 +116,7 @@ importers:
       postcss: ^8.4.21
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-icons: ^4.7.1
       sharp: ^0.31.3
       tailwindcss: ^3.2.4
       tsconfig: workspace:0.0.0
@@ -123,6 +125,7 @@ importers:
       utils: workspace:0.0.0
       zod: ^3.20.2
     dependencies:
+      '@headlessui/react': 1.7.8_biqbaboplfbrettd7655fr4n2y
       '@next/font': 13.1.6
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.4
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.4
@@ -136,6 +139,7 @@ importers:
       next-seo: 5.15.0_3vryta7zmbcsw4rrqf4axjqggm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-icons: 4.7.1_react@18.2.0
       sharp: 0.31.3
       ui: link:../../packages/ui
       utils: link:../../packages/utils

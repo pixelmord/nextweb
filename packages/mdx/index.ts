@@ -68,7 +68,6 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
       mdxOptions: {
         remarkPlugins: [],
         rehypePlugins: [],
-        development: false,
       },
       // ...mdxOptions,
     });

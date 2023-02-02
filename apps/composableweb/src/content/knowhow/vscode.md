@@ -12,9 +12,9 @@ draft: true
 
 ### Useful online resources
 
-<https://snippet-generator.app/>
+[https://snippet-generator.app/](https://snippet-generator.app/)
 
-### Developers about their setups:
+### Developers about their setups
 
 May 20 '19
 [dev.to/yloganathan/vs-code-setup-to-improve-developer-productivity-3die](https://dev.to/yloganathan/vs-code-setup-to-improve-developer-productivity-3die)

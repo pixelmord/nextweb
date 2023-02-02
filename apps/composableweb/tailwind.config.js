@@ -12,9 +12,9 @@ module.exports = {
       },
       colors: {
         base: colors.zinc,
-        primary: colors.emerald,
+        primary: colors.indigo,
         secondary: colors.orange,
-        accent: colors.emerald,
+        accent: colors.pink,
         success: colors.green,
         warning: colors.yellow,
         danger: colors.red,
@@ -270,10 +270,6 @@ module.exports = {
             marginBottom: theme('spacing.20'),
             borderTopWidth: '1px',
             borderColor: 'var(--tw-prose-hr)',
-            '@screen lg': {
-              marginLeft: `calc(${theme('spacing.12')} * -1)`,
-              marginRight: `calc(${theme('spacing.12')} * -1)`,
-            },
           },
 
           // Tables
