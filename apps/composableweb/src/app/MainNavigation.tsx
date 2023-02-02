@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
 const menuLinks = [
-  { href: '/resume', text: 'About Me' },
+  { href: '/resume/en', text: 'About Me' },
   { href: '/blog', text: 'Writing' },
   { href: '/code-recipes', text: 'Code Recipes' },
   { href: '/knowhow', text: 'Know How' },

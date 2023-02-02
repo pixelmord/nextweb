@@ -1,6 +1,6 @@
 import PostTeaser from '@/components/content/PostTeaser';
 
-export default function PostListPage({ posts, title, description }) {
+export default function PostListPage({ posts, title, description = '' }) {
   return (
     <div className="prose dark:prose-invert container mx-auto max-w-3xl px-6 py-12 xl:px-8">
       <h1 className="my-0">{title}</h1>
