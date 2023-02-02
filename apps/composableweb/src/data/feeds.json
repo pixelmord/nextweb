@@ -1,0 +1,20 @@
+{
+  "developer": [
+    {
+      "title": "Jared Palmer's Blog",
+      "url": "https://jaredpalmer.com/rss.xml"
+    },
+    {
+      "title": "Josh W Comeau",
+      "url": "https://joshwcomeau.com/rss.xml"
+    },
+    {
+      "title": "Brent Jackson - Front-end developer at Gatsby. Based in Brooklyn, NY",
+      "url": "https://jxnblk.com/rss.xml"
+    },
+    {
+      "title": "Hugo 'Kitty' Giraudel ",
+      "url": "https://hugogiraudel.com/rss/index.xml"
+    }
+  ]
+}
