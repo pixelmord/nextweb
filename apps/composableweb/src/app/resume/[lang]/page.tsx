@@ -5,6 +5,7 @@ import fetchLocalFile from 'utils/fetch-local-file';
 
 import { Locale, i18n } from '@/config/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
+import { ResumeData } from '@/types';
 
 const socialIcons = {
   Twitter: () => <FiTwitter className="w-5 h-5" />,
@@ -15,7 +16,7 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 export default async function ResumePage({ params: { lang } }: { params: { lang: Locale } }) {
-  const data = await fetchLocalFile(`src/data/resume.${lang}.json`);
+  const data = await fetchLocalFile<ResumeData>(`src/data/resume.${lang}.json`);
   const dictionary = await getDictionary(lang);
 
   return (

@@ -5,6 +5,8 @@
       "heading": "Hire me!",
       "subheading": "I am your man if you need someone passionate about teamwork, tech and user experience.",
       "image": "/static/images/matt-noble-VpGAhrqRAsw-unsplash.jpg",
+      "imageWidth": "1280",
+      "imageHeight": "1920",
       "link": "/resume/en",
       "tags": ["architect", "engineering manager", "front-end"],
       "content": "As an engineering manager and team lead I am looking for a team with a strong vision that strives to create a product that makes the world a better place. We share the belief that digital transformation is inclusive, based upon great technology and user experience alike. Flat hierarchy and leading by example are motivators for creativity."
@@ -14,6 +16,8 @@
       "heading": "What is the 'Composable Web'?",
       "subheading": "Enterprise ready modern front-ends backed by microservices",
       "image": "/static/images/james-owen-oFHMk5fD8-s-unsplash.jpg",
+      "imageWidth": "1280",
+      "imageHeight": "1920",
       "link": "/pages/about-composable-web",
       "tags": ["JAMStack", "reactJS", "microservices", "decoupled"],
       "content": "The biggest advantage of using web-technology for building applications is the ability to deliver incremental results fast. That fits right into an agile mindset, where short cycles of development lead from idea to prototype to usable software that can be incrementally shipped. Those ideas work best with component thinking, not only in terms of front-end components, but also in composition of webservices and APIs."
@@ -23,6 +27,8 @@
       "heading": "Open Source - Why it Matters",
       "subheading": "Stand on the shoulders of giants and use your money wisely",
       "image": "/static/images/mike-petrucci-c9FQyqIECds-unsplash.jpg",
+      "imageWidth": "1280",
+      "imageHeight": "853",
       "link": "/pages/open-source",
       "tags": ["open-source", "contribution", "no vendor lock-in"],
       "content": "A vast ecosystem of open-source software lets you stand on the shoulders of giants and keep your focus on delivering value for your core vision. Working in the open fosters transparency, accountability and ultimately security - all of those factors lead to well crafted software"
