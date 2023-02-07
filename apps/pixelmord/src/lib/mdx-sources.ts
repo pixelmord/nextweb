@@ -1,8 +1,8 @@
-import * as z from 'zod';
 import { createSource } from 'mdx';
+import * as z from 'zod';
 
 export const Recipes = createSource({
-  contentPath: 'content/recipes',
+  contentPath: 'src/content/recipes',
   basePath: '/recipes',
   sortBy: 'createdAt',
   sortOrder: 'desc',

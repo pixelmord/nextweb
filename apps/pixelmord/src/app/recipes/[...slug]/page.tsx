@@ -1,9 +1,9 @@
 import { MdxContent } from 'mdx/MdxContent';
+import { Recipes } from 'src/lib/mdx-sources';
 import { H1 } from 'ui';
 import { formatDate } from 'utils';
 
 import { Container } from '@/components/Container';
-import { Recipes } from '@/lib/mdx-sources';
 
 type PageParams = {
   slug: string[];

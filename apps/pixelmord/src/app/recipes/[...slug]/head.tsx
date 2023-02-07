@@ -1,4 +1,4 @@
-import { Recipes } from '@/lib/mdx-sources';
+import { Recipes } from 'src/lib/mdx-sources';
 
 import DefaultHeadTags from '../../DefaultHeadTags';
 
