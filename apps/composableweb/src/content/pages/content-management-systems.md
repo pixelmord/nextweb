@@ -1,7 +1,7 @@
 ---
 title: 'Content Management Systems'
-createdAt: '2020-11-04'
-publishedAt: '2020-11-04'
+dateCreated: '2020-11-04'
+datePublished: '2020-11-04'
 summary: 'CMS'
 tags:
   - 'CMS'

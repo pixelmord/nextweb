@@ -1,24 +1,7 @@
+import { BaseFrontmatterSchema, MarkdownFrontmatter } from 'mdx';
 import { z } from 'zod';
 
-export type MarkdownFrontmatter = Record<string, string | string[] | number | number[] | boolean | IReadTimeResults>;
-export const IReadTimeResultsSchema = z.object({
-  text: z.string(),
-  time: z.number(),
-  words: z.number(),
-  minutes: z.number(),
-});
-export type IReadTimeResults = z.infer<typeof IReadTimeResultsSchema>;
-export const PostFrontmatterSchema = z.object({
-  title: z.string(),
-  createdAt: z.string(),
-  publishedAt: z.string(),
-  draft: z.boolean(),
-  summary: z.string().optional(),
-  tags: z.string().array().optional(),
-  wordCount: z.number(),
-  readingTime: IReadTimeResultsSchema,
-});
-export type PostFrontmatter = MarkdownFrontmatter & z.infer<typeof PostFrontmatterSchema>;
+export type PostFrontmatter = MarkdownFrontmatter & z.infer<typeof BaseFrontmatterSchema>;
 export type BlogFrontmatter = PostFrontmatter;
 export type CodeRecipeFrontmatter = PostFrontmatter;
 export type PageFrontmatter = PostFrontmatter;

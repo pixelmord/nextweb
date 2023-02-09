@@ -1,9 +1,8 @@
-import { H1 } from 'ui';
-
 import Link from 'next/link';
+import { H1 } from 'ui';
+import { formatDate } from 'utils';
 
 import { Blog } from '@/lib/mdx-sources';
-import { formatDate } from 'utils';
 
 export default async function BlogPage() {
   const posts = await Blog.getAllMdxNodes();
@@ -21,8 +20,8 @@ export default async function BlogPage() {
                 {post?.frontMatter.title}
               </h2>
             </Link>
-            {post?.frontMatter.createdAt && (
-              <p className="text-sm text-slate-600">{formatDate(post?.frontMatter.createdAt)}</p>
+            {post?.frontMatter.dateCreated && (
+              <p className="text-sm text-slate-600">{formatDate(post?.frontMatter.dateCreated)}</p>
             )}
           </div>
           {post?.frontMatter.summary && <p className="text-slate-600">{post?.frontMatter.summary}</p>}

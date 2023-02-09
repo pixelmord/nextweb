@@ -1,7 +1,7 @@
 ---
 title: 'About the Composable Web'
-createdAt: '2020-10-21'
-publishedAt: '2020-10-21'
+dateCreated: '2020-10-21'
+datePublished: '2020-10-21'
 summary: 'The biggest advantage of using web-technology for building applications is the ability to deliver incremental results fast. That fits right into an agile mindset, where short cycles of development lead from idea to prototype to usable software that can be incrementally shipped. Those ideas work best with component thinking, not only in terms of front-end components, but also in composition of webservices and APIs.'
 tags:
   - 'composable'

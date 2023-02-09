@@ -1,7 +1,7 @@
 ---
 title: 'GIT'
-publishedAt: '2019-08-03'
-createdAt: '2019-07-23'
+datePublished: '2019-08-03'
+dateCreated: '2019-07-23'
 summary: 'GIT commands'
 tags:
   - GIT

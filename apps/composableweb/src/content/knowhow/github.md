@@ -1,7 +1,7 @@
 ---
 title: 'Github Tips and Tricks'
-publishedAt: '2020-10-28'
-createdAt: '2020-10-28'
+datePublished: '2020-10-28'
+dateCreated: '2020-10-28'
 summary: 'Configure, use and have fun with GitHub.'
 tags:
   - GitHub

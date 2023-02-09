@@ -1,12 +1,12 @@
 'use client';
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
 
-import { FiMenu, FiX } from 'react-icons/fi';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
-const menuLinks = [{ href: '/recipes', text: 'Recipes' }];
+import { FiMenu, FiX } from 'react-icons/fi';
+
+const menuLinks = [{ href: '/recipes', text: 'Kochrezepte' }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -25,7 +25,7 @@ export default function Head() {
                   <Link href="/">
                     <Image
                       className="block h-10 w-10 rounded-full"
-                      src="/favicons/android-chrome-192x192.png"
+                      src="/static/favicons/android-chrome-192x192.png"
                       width="40"
                       height="40"
                       alt="@pixelmord - Andreas Adam"
@@ -52,7 +52,7 @@ export default function Head() {
 
               <div className="-mr-2 flex items-center sm:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="text-base-400 hover:bg-base-100 hover:text-base-500 inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <Disclosure.Button className="text-base-400 hover:bg-base-100 hover:text-base-500 inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <FiX className="block h-6 w-6" aria-hidden="true" />

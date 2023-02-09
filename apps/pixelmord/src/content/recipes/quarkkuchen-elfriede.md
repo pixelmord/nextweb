@@ -1,7 +1,8 @@
 ---
 title: "Quarkkuchen Elfriede \U0001F370"
+name: "Quarkkuchen Elfriede \U0001F370"
 summary: Mein Lieblingskuchen
-ingredients:
+recipeIngredient:
   - 750g Quark 20%
   - 320g Puderzucker
   - 190g Butter
@@ -11,15 +12,17 @@ ingredients:
   - 1 EL Rum
   - 100g Rosinen
   - 3 Eier
-tags:
+keywords:
   - Backen
 preparationTime: 60
 difficulty: simpel
-coverImage: /assets/recipes/tina-guina-s8_7AqkzCWY-unsplash.jpg
+image:
+  - /assets/recipes/tina-guina-s8_7AqkzCWY-unsplash.jpg
 date: '2020-05-20T12:35:07.322Z'
 ogImage: /assets/recipes/tina-guina-s8_7AqkzCWY-unsplash.jpg
-createdAt: '2020-08-30'
-publishedAt: '2020-08-30'
+dateCreated: '2020-08-30'
+datePublished: '2020-08-30'
+dateModified: '2020-08-30'
 draft: false
 ---
 

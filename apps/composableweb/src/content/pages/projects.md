@@ -1,7 +1,7 @@
 ---
 title: 'Projects'
-createdAt: '2020-11-13'
-publishedAt: '2020-11-13'
+dateCreated: '2020-11-13'
+datePublished: '2020-11-13'
 tags:
   - 'page'
 draft: true

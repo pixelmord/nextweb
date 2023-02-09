@@ -4,12 +4,12 @@ import * as z from 'zod';
 export const Blog = createSource({
   contentPath: 'src/content/blog',
   basePath: '/blog',
-  sortBy: 'createdAt',
+  sortBy: 'dateCreated',
   sortOrder: 'desc',
   frontMatter: z.object({
     title: z.string(),
-    createdAt: z.string(),
-    publishedAt: z.string(),
+    dateCreated: z.string(),
+    datePublished: z.string(),
     summary: z.string().optional(),
     draft: z.boolean(),
   }),
@@ -18,12 +18,12 @@ export const Blog = createSource({
 export const CodeRecipes = createSource({
   contentPath: 'src/content/code-recipes',
   basePath: '/code-recipes',
-  sortBy: 'createdAt',
+  sortBy: 'dateCreated',
   sortOrder: 'desc',
   frontMatter: z.object({
     title: z.string(),
-    createdAt: z.string(),
-    publishedAt: z.string(),
+    dateCreated: z.string(),
+    datePublished: z.string(),
     summary: z.string().optional(),
     draft: z.boolean(),
   }),
@@ -32,12 +32,12 @@ export const CodeRecipes = createSource({
 export const Knowhow = createSource({
   contentPath: 'src/content/knowhow',
   basePath: '/knowhow',
-  sortBy: 'createdAt',
+  sortBy: 'dateCreated',
   sortOrder: 'desc',
   frontMatter: z.object({
     title: z.string(),
-    createdAt: z.string(),
-    publishedAt: z.string(),
+    dateCreated: z.string(),
+    datePublished: z.string(),
     summary: z.string().optional(),
     draft: z.boolean(),
   }),
@@ -45,12 +45,12 @@ export const Knowhow = createSource({
 export const Pages = createSource({
   contentPath: 'src/content/pages',
   basePath: '/pages',
-  sortBy: 'createdAt',
+  sortBy: 'dateCreated',
   sortOrder: 'desc',
   frontMatter: z.object({
     title: z.string(),
-    createdAt: z.string(),
-    publishedAt: z.string(),
+    dateCreated: z.string(),
+    datePublished: z.string(),
     summary: z.string().optional(),
     draft: z.boolean(),
   }),

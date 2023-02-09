@@ -1,7 +1,7 @@
 ---
 title: 'Common Web Project Config'
-publishedAt: '2019-07-23'
-createdAt: '2019-07-23'
+datePublished: '2019-07-23'
+dateCreated: '2019-07-23'
 summary: 'Common Web Project Config - files and infos that should be common to all project flavours.'
 tags:
   - Editorconfig

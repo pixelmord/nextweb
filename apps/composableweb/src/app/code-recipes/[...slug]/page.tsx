@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { CodeRecipes } from 'src/lib/mdx-sources';
 
 import PostDetail from '@/components/content/PostDetail';
@@ -20,6 +21,8 @@ export async function generateStaticParams() {
 
 export default async function CodeRecipePage({ params }: PostPageProps) {
   const post = await CodeRecipes.getMdxNode(params?.slug?.join('/'));
-  if (!post) return null;
+  if (!post) {
+    notFound();
+  }
   return <PostDetail post={post} />;
 }

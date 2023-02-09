@@ -1,7 +1,7 @@
 ---
 title: 'MacOS'
-publishedAt: '2020-09-02'
-createdAt: '2019-07-23'
+datePublished: '2020-09-02'
+dateCreated: '2019-07-23'
 summary: 'Code style conventions'
 tags:
   - Mac

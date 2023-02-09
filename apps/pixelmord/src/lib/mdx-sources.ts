@@ -1,21 +1,11 @@
-import { createSource } from 'mdx';
-import * as z from 'zod';
+import { BaseFrontmatterSchema, createSource } from 'mdx';
+
+import { RecipeSchema } from '@/types';
 
 export const Recipes = createSource({
   contentPath: 'src/content/recipes',
   basePath: '/recipes',
-  sortBy: 'createdAt',
+  sortBy: 'dateCreated',
   sortOrder: 'desc',
-  frontMatter: z.object({
-    title: z.string(),
-    createdAt: z.string(),
-    publishedAt: z.string(),
-    summary: z.string().optional(),
-    draft: z.boolean(),
-    ingredients: z.string().array().optional().nullable(),
-    tags: z.string().array().optional().nullable(),
-    preparationTime: z.number().optional().nullable(),
-    difficulty: z.string().optional().nullable(),
-    coverImage: z.string().optional().nullable(),
-  }),
+  frontMatter: BaseFrontmatterSchema.merge(RecipeSchema),
 });

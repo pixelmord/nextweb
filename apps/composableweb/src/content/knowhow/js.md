@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript'
-publishedAt: '2019-08-30'
-createdAt: '2019-07-23'
+datePublished: '2019-08-30'
+dateCreated: '2019-07-23'
 summary: 'Code style conventions'
 tags:
   - Office

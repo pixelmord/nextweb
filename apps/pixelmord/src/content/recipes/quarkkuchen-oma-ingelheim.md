@@ -1,6 +1,7 @@
 ---
 title: 'Quarkkuchen Oma Ingelheim'
-ingredients:
+name: 'Quarkkuchen Oma Ingelheim'
+recipeIngredient:
   - 1kg Quark 20%
   - 125g Butter
   - 300g Zucker
@@ -11,9 +12,11 @@ ingredients:
   - 1 Pckg. Backpulver
   - Saft und Schale von 1 Zitrone
   - 125g Rosinen
-createdAt: '2020-09-06'
-publishedAt: '2020-09-06'
-coverImage:
+dateCreated: '2020-09-06'
+datePublished: '2020-09-06'
+dateModified: '2020-09-06'
+image:
+  -
 draft: false
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: 'Aprikosen-Schokokuchen'
+name: 'Aprikosen-Schokokuchen'
 summary: 'Aprikosen-Schokokuchen'
-ingredients:
+recipeIngredient:
   - 100g griffiges Mehl
   - 1 Kaffeelöffel Backpulver
   - 15g Kakao
@@ -13,13 +14,15 @@ ingredients:
   - 1 ganzes Ei
   - 2 Eiklar
   - 75g Staubzucker
-tags:
+keywords:
   - Kuchen
-preparationTime: 20
+prepTime: PT0H20M
 difficulty: simpel
-coverImage:
-createdAt: '2021-07-27'
-publishedAt: '2021-07-27'
+image:
+  -
+dateCreated: '2021-07-27'
+datePublished: '2021-07-27'
+dateModified: '2021-07-27'
 draft: true
 ---
 

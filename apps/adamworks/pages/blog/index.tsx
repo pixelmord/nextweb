@@ -18,8 +18,8 @@ export default function BlogPage({ posts }) {
                 {post?.frontMatter.title}
               </h2>
             </Link>
-            {post?.frontMatter.createdAt && (
-              <p className="text-sm text-slate-600">{formatDate(post?.frontMatter.createdAt)}</p>
+            {post?.frontMatter.dateCreated && (
+              <p className="text-sm text-slate-600">{formatDate(post?.frontMatter.dateCreated)}</p>
             )}
           </div>
           {post?.frontMatter.summary && <p className="text-slate-600">{post?.frontMatter.summary}</p>}

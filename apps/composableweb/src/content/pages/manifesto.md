@@ -1,7 +1,7 @@
 ---
 title: 'Manifesto'
-createdAt: '2020-10-21'
-publishedAt: '2020-10-21'
+dateCreated: '2020-10-21'
+datePublished: '2020-10-21'
 tags:
   - 'page'
 draft: true

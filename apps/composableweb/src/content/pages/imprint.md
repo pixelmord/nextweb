@@ -1,7 +1,7 @@
 ---
 title: 'Impressum'
-createdAt: '2020-09-29'
-publishedAt: '2020-09-29'
+dateCreated: '2020-09-29'
+datePublished: '2020-09-29'
 draft: false
 ---
 

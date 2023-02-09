@@ -1,7 +1,7 @@
 ---
 title: 'Regular Expressions'
-publishedAt: '2020-04-22'
-createdAt: '2019-07-23'
+datePublished: '2020-04-22'
+dateCreated: '2019-07-23'
 summary: 'Regular Expressions'
 tags:
   - regex

@@ -1,21 +1,14 @@
 import { Recipes } from 'src/lib/mdx-sources';
 
+import meta from '@/config/meta';
+
 import DefaultHeadTags from '../../DefaultHeadTags';
 
 export default async function Head({ params }) {
-  // console.log(params?.slug?.join('/'));
-  // try {
-  //   const post = await Recipes.getMdxNode(params?.slug?.join('/'));
-  // } catch (e) {
-  //   console.log(e);
-  // }
-
-  // // if (!post) return null;
+  const post = await Recipes.getMdxNode(params?.slug?.join('/'));
   return (
     <>
-      <DefaultHeadTags />
-      <title>Pixelmord - Recipe </title>
-      <meta name="description" content="Project tools for the future" />
+      <DefaultHeadTags overrides={{ title: `Kochrezept: ${post.frontMatter.title} | ${meta.title}` }} />
     </>
   );
 }

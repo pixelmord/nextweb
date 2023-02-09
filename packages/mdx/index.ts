@@ -5,31 +5,27 @@ import { MDXRemoteSerializeResult, SerializeOptions } from 'next-mdx-remote/dist
 import { serialize } from 'next-mdx-remote/serialize';
 import NodeCache from 'node-cache';
 import path from 'path';
+import readingTime from 'reading-time';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeCodeTitles from 'rehype-code-titles';
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 import * as z from 'zod';
 
+import { IReadTimeResults, MdxFile, MdxFileData, Source } from './types';
+
+export * from './types';
+
 const mdxCache = new NodeCache();
-
-export interface Source<T> {
-  contentPath: string;
-  basePath: string;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
-  frontMatter: T;
-}
-
-interface MdxFile {
-  filepath: string;
-  slug: string;
-  url: string;
-}
-
-export interface MdxFileData<TFrontmatter> {
-  raw: string;
-  hash: string;
-  frontMatter: TFrontmatter;
-  mdx: MDXRemoteSerializeResult;
-}
-
+export const enhanceFrontmatterReadingTime = (
+  mdxContent: string
+): { wordCount: number; readingTime: IReadTimeResults } => {
+  return {
+    wordCount: readingTime(mdxContent).words,
+    readingTime: readingTime(mdxContent),
+  };
+};
 export function createSource<T extends z.ZodType>(source: Source<T>) {
   const { contentPath, basePath, sortBy, sortOrder } = source;
 
@@ -66,12 +62,39 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
     const mdx = await serialize(raw, {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [],
-        rehypePlugins: [],
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+          rehypeSlug,
+          rehypeCodeTitles,
+          [
+            rehypePrettyCode,
+            {
+              theme: 'one-dark-pro',
+              onVisitLine(node: any) {
+                // Prevent lines from collapsing in `display: grid` mode, and allow empty
+                // lines to be copy/pasted
+                if (node.children.length === 0) {
+                  node.children = [{ type: 'text', value: ' ' }];
+                }
+              },
+              onVisitHighlightedLine(node: any) {
+                node.properties.className.push('line--highlighted');
+              },
+              onVisitHighlightedWord(node: any) {
+                node.properties.className = ['word--highlighted'];
+              },
+            },
+          ],
+          rehypeAutolinkHeadings,
+        ],
       },
       // ...mdxOptions,
     });
-    const frontMatter = mdx.frontmatter ? (source.frontMatter.parse(mdx.frontmatter) as z.infer<T>) : null;
+    let frontMatter = mdx.frontmatter ? (source.frontMatter.parse(mdx.frontmatter) as z.infer<T>) : null;
+    frontMatter = {
+      ...frontMatter,
+      ...enhanceFrontmatterReadingTime(mdx.compiledSource),
+    };
 
     const fileData = {
       raw,

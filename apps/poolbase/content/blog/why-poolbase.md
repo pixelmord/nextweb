@@ -1,7 +1,7 @@
 ---
 title: 'Why Poolbase?'
-createdAt: '2022-11-08'
-publishedAt: '2022-11-08'
+dateCreated: '2022-11-08'
+datePublished: '2022-11-08'
 draft: false
 ---
 
