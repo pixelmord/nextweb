@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FiBell, FiMenu, FiPackage, FiUser } from 'react-icons/fi';
+import type { Database } from 'src/types/supabase';
 import { Button } from 'ui';
 
 import UserMenu from '@/components/UserMenu';
 import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
-import type { Database } from '@/types/supabase';
 
 type Profile = Database['public']['Tables']['profiles']['Row'];
 

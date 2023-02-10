@@ -1,12 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
-import { FiMenu, FiX } from 'react-icons/fi';
-import { useState } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import type { Database } from '@/types/supabase';
+import { useState } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
+import type { Database } from 'src/types/supabase';
 import { LinkButton } from 'ui';
+
 type Profile = Database['public']['Tables']['profiles']['Row'];
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 

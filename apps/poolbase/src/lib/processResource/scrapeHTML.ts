@@ -1,7 +1,6 @@
 import { parse } from 'node-html-parser';
 import { chromium, devices } from 'playwright';
-
-import { ResourceData } from '@/types';
+import { ResourceData } from 'src/types';
 
 export const findMainContentElement = (document: Document): HTMLElement | null => {
   const body = document.querySelector('body');

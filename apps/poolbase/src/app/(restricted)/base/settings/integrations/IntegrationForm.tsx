@@ -1,13 +1,15 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Database } from 'src/types';
+import { IntegrationSchema } from 'src/types';
 import { Button, H2 } from 'ui';
 import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import { FormElementText } from '@/components/Form';
-import { Database } from '@/types';
 import supabase from '@/lib/supabaseBrowserClient';
-import { IntegrationSchema } from '@/types';
+
 export type Integration = Database['public']['Tables']['integrations']['Row'];
 
 export default function IntegrationForm({ initialData }: { initialData: Integration }) {

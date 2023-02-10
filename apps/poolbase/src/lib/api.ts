@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-
-import type { Database } from '@/types/supabase';
+import type { Database } from 'src/types/supabase';
 
 import supabase from './supabaseBrowserClient';
 

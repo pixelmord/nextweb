@@ -6,9 +6,9 @@ import '@/styles/global.css';
 
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { cookies, headers } from 'next/headers';
+import { Database } from 'src/types/supabase';
 
 import SupabaseListener from '@/components/SupabaseListener';
-import { Database } from '@/types/supabase';
 
 const lato = Lato({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-lato' });
 

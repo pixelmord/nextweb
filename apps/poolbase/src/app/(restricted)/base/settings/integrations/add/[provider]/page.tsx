@@ -1,6 +1,8 @@
-import PageHeader from '@/components/PageHeader';
-import { IntegrationProviders } from '@/types';
+import { IntegrationProviders } from 'src/types';
 import { Container, H1 } from 'ui';
+
+import PageHeader from '@/components/PageHeader';
+
 import IntegrationForm from '../../IntegrationForm';
 
 const defaultValues = { github: { display_name: 'Github', provider: 'github', api_username: '', access_token: '' } };

@@ -3,8 +3,7 @@ import 'server-only';
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { cookies, headers } from 'next/headers';
 import { Octokit } from 'octokit';
-
-import { Database } from '@/types/supabase';
+import { Database } from 'src/types/supabase';
 
 export async function createClientWithSession() {
   const supabase = createServerComponentSupabaseClient<Database>({

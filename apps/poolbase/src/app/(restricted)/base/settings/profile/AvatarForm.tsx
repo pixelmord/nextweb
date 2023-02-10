@@ -1,11 +1,15 @@
 'use client';
-import React, { useState } from 'react';
-import type { Database } from '@/types/supabase';
-type Profiles = Database['public']['Tables']['profiles']['Row'];
-import { buttonStyle } from 'ui/client-only';
-import { useProfileImage } from '@/lib/api';
+
 import Image from 'next/image';
+import React, { useState } from 'react';
+import type { Database } from 'src/types/supabase';
+import { buttonStyle } from 'ui/client-only';
+
+import { useProfileImage } from '@/lib/api';
 import supabase from '@/lib/supabaseBrowserClient';
+
+type Profiles = Database['public']['Tables']['profiles']['Row'];
+
 export default function AvatarForm({
   uid,
   url,

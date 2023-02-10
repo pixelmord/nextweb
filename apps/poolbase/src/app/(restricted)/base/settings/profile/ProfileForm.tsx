@@ -2,11 +2,11 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { Database, UserProfileData, UserProfileSchema } from 'src/types';
 import { Button, H2 } from 'ui/client-only';
 
 import { FormElementText } from '@/components/Form';
 import { UpdateProfileData, useUpdateProfile, useUserProfile } from '@/lib/api';
-import { Database, UserProfileData, UserProfileSchema } from '@/types';
 
 import AvatarForm from './AvatarForm';
 

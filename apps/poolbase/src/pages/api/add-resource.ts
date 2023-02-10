@@ -1,8 +1,8 @@
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { Database, ResourceSchema } from 'src/types';
 
 import scrapeHTML from '@/lib/processResource/scrapeHTML';
-import { Database, ResourceSchema } from '@/types';
 
 const URLDataSchema = ResourceSchema.pick({ url: true, title: true });
 

@@ -2,7 +2,7 @@ import { createSource } from 'mdx';
 import * as z from 'zod';
 
 export const Blog = createSource({
-  contentPath: 'content/blog',
+  contentPath: 'src/content/blog',
   basePath: '/blog',
   sortBy: 'dateCreated',
   sortOrder: 'desc',
