@@ -6,13 +6,13 @@ import { SectionBlockData } from '@/types';
 
 export default function Section({ data }: { data: SectionBlockData }) {
   return (
-    <section className="flex">
+    <section className="flex mb-5">
       {data.image && (
-        <Link href={data.link} className="block w-72 h-72 lg:w-96 lg:h-96 flex-shrink-0 aspect-1">
+        <Link href={data.link} className="block w-36 lg:w-96 flex-shrink-0 overflow-hidden lg:aspect-1 self-stretch">
           <Image
             src={data.image}
             alt={data.heading}
-            className="block object-cover"
+            className="block object-cover max-w-none w-full h-full"
             width={+data.imageWidth}
             height={+data.imageHeight}
           />
@@ -20,7 +20,7 @@ export default function Section({ data }: { data: SectionBlockData }) {
       )}
       <div className="px-10 flex-grow">
         {data.heading && (
-          <H2>
+          <H2 className="">
             <Link href={data.link}>{data.heading}</Link>
           </H2>
         )}

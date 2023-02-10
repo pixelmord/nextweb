@@ -5,13 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
-const menuLinks = [
-  { href: '/resume/en', text: 'About Me' },
-  { href: '/blog', text: 'Writing' },
-  { href: '/code-recipes', text: 'Code Recipes' },
-  { href: '/knowhow', text: 'Know How' },
-];
-export const MainNavigation = () => {
+export const MainNavigation = ({ links }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
 
@@ -27,7 +21,7 @@ export const MainNavigation = () => {
         <FiMenu className="h-6 w-6" />
       </button>
       <div className={`${mobileMenuOpen ? 'block' : 'sr-only'} lg:block lg:not-sr-only mx-auto`}>
-        {menuLinks.map((link) => (
+        {links.map((link) => (
           <Link
             href={link.href}
             key={link.href}

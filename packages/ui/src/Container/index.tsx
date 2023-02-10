@@ -18,7 +18,7 @@ export interface ContainerProps
   extends React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>,
     VariantProps<typeof containerStyle> {}
 
-export const Container: React.FC<ContainerProps> = ({ className, hspace = 'full', ...props }) => {
+export const Container: React.FC<ContainerProps> = ({ className, hspace = 'page', ...props }) => {
   className = containerStyle({ hspace, className });
   return <div className={className} {...props} />;
 };

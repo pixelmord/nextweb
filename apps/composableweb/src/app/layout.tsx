@@ -34,10 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {config.common.tagline}
               </h3>
             </div>
-            <MainNavigation />
+            <MainNavigation links={config.links} />
           </div>
         </header>
-        <main className="flex flex-grow px-3 lg:px-8">{children}</main>
+        <main className="flex flex-grow">{children}</main>
       </body>
     </html>
   );
