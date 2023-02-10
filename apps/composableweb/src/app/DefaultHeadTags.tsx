@@ -5,6 +5,7 @@ import meta from '@/config/meta';
 export default function DefaultHeadTags({ overrides = {} }: { overrides?: Partial<NextSeoProps> }) {
   const updateMeta: NextSeoProps = {
     ...meta,
+    themeColor: '#E2E8F0',
     ...overrides,
   };
   // TODO: Update with sane defaults, see html and pwa checklist
@@ -15,8 +16,7 @@ export default function DefaultHeadTags({ overrides = {} }: { overrides?: Partia
       <link rel="alternate" type="application/feed+json" href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`} />
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-      <meta content="#E2E8F0" name="theme-color" />
-      <meta content="#E2E8F0" name="msapplication-TileColor" />
+
       <meta content="/static/browserconfig.xml" name="msapplication-config" />
       <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
       <link href="/static/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
