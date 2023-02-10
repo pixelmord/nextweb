@@ -7,8 +7,8 @@ draft: false
 
 Andreas Adam<br/>
 ComposableWeb<br/>
-Rümannstraße 94<br/>
-80804 München
+Kunigundenstr. 6a<br/>
+80802 München
 
 Telefon: +491797095114
 
@@ -19,7 +19,7 @@ Unsplash.com
 
 ## Hinweis gemäß Online-Streitbeilegungs-Verordnung
 
-Nach geltendem Recht sind wir verpflichtet, Verbraucher auf die Existenz der Europäischen Online-Streitbeilegungs-Plattform hinzuweisen, die für die Beilegung von Streitigkeiten genutzt werden kann, ohne dass ein Gericht eingeschaltet werden muss. Für die Einrichtung der Plattform ist die Europäische Kommission zuständig. Die Europäische Online-Streitbeilegungs-Plattform ist hier zu finden: http://ec.europa.eu/odr. Unsere E-Mail lautet: office@composableweb.com
+Nach geltendem Recht sind wir verpflichtet, Verbraucher auf die Existenz der Europäischen Online-Streitbeilegungs-Plattform hinzuweisen, die für die Beilegung von Streitigkeiten genutzt werden kann, ohne dass ein Gericht eingeschaltet werden muss. Für die Einrichtung der Plattform ist die Europäische Kommission zuständig. Die Europäische Online-Streitbeilegungs-Plattform ist hier zu finden: [http://ec.europa.eu/odr](http://ec.europa.eu/odr). Unsere E-Mail lautet: office@composableweb.com
 
 Wir weisen aber darauf hin, dass wir nicht bereit sind, uns am Streitbeilegungsverfahren im Rahmen der Europäischen Online-Streitbeilegungs-Plattform zu beteiligen. Nutzen Sie zur Kontaktaufnahme bitte unsere obige E-Mail und Telefonnummer.
 
