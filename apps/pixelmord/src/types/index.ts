@@ -4,7 +4,6 @@ import { z } from 'zod';
 export type PostFrontmatter = MarkdownFrontmatter & BaseFrontmatter;
 export const RecipeSchema = z.object({
   name: z.string(),
-  recipeIngredient: z.string().array(),
   difficulty: z.string().optional(),
   image: z.string().nullable().array().optional(),
   author: z.string().optional(),
