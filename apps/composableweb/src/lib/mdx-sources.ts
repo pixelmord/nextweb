@@ -25,6 +25,7 @@ export const CodeRecipes = createSource({
     dateCreated: z.string(),
     datePublished: z.string(),
     summary: z.string().optional(),
+    tags: z.string().optional().array().optional(),
     draft: z.boolean(),
   }),
 });
