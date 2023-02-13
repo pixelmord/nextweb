@@ -39,7 +39,7 @@ export const BaseFrontmatterSchema = z.object({
   title: z.string(),
   dateCreated: z.string(),
   datePublished: z.string(),
-  dateModified: z.string(),
+  dateModified: z.string().optional(),
   draft: z.boolean(),
   summary: z.string().optional(),
   tags: z.string().array().optional(),

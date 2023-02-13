@@ -21,6 +21,7 @@ export async function generateStaticParams() {
 
 export default async function CodeRecipePage({ params }: PostPageProps) {
   const post = await CodeRecipes.getMdxNode(params?.slug?.join('/'));
+
   if (!post) {
     notFound();
   }
