@@ -3,5 +3,6 @@ module.exports = {
   transpilePackages: ['ui', 'utils', 'mdx'],
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ['shiki'],
   },
 };

@@ -1,0 +1,196 @@
+{
+  "basics": {
+    "name": "Andreas Adam",
+    "label": "Frontend Architect, Team Lead, Tech Lead",
+    "picture": "/static/images/andreas-adam_130.jpeg",
+    "email": "andreas.adam@composableweb.com",
+    "phone": "+49 (179) 709 5114",
+    "website": "https://composableweb.com",
+    "summary": "Lead Front-end Engineer, Tech Lead, Team Lead with many years of senior expertise in web software development and in leading agile development teams in mixed local and remote settings. With a highly versatile skill set both in engineering as well as project discovery, architecture, and sales support for award-winning projects. I am sharing my expertise through consulting and training for developers and companies and as a speaker at international conferences and local meetups. I am a keen advocate for open source and I love learning new technologies, dealing with interesting data, and creating things that impress with brilliant UX. I lead by example and value knowledge transfer to move a company and her developers forward by introducing new technologies and quality standards.",
+    "location": {
+      "address": "Rümannstraße 94",
+      "postalCode": "80804",
+      "city": "München",
+      "countryCode": "DE",
+      "region": "Bayern"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "@pixelmord",
+        "url": "http://twitter.com/pixelmord"
+      },
+      {
+        "network": "GitHub",
+        "username": "pixelmord",
+        "url": "http://github.com/pixelmord"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "Andreas Adam (andreassahle)",
+        "url": "http://www.linkedin.com/in/andreassahle"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Freelancer",
+      "position": "Lead Front-end Engineer, Tech Lead",
+      "website": "http://composableweb.com",
+      "startDate": "2019",
+      "endDate": "now",
+      "summary": "Offering services from consulting and project planning to implementation",
+      "highlights": [
+        "Project Viability Consulting",
+        "Relaunch Strategies",
+        "Decoupled Architectures with JAMStack and decoupled CMS",
+        "SAAS Development",
+        "Microservice Architectures"
+      ]
+    },
+    {
+      "company": "Publicis Sapient",
+      "position": "Manager Experience Technology - Engineering Manager for Front-end Teams",
+      "website": "https://www.publicissapient.com",
+      "startDate": "2019",
+      "endDate": "2019",
+      "summary": "",
+      "highlights": [
+        "Rapid Prototyping for Sales Support and R&D",
+        "Company-wide technology transfer",
+        "Evaluation of new technologies"
+      ]
+    },
+    {
+      "company": "Wunder.IO / Wunderkraut GmbH",
+      "position": "Lead Front-end Engineer, Tech Lead, Team Lead",
+      "website": "https://wunder.io",
+      "startDate": "2019",
+      "endDate": "2014",
+      "summary": "Leading interdisciplinary teams of engineers and UX designers in developing web projects. Working in areas such as architecture, implementation, and test strategy",
+      "highlights": [
+        "Collaborating with other members of technical leadership to build local, autonomous teams, ensure their success, and enable parallel delivery between teams",
+        "Training and mentoring team members as well as recruiting, interviewing, and hiring",
+        "Company-wide technology transfer, evaluation of new technologies",
+        "Specialist work as a contributor on teams that need extra support",
+        "Specialization in Elasticsearch for advanced search interfaces and backends"
+      ]
+    },
+    {
+      "company": "Wunder.IO / Wunderkraut GmbH",
+      "position": "Founding Partner, Senior Front-end Engineer",
+      "website": "https://wunder.io",
+      "startDate": "2014",
+      "endDate": "2010",
+      "summary": "Founded the company out of a community effort of planning and realising the first Drupal Camp in Germany 2010. Working as Senior Front-end Engineer on Web-Frontends and Editorial UI",
+      "highlights": [
+        "Single Page Applications with MVC JS frameworks",
+        "Frontend implementation for JS-Drupal hybrid web applications and sites",
+        "Editorial Interfaces for Drupal CMS",
+        "Specialist for frontend automation and CI integration",
+        "Instructor for customer’s developers on responsive web and Drupal"
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "DrupalCon 2012 - Drupal Association",
+      "position": "Conference Organizer",
+      "website": "https://munich2012.drupal.org/",
+      "startDate": "2012-08",
+      "endDate": "2012-01",
+      "summary": "Member of the core organizer team for the 2012 European DrupalCon in Munich.",
+      "highlights": []
+    },
+    {
+      "organization": "DrupalDevDays Germany 2010 - Drupal Association",
+      "position": "Conference Organizer",
+      "website": "https://munich2012.drupal.org/",
+      "startDate": "2010-04",
+      "endDate": "2009-12",
+      "summary": "Member of the core organizer team for the first German Drupal Camp 2010 in Munich.",
+      "highlights": []
+    }
+  ],
+  "education": [
+    {
+      "institution": "Munich University of Applied Sciences",
+      "area": "Industrial Design",
+      "studyType": "Bachelor",
+      "startDate": "1995",
+      "endDate": "1996",
+      "gpa": "0",
+      "courses": []
+    },
+    {
+      "institution": "Ludwig-Maximilians Universität München",
+      "area": "Roman Languages (Spanish)",
+      "studyType": "Magister of Arts",
+      "startDate": "1995",
+      "endDate": "1992",
+      "gpa": "0",
+      "courses": []
+    },
+    {
+      "institution": "Technical University Munich",
+      "area": "Engineering",
+      "studyType": "",
+      "startDate": "1992",
+      "endDate": "1990",
+      "gpa": "0",
+      "courses": []
+    }
+  ],
+  "awards": [
+    {
+      "title": "Blue Arrow Awards - Finalist in Viable Business Category",
+      "date": "2019",
+      "awarder": "Blue Arrow",
+      "summary": "All entries are judged by the following criteria: Business results, User experience, Innovation, International breakthrough, Societal influence"
+    },
+    {
+      "title": "Splash Award DE and International",
+      "date": "2018",
+      "awarder": "splashawards.org",
+      "summary": "Winner in the category E-Commerce in both German and International contests for the renewal of Finavia.fi. Website of the Finish airport operator and customer portal for airport information and E-Commerce."
+    }
+  ],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Web Development",
+      "level": "Master",
+      "keywords": ["HTML", "CSS", "Javascript"]
+    }
+  ],
+  "languages": [
+    {
+      "language": "German",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "English",
+      "fluency": "Second Language"
+    },
+    {
+      "language": "Spanish",
+      "fluency": "Conversational"
+    },
+    {
+      "language": "French",
+      "fluency": "Conversational"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Wildlife",
+      "keywords": ["Ferrets", "Unicorns"]
+    }
+  ],
+  "references": [
+    {
+      "name": "Jane Doe",
+      "reference": "Reference..."
+    }
+  ]
+}
