@@ -1,0 +1,48 @@
+---
+title: 'The Difference Between Throttle and Debounce Explained by Example'
+layout: 'blog-post'
+dateCreated: '2020-08-31'
+datePublished: '2020-08-31'
+tags:
+  - Javascript
+  - CodeSandbox
+  - throttle
+  - debounce
+draft: false
+---
+
+## What is Throttle and Debounce?
+
+Both are concepts to limit the number of times a function is called. Typically that is useful for event handlers that get called very often.
+Think of mouse movement, keyboard or window resize events in human interaction or data streams in automation or device events.
+
+## Why should you know and care about those functions/concepts?
+
+Because your programm does not always care about all these events or even more importantly that the user experience can be significantly improved by not reacting to every event.
+You might not care about all the data during a resize event, because reacting to it every frame would lead to potential performance issues when you would redraw the layout hundreds of times.
+For a user it might be confusing that for example during an autocomplete in a searchbox for every keystroke there would be new or no results to some fragments of words that might makle no sense.
+Or it would be just visually distracting if new results come "flickering" in for every keystroke. While reading data from a device's output stream, you might for example only be interested in it every X seconds and not the more frequent updates that the device sends.
+
+## Ok, so what is the difference?
+
+A throttled function is executed only EVERY X milliseconds with the last value given. (Imagine a door that only opens in an interval)
+A debounced function is executed only after a value has not been given for X milliseconds. (Imagine a door that only opens if nobody has been knocking anymore for a while)
+
+### Here is a codepen in react with throttle and debounce hooks to try it out:
+
+<iframe
+  src="https://codesandbox.io/embed/throttle-debounce-demo-qp2lo?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+  style={{ width: '100%', height: '800px', border: '0', borderRadius: '4px', overflow: 'hidden' }}
+  title="throttle-debounce-demo"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+[![Edit throttle-debounce-demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/throttle-debounce-demo-qp2lo?fontsize=14&hidenavigation=1&theme=dark&view=preview)
+
+### Use cases for Throttle
+
+Examples would be scenarios where you care about constant updates, but for performance or experience reasons you want to set your own interval time.
+Users might not care about a stock update every millisecond, but every 10 seconds might be "real-time" enough.
+
+### Use cases for Debounce

@@ -26,8 +26,8 @@ export default function PostPage({ post }: PostPageProps) {
     <article className="mx-auto max-w-2xl py-12">
       <div className="flex flex-col space-y-2">
         <H1>{post.frontMatter.title}</H1>
-        {post.frontMatter.createdAt && (
-          <p className="text-sm text-slate-600">{formatDate(post.frontMatter.createdAt)}</p>
+        {post.frontMatter.dateCreated && (
+          <p className="text-sm text-slate-600">{formatDate(post.frontMatter.dateCreated)}</p>
         )}
       </div>
       <hr className="my-6" />
