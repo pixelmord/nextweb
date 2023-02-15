@@ -33,7 +33,7 @@ const AddResourceRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     const { error, data: resourceData } = await supabase.from('resources').insert(payload).select();
-    console.log(resourceData[0].id);
+
     console.debug(`Created in: ${Date.now() - start} ms`);
     if (error) {
       return res.status(500).json({ error: error.message });
