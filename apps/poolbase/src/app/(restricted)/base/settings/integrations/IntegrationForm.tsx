@@ -4,15 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Database } from 'src/types';
 import { IntegrationSchema } from 'src/types';
-import { Button, H2 } from 'ui';
-import { z } from 'zod';
+import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import supabase from '@/lib/supabaseBrowserClient';
+import { useSupabase } from '@/components/SupabaseProvider';
 
 export type Integration = Database['public']['Tables']['integrations']['Row'];
 
 export default function IntegrationForm({ initialData }: { initialData: Integration }) {
+  const { supabase } = useSupabase();
   const {
     register,
     handleSubmit,
