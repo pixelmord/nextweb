@@ -1,26 +1,19 @@
 'use client';
 
 import { Menu, Transition } from '@headlessui/react';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 import { IconType } from 'react-icons';
-import type { Database } from 'src/types/supabase';
 import { Button } from 'ui';
 
-import { useLogOut, useUserProfile } from '@/lib/api';
+import { useLogOut, userAtom } from '@/lib/api';
 
-type Profile = Database['public']['Tables']['profiles']['Row'];
-export default function UserMenu({
-  links,
-  user,
-}: {
-  links: { href: string; text: string; icon: IconType }[];
-  user: Profile;
-}) {
+export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
-  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
+  const [userProfile] = useAtom(userAtom);
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   return (

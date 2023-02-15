@@ -14,12 +14,8 @@ export default async function ProfilePage() {
         <H1>Edit your Profile</H1>
       </PageHeader>
       <Container>
-        {!!user && (
-          <>
-            <AvatarForm user={user} />
-            <ProfileForm user={user} />
-          </>
-        )}
+        <AvatarForm />
+        <ProfileForm />
       </Container>
     </>
   );

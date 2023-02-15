@@ -1,26 +1,24 @@
 'use client';
 
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import type { Database } from 'src/types/supabase';
 import { buttonStyle } from 'ui/client-only';
 
-import { useUpdateProfile, useUserProfile } from '@/lib/api';
-import supabase from '@/lib/supabaseBrowserClient';
+import { useSupabase } from '@/components/SupabaseProvider';
+import { useUpdateProfile, userAtom } from '@/lib/api';
 
 type Profiles = Database['public']['Tables']['profiles']['Row'];
-export default function AvatarFormWrapper({ user }: { user: Profiles }) {
-  const { data, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
-  if (isLoading || isIdle) {
-    return <div>Loading</div>;
+export default function AvatarFormWrapper() {
+  const [userProfile] = useAtom(userAtom);
+  if (!userProfile) {
+    return null;
   }
-  if (isError) {
-    return <div>Error</div>;
-  }
-
-  return <AvatarForm user={data} />;
+  return <AvatarForm user={userProfile} />;
 }
 function AvatarForm({ user }: { user?: Profiles }) {
+  const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);
   const mutation = useUpdateProfile();

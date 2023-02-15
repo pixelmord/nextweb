@@ -1,8 +1,25 @@
 'use client';
-import { QueryClient, QueryClientProvider as Provider } from 'react-query';
 
+import { QueryClientProvider as QCProvider, Hydrate as QHydrate, QueryClient } from '@tanstack/react-query';
+import { queryClientAtom } from 'jotai-tanstack-query';
+import { Provider } from 'jotai/react';
+import { useHydrateAtoms } from 'jotai/react/utils';
+
+export const Hydrate = ({ children, state }) => {
+  return <QHydrate state={state}>{children}</QHydrate>;
+};
 const queryClient = new QueryClient();
+const HydrateAtoms = ({ children }) => {
+  useHydrateAtoms([[queryClientAtom, queryClient]] as const);
+  return children;
+};
 
 export default function QueryClientProvider({ children }: React.PropsWithChildren) {
-  return <Provider client={queryClient}>{children}</Provider>;
+  return (
+    <QCProvider client={queryClient}>
+      <Provider>
+        <HydrateAtoms>{children}</HydrateAtoms>
+      </Provider>
+    </QCProvider>
+  );
 }

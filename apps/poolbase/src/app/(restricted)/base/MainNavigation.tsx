@@ -1,19 +1,20 @@
 'use client';
 
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FiBell, FiMenu, FiPackage, FiUser } from 'react-icons/fi';
-import type { Database } from 'src/types/supabase';
 import { Button } from 'ui';
 
 import UserMenu from '@/components/UserMenu';
-import { useLogOut, useUserProfile } from '@/lib/api';
+import { useLogOut, userAtom } from '@/lib/api';
 
-type Profile = Database['public']['Tables']['profiles']['Row'];
-
-const menuLinks = [{ href: '/base', text: 'Dashboard' }];
+const menuLinks = [
+  { href: '/base', text: 'Dashboard' },
+  { href: '/base/integrations', text: 'Integrations' },
+];
 const userLinks = [
   {
     href: '/base/settings/profile',
@@ -26,8 +27,9 @@ const userLinks = [
     icon: FiPackage,
   },
 ];
-export default function MainNavigation({ user }: { user: Profile }) {
-  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
+export default function MainNavigation() {
+  const [userProfile] = useAtom(userAtom);
+
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();
@@ -80,7 +82,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
               </button>
 
               <div className="relative ml-3">
-                <UserMenu links={userLinks} user={user} />
+                <UserMenu links={userLinks} />
               </div>
             </div>
           </div>

@@ -1,10 +1,14 @@
 'use client';
+
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import supabase from '@/lib/supabaseBrowserClient';
+
+import { useSupabase } from '@/components/SupabaseProvider';
+
 export default function LoginForm() {
   const router = useRouter();
+  const { supabase } = useSupabase();
 
   const [hasMounted, setHasMounted] = useState(false);
   // Blocking hydration warning

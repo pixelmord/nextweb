@@ -1,11 +1,14 @@
 'use client';
 
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { atom, useAtom } from 'jotai';
+import { atomsWithQuery } from 'jotai-tanstack-query';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import type { Database } from 'src/types/supabase';
 
-import supabase from './supabaseBrowserClient';
+import { createClient } from './supabaseBrowserClient';
+
+const supabase = createClient();
 
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
@@ -15,18 +18,23 @@ export async function getUserProfile() {
       data: { user },
     } = await supabase.auth.getUser();
     const userId = user?.id;
-    let { data, error, status } = await supabase.from('profiles').select(`*`).eq('id', userId).single();
+    if (!userId) {
+      return null;
+    }
+    const { data, error, status } = await supabase.from('profiles').select(`*`).eq('id', userId).single();
     if (error && status !== 406) {
-      throw error;
+      console.log(error);
+      return null;
     }
     return data;
   } catch (error) {
     console.log(error);
   }
 }
-export function useUserProfile(options: { initialData?: Profiles }) {
-  return useQuery(['userProfile'], () => getUserProfile(), { initialData: options?.initialData || null });
-}
+export const [userAtom] = atomsWithQuery(() => ({
+  queryKey: ['userProfile'],
+  queryFn: () => getUserProfile(),
+}));
 
 export type UpdateProfileData = Pick<
   Profiles,

@@ -1,25 +1,23 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { Database, UserProfileData, UserProfileSchema } from 'src/types';
 import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { UpdateProfileData, useUpdateProfile, useUserProfile } from '@/lib/api';
+import { UpdateProfileData, useUpdateProfile, userAtom } from '@/lib/api';
 
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
-export default function ProfileFormWrapper({ user }: { user: Profiles }) {
-  const { data, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
-  if (isLoading || isIdle) {
-    return <div>Loading</div>;
-  }
-  if (isError) {
-    return <div>Error</div>;
+export default function ProfileFormWrapper() {
+  const [userProfile] = useAtom(userAtom);
+  if (!userProfile) {
+    return null;
   }
 
-  return <ProfileForm user={data} />;
+  return <ProfileForm user={userProfile} />;
 }
 function ProfileForm({ user }: { user: Profiles }) {
   const mutation = useUpdateProfile();
