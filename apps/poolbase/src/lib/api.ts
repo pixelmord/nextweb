@@ -28,27 +28,10 @@ export function useUserProfile(options: { initialData?: Profiles }) {
   return useQuery(['userProfile'], () => getUserProfile(), { initialData: options?.initialData || null });
 }
 
-export function useProfileImage(url: string) {
-  const [avatarUrl, setAvatarUrl] = useState<Profiles['avatar_url']>(null);
-
-  useEffect(() => {
-    if (url) downloadImage(url);
-  }, [url]);
-
-  async function downloadImage(path: string) {
-    try {
-      const {
-        data: { publicUrl: url },
-      } = await supabase.storage.from('avatars').getPublicUrl(`${path}`);
-
-      setAvatarUrl(url);
-    } catch (error) {
-      console.log('Error downloading image: ', error);
-    }
-  }
-  return avatarUrl;
-}
-export type UpdateProfileData = Pick<Profiles, 'avatar_url' | 'full_name' | 'id' | 'username' | 'website'>;
+export type UpdateProfileData = Pick<
+  Profiles,
+  'avatar_url' | 'avatar_storage_path' | 'full_name' | 'id' | 'username' | 'website'
+>;
 export async function updateProfile(data: UpdateProfileData) {
   try {
     const updates = {

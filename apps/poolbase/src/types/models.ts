@@ -28,6 +28,7 @@ export const UserProfileSchema = zod.object({
   public_email: zod.string().email().optional(),
   full_name: zod.string().min(1).max(255).nullable().optional(),
   avatar_url: zod.string().url().optional(),
+  avatar_storage_path: zod.string().optional(),
   website: zod.string().url().nullable().optional(),
 });
 

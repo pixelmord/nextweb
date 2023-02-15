@@ -9,7 +9,7 @@ import type { Database } from 'src/types/supabase';
 import { Button } from 'ui';
 
 import UserMenu from '@/components/UserMenu';
-import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import { useLogOut, useUserProfile } from '@/lib/api';
 
 type Profile = Database['public']['Tables']['profiles']['Row'];
 
@@ -28,7 +28,7 @@ const userLinks = [
 ];
 export default function MainNavigation({ user }: { user: Profile }) {
   const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
-  const avatarUrl = useProfileImage(userProfile?.avatar_url as string);
+  const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
   }
   const pathname = usePathname();
   return (
-    <nav className="bg-base-800 dark:bg-base-200">
+    <nav className="bg-base-800 dark:bg-base-600">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -60,7 +60,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
                     className={`${
                       pathname === link.href
                         ? 'bg-base-900 text-white'
-                        : 'text-base-300 hover:bg-base-700 hover:text-white'
+                        : 'text-base-200 hover:bg-base-700 hover:text-white'
                     } rounded-md px-3 py-2 text-sm font-medium`}
                   >
                     {link.text}

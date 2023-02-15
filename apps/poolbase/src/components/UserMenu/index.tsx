@@ -9,7 +9,7 @@ import { IconType } from 'react-icons';
 import type { Database } from 'src/types/supabase';
 import { Button } from 'ui';
 
-import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import { useLogOut, useUserProfile } from '@/lib/api';
 
 type Profile = Database['public']['Tables']['profiles']['Row'];
 export default function UserMenu({
@@ -21,7 +21,7 @@ export default function UserMenu({
 }) {
   const pathname = usePathname();
   const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
-  const avatarUrl = useProfileImage(userProfile?.avatar_url);
+  const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   return (
     <Menu as="div">
@@ -36,6 +36,11 @@ export default function UserMenu({
               width="32"
               height="32"
             />
+          )}
+          {!avatarUrl && (
+            <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
+              <span>{userProfile?.username.slice(0, 2)}</span>
+            </div>
           )}
         </Menu.Button>
       </div>
@@ -55,7 +60,7 @@ export default function UserMenu({
                 <Link
                   href={link.href}
                   className={`${
-                    active || pathname === link.href ? 'bg-violet-500 text-white' : 'text-gray-700'
+                    active || pathname === link.href ? 'bg-accent-500 text-white' : 'text-gray-700'
                   } group flex px-4 py-2 text-sm `}
                 >
                   <link.icon className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -65,7 +70,11 @@ export default function UserMenu({
             </Menu.Item>
           ))}
           <Menu.Item>
-            <Button onClick={() => logoutMutation.mutate()}>Logout</Button>
+            <div className="text-center">
+              <Button onClick={() => logoutMutation.mutate()} className="my-3">
+                Logout
+              </Button>
+            </div>
           </Menu.Item>
         </Menu.Items>
       </Transition>

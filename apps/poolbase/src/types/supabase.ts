@@ -71,6 +71,7 @@ export interface Database {
       }
       profiles: {
         Row: {
+          avatar_storage_path: string | null
           avatar_url: string | null
           created_at: string | null
           full_name: string | null
@@ -80,6 +81,7 @@ export interface Database {
           website: string | null
         }
         Insert: {
+          avatar_storage_path?: string | null
           avatar_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -89,6 +91,7 @@ export interface Database {
           website?: string | null
         }
         Update: {
+          avatar_storage_path?: string | null
           avatar_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -96,6 +99,46 @@ export interface Database {
           updated_at?: string | null
           username?: string | null
           website?: string | null
+        }
+      }
+      resource_tag: {
+        Row: {
+          created_at: string | null
+          id: string
+          resource_id: string | null
+          tag_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          resource_id?: string | null
+          tag_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          resource_id?: string | null
+          tag_id?: string | null
+        }
+      }
+      resource_user: {
+        Row: {
+          created_at: string | null
+          id: string
+          resource_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          resource_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          resource_id?: string | null
+          user_id?: string | null
         }
       }
       resources: {
@@ -170,6 +213,84 @@ export interface Database {
           title?: string | null
           updated_at?: string | null
           url?: string
+        }
+      }
+      scope_tag: {
+        Row: {
+          created_at: string | null
+          id: string
+          scope_id: string | null
+          tag_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          scope_id?: string | null
+          tag_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          scope_id?: string | null
+          tag_id?: string | null
+        }
+      }
+      scopes: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_storage_path: string | null
+          image_url: string | null
+          title: string | null
+          uid: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+      }
+      tags: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_storage_path: string | null
+          image_url: string | null
+          title: string | null
+          uid: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
         }
       }
     }
@@ -328,3 +449,4 @@ export interface Database {
     }
   }
 }
+
