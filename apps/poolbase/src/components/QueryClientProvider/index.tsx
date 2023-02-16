@@ -1,6 +1,7 @@
 'use client';
 
 import { QueryClientProvider as QCProvider, Hydrate as QHydrate, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClientAtom } from 'jotai-tanstack-query';
 import { Provider } from 'jotai/react';
 import { useHydrateAtoms } from 'jotai/react/utils';
@@ -20,6 +21,7 @@ export default function QueryClientProvider({ children }: React.PropsWithChildre
       <Provider>
         <HydrateAtoms>{children}</HydrateAtoms>
       </Provider>
+      <ReactQueryDevtools />
     </QCProvider>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { atom, useAtom } from 'jotai';
-import { atomsWithQuery } from 'jotai-tanstack-query';
+import { atomsWithMutation, atomsWithQuery, queryClientAtom } from 'jotai-tanstack-query';
 import { useRouter } from 'next/navigation';
 import type { Database } from 'src/types/supabase';
 
@@ -41,45 +41,46 @@ export type UpdateProfileData = Pick<
   'avatar_url' | 'avatar_storage_path' | 'full_name' | 'id' | 'username' | 'website'
 >;
 export async function updateProfile(data: UpdateProfileData) {
-  try {
-    const updates = {
-      ...data,
-      updated_at: new Date().toISOString(),
-    };
+  const updates = {
+    ...data,
+    updated_at: new Date().toISOString(),
+  };
 
-    let { error } = await supabase.from('profiles').upsert(updates);
-    if (error) throw error;
-  } catch (error) {
-    console.log(error);
-  }
+  const { data: profile, error } = await supabase.from('profiles').upsert(updates).select();
+  if (error) console.log(error);
+  return profile;
 }
 
-export function useUpdateProfile() {
-  const queryClient = useQueryClient();
-  return useMutation((data: UpdateProfileData) => updateProfile(data), {
-    onMutate: async (newProfileData) => {
-      // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries(['userProfile']);
+export const [, updateUserProfile] = atomsWithMutation((get) => ({
+  mutationKey: ['updateUserProfile'],
+  mutationFn: async (data: UpdateProfileData) => {
+    return updateProfile(data);
+  },
+  onMutate: async (newProfileData: UpdateProfileData) => {
+    const queryClient = get(queryClientAtom);
+    // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+    await queryClient.cancelQueries(['userProfile']);
 
-      // Snapshot the previous value
-      const previousProfile = queryClient.getQueryData<UpdateProfileData>(['userProfile']);
+    // Snapshot the previous value
+    const previousProfile = queryClient.getQueryData<UpdateProfileData>(['userProfile']);
 
-      // Optimistically update to the new value
-      queryClient.setQueryData(['userProfile'], { ...previousProfile, ...newProfileData });
+    // Optimistically update to the new value
+    queryClient.setQueryData(['userProfile'], { ...previousProfile, ...newProfileData });
 
-      // Return a context object with the snapshotted value
-      return { previousProfile };
-    },
-    // If the mutation fails, use the context returned from onMutate to roll back
-    onError: (err, newProfileData, context) => {
-      queryClient.setQueryData(['userProfile'], context.previousProfile);
-    },
-    // Always refetch after error or success:
-    onSettled: () => {
-      queryClient.invalidateQueries(['userProfile']);
-    },
-  });
-}
+    // Return a context object with the snapshotted value
+    return { previousProfile };
+  },
+  // // If the mutation fails, use the context returned from onMutate to roll back
+  onError: (err, newProfileData: UpdateProfileData, context: { previousProfile: UpdateProfileData }) => {
+    const queryClient = get(queryClientAtom);
+    queryClient.setQueryData(['userProfile'], context.previousProfile);
+  },
+  // Always refetch after error or success:
+  onSettled: () => {
+    const queryClient = get(queryClientAtom);
+    queryClient.invalidateQueries(['userProfile']);
+  },
+}));
 
 const logout = async () => {
   const { error } = await supabase.auth.signOut();

@@ -7,7 +7,7 @@ import type { Database } from 'src/types/supabase';
 import { buttonStyle } from 'ui/client-only';
 
 import { useSupabase } from '@/components/SupabaseProvider';
-import { useUpdateProfile, userAtom } from '@/lib/api';
+import { UpdateProfileData, updateUserProfile, userAtom } from '@/lib/api';
 
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 export default function AvatarFormWrapper() {
@@ -21,7 +21,7 @@ function AvatarForm({ user }: { user?: Profiles }) {
   const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);
-  const mutation = useUpdateProfile();
+  const [, mutate] = useAtom(updateUserProfile);
 
   const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
     try {
@@ -47,7 +47,7 @@ function AvatarForm({ user }: { user?: Profiles }) {
       if (uploadError) {
         throw uploadError;
       }
-      mutation.mutate({ ...user, avatar_storage_path: `public/${filePath}`, avatar_url: url });
+      mutate([{ ...user, avatar_storage_path: `public/${filePath}`, avatar_url: url } as UpdateProfileData]);
     } catch (error) {
       console.log(error);
       setUploading(false);
@@ -61,13 +61,14 @@ function AvatarForm({ user }: { user?: Profiles }) {
         <Image
           src={avatarUrl}
           alt="Avatar"
-          className="mb-6 rounded-full border border-pink-900 bg-gray-400"
+          className="mb-6 rounded-full border border-pink-900 bg-gray-400 w-40 h-40"
           width={160}
           height={160}
         />
       ) : (
         <div className="mb-6 rounded-full border border-pink-900 bg-gray-400 w-40 h-40" />
       )}
+
       <div className="w-40">
         <label
           className={buttonStyle({ intent: 'secondary', size: 'medium', className: 'block text-center' })}

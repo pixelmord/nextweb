@@ -7,7 +7,7 @@ import { Database, UserProfileData, UserProfileSchema } from 'src/types';
 import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { UpdateProfileData, useUpdateProfile, userAtom } from '@/lib/api';
+import { UpdateProfileData, updateUserProfile, userAtom } from '@/lib/api';
 
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
@@ -20,11 +20,11 @@ export default function ProfileFormWrapper() {
   return <ProfileForm user={userProfile} />;
 }
 function ProfileForm({ user }: { user: Profiles }) {
-  const mutation = useUpdateProfile();
+  const [, mutate] = useAtom(updateUserProfile);
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(UserProfileSchema),
     defaultValues: user as UserProfileData,
@@ -33,7 +33,7 @@ function ProfileForm({ user }: { user: Profiles }) {
   return (
     <form
       onSubmit={handleSubmit((values) => {
-        mutation.mutate({ ...user, ...values } as UpdateProfileData);
+        mutate([{ ...user, ...values } as UpdateProfileData]);
       })}
     >
       <FormElementText id="full_name" label="Full Name" {...register('full_name')} error={errors.full_name} />
@@ -41,7 +41,7 @@ function ProfileForm({ user }: { user: Profiles }) {
       <FormElementText id="website" label="Website" {...register('website')} error={errors.website} />
       <div className="mt-8">
         <Button type="submit" intent="primary" disabled={!isValid}>
-          Save
+          {isSubmitting ? 'Saving...' : 'Save'}
         </Button>
       </div>
     </form>
