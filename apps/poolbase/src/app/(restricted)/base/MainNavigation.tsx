@@ -13,7 +13,7 @@ import { useLogOut, userAtom } from '@/lib/api';
 
 const menuLinks = [
   { href: '/base', text: 'Dashboard' },
-  { href: '/base/integrations', text: 'Integrations' },
+  { href: '/base/resources', text: 'Resources' },
 ];
 const userLinks = [
   {
@@ -28,8 +28,8 @@ const userLinks = [
   },
 ];
 export default function MainNavigation() {
-  const [userProfile] = useAtom(userAtom);
-
+  const [profile] = useAtom(userAtom);
+  const { data: userProfile } = profile;
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();

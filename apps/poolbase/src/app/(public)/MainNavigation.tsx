@@ -13,7 +13,8 @@ import { userAtom } from '@/lib/api';
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 
 export default function MainNavigation() {
-  const [user] = useAtom(userAtom);
+  const [profile] = useAtom(userAtom);
+  const { data: user } = profile;
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (

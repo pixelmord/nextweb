@@ -1,13 +1,9 @@
-import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import { cookies, headers } from 'next/headers';
 import { Octokit } from 'octokit';
-import { Database } from 'src/types/supabase';
+
+import { createClient } from './supabaseServerClient';
 
 export async function createClientWithSession() {
-  const supabase = createServerComponentSupabaseClient<Database>({
-    headers,
-    cookies,
-  });
+  const supabase = createClient();
 
   const {
     data: { session },
@@ -87,3 +83,15 @@ export const fetchGithubStars = async () => {
 
   return { data, error };
 };
+
+export async function fetchResources() {
+  const { session, supabase } = await createClientWithSession();
+  if (!session) {
+    return { data: null, error: new Error('No session') };
+  }
+  const { data, error } = await supabase
+    .from('resource_user')
+    .select('created_at, resource_id(*)')
+    .eq('user_id', session.user.id);
+  return { data, error };
+}

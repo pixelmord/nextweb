@@ -7,7 +7,6 @@ import AvatarForm from './AvatarForm';
 import ProfileForm from './ProfileForm';
 
 export default async function ProfilePage() {
-  const { data: user } = await fetchUserProfile();
   return (
     <>
       <PageHeader>

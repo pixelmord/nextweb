@@ -8,28 +8,25 @@ import type { Database } from 'src/types/supabase';
 
 import { createClient } from './supabaseBrowserClient';
 
-const supabase = createClient();
+export async function createClientWithSession() {
+  const supabase = createClient();
 
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  return { session, supabase };
+}
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 export async function getUserProfile() {
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id;
-    if (!userId) {
-      return null;
-    }
-    const { data, error, status } = await supabase.from('profiles').select(`*`).eq('id', userId).single();
-    if (error && status !== 406) {
-      console.log(error);
-      return null;
-    }
-    return data;
-  } catch (error) {
-    console.log(error);
+  const { session, supabase } = await createClientWithSession();
+  if (!session) {
+    return { data: null, error: new Error('No session') };
   }
+  const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+
+  return { data, error };
 }
 export const [userAtom] = atomsWithQuery(() => ({
   queryKey: ['userProfile'],
@@ -41,6 +38,7 @@ export type UpdateProfileData = Pick<
   'avatar_url' | 'avatar_storage_path' | 'full_name' | 'id' | 'username' | 'website'
 >;
 export async function updateProfile(data: UpdateProfileData) {
+  const { supabase } = await createClientWithSession();
   const updates = {
     ...data,
     updated_at: new Date().toISOString(),
@@ -70,7 +68,7 @@ export const [, updateUserProfile] = atomsWithMutation((get) => ({
     // Return a context object with the snapshotted value
     return { previousProfile };
   },
-  // // If the mutation fails, use the context returned from onMutate to roll back
+
   onError: (err, newProfileData: UpdateProfileData, context: { previousProfile: UpdateProfileData }) => {
     const queryClient = get(queryClientAtom);
     queryClient.setQueryData(['userProfile'], context.previousProfile);
@@ -83,6 +81,7 @@ export const [, updateUserProfile] = atomsWithMutation((get) => ({
 }));
 
 const logout = async () => {
+  const { supabase } = await createClientWithSession();
   const { error } = await supabase.auth.signOut();
 
   if (error) {
@@ -100,3 +99,19 @@ export function useLogOut() {
     },
   });
 }
+
+export async function getResources() {
+  const { session, supabase } = await createClientWithSession();
+  if (!session) {
+    return { data: null, error: new Error('No session') };
+  }
+  const { data, error } = await supabase
+    .from('resource_user')
+    .select('created_at, resource_id(*)')
+    .eq('user_id', session.user.id);
+  return { data, error };
+}
+export const [resourcesAtom] = atomsWithQuery(() => ({
+  queryKey: ['resources'],
+  queryFn: () => getResources(),
+}));

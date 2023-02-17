@@ -12,7 +12,8 @@ import { UpdateProfileData, updateUserProfile, userAtom } from '@/lib/api';
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 export default function ProfileFormWrapper() {
-  const [userProfile] = useAtom(userAtom);
+  const [profile] = useAtom(userAtom);
+  const { data: userProfile } = profile;
   if (!userProfile) {
     return null;
   }

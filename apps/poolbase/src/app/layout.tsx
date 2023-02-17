@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   } = await supabase.auth.getSession();
   return (
     <html className={`${lato.variable} h-full dark:text-base-200`}>
-      <body className="h-full">
+      <body className="h-full flex flex-col">
         <SupabaseProvider>
           <SupabaseListener serverAccessToken={session?.access_token} />
           <QueryClientProvider>{children}</QueryClientProvider>

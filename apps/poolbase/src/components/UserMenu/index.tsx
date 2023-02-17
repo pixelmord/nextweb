@@ -13,7 +13,8 @@ import { useLogOut, userAtom } from '@/lib/api';
 
 export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
-  const [userProfile] = useAtom(userAtom);
+  const [profile] = useAtom(userAtom);
+  const { data: userProfile } = profile;
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   return (
@@ -30,7 +31,7 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
               height="32"
             />
           )}
-          {!avatarUrl && (
+          {!avatarUrl && !!userProfile && (
             <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
               <span>{userProfile?.username.slice(0, 2)}</span>
             </div>

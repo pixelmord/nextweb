@@ -1,5 +1,6 @@
 import { dehydrate } from '@tanstack/query-core';
 
+import IntegrationSync from '@/components/IntegrationSync';
 import { Hydrate } from '@/components/QueryClientProvider';
 import getQueryClient from '@/lib/getQueryClient';
 import { fetchUserProfile } from '@/lib/ssrApi';
@@ -15,6 +16,7 @@ export default async function BaseLayout({ children }: React.PropsWithChildren) 
   const dehydratedState = dehydrate(queryClient);
   return (
     <Hydrate state={dehydratedState}>
+      <IntegrationSync />
       <div className="dark:bg-base-800 bg-base-100 flex flex-col h-full">
         <header>
           <MainNavigation />
