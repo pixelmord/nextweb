@@ -14,7 +14,7 @@ const menuLinks = [{ href: '/#features', text: 'Features' }];
 
 export default function MainNavigation() {
   const [profile] = useAtom(userAtom);
-  const { data: user } = profile;
+  const user = profile?.data;
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 import { IconType } from 'react-icons';
+import { FiUser } from 'react-icons/fi';
 import { Button } from 'ui';
 
 import { useLogOut, userAtom } from '@/lib/api';
@@ -14,7 +15,7 @@ import { useLogOut, userAtom } from '@/lib/api';
 export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
   const [profile] = useAtom(userAtom);
-  const { data: userProfile } = profile;
+  const userProfile = profile?.data;
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   return (
@@ -33,7 +34,12 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
           )}
           {!avatarUrl && !!userProfile && (
             <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
-              <span>{userProfile?.username.slice(0, 2)}</span>
+              <span>{userProfile?.username?.slice(0, 2)}</span>
+            </div>
+          )}
+          {!avatarUrl && !userProfile && (
+            <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
+              <FiUser />
             </div>
           )}
         </Menu.Button>

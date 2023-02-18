@@ -29,7 +29,7 @@ const userLinks = [
 ];
 export default function MainNavigation() {
   const [profile] = useAtom(userAtom);
-  const { data: userProfile } = profile;
+  const userProfile = profile?.data;
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();
@@ -121,7 +121,7 @@ export default function MainNavigation() {
             {!!userProfile && (
               <>
                 <div className="flex-shrink-0">
-                  {!!avatarUrl && (
+                  {!!avatarUrl ? (
                     <Image
                       width="40"
                       height="40"
@@ -130,6 +130,10 @@ export default function MainNavigation() {
                       src={avatarUrl}
                       alt={userProfile.full_name || ''}
                     />
+                  ) : (
+                    <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
+                      <span>{userProfile?.username?.slice(0, 2)}</span>
+                    </div>
                   )}
                 </div>
                 <div className="ml-3">

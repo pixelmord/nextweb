@@ -13,7 +13,7 @@ type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 export default function ProfileFormWrapper() {
   const [profile] = useAtom(userAtom);
-  const { data: userProfile } = profile;
+  const userProfile = profile?.data;
   if (!userProfile) {
     return null;
   }

@@ -12,7 +12,7 @@ import { UpdateProfileData, updateUserProfile, userAtom } from '@/lib/api';
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 export default function AvatarFormWrapper() {
   const [profile] = useAtom(userAtom);
-  const { data: userProfile } = profile;
+  const userProfile = profile?.data;
   if (!userProfile) {
     return null;
   }
@@ -62,12 +62,12 @@ function AvatarForm({ user }: { user?: Profiles }) {
         <Image
           src={avatarUrl}
           alt="Avatar"
-          className="mb-6 rounded-full border border-pink-900 bg-gray-400 w-40 h-40"
+          className="mb-6 rounded-full border border-accent-900 bg-gray-400 w-40 h-40"
           width={160}
           height={160}
         />
       ) : (
-        <div className="mb-6 rounded-full border border-pink-900 bg-gray-400 w-40 h-40" />
+        <div className="mb-6 rounded-full border border-accent-900 bg-gray-400 w-40 h-40" />
       )}
 
       <div className="w-40">
