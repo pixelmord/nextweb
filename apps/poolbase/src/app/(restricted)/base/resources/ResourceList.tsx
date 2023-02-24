@@ -3,19 +3,17 @@
 import { useAtom } from 'jotai';
 import { H2 } from 'ui';
 
-import { resourcesAtom } from '@/lib/api';
+import { resourcesAtom } from '@/lib/api/client';
 
 export default function ResourceList() {
   const [resources] = useAtom(resourcesAtom);
   return (
     <>
-      {!!resources.data &&
-        resources.data.map((star) => (
-          <div>
-            <H2 key={star.resource_id.id} styling="h4">
-              {star.resource_id.title}
-            </H2>
-          </div>
+      {!!resources &&
+        resources.map((star) => (
+          <H2 key={star.resource_id.id} styling="h4">
+            <a href={star.resource_id.url}>{star.resource_id.title}</a>
+          </H2>
         ))}
     </>
   );

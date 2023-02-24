@@ -8,13 +8,13 @@ import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { LinkButton } from 'ui';
 
-import { userAtom } from '@/lib/api';
+import { userAtom } from '@/lib/api/client';
 
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 
 export default function MainNavigation() {
-  const [profile] = useAtom(userAtom);
-  const user = profile?.data;
+  const [user] = useAtom(userAtom);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (

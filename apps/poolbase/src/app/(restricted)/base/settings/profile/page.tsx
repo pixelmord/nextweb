@@ -1,7 +1,6 @@
 import { Container, H1 } from 'ui';
 
 import PageHeader from '@/components/PageHeader';
-import { fetchUserProfile } from '@/lib/ssrApi';
 
 import AvatarForm from './AvatarForm';
 import ProfileForm from './ProfileForm';

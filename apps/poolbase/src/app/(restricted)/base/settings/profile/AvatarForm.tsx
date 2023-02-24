@@ -7,18 +7,15 @@ import type { Database } from 'src/types/supabase';
 import { buttonStyle } from 'ui/client-only';
 
 import { useSupabase } from '@/components/SupabaseProvider';
-import { UpdateProfileData, updateUserProfile, userAtom } from '@/lib/api';
+import { updateUserProfile, userAtom } from '@/lib/api/client';
+import { UpdateProfileData } from '@/lib/api/fetchers';
+import { Profile } from '@/types';
 
-type Profiles = Database['public']['Tables']['profiles']['Row'];
 export default function AvatarFormWrapper() {
-  const [profile] = useAtom(userAtom);
-  const userProfile = profile?.data;
-  if (!userProfile) {
-    return null;
-  }
-  return <AvatarForm user={userProfile} />;
+  const [userProfile] = useAtom(userAtom);
+  return <AvatarForm user={userProfile || {}} />;
 }
-function AvatarForm({ user }: { user?: Profiles }) {
+function AvatarForm({ user }: { user?: Profile }) {
   const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);

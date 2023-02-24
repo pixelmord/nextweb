@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Container, H1, H2 } from 'ui';
 
 import PageHeader from '@/components/PageHeader';
-import { fetchGithubStars, fetchIntegration } from '@/lib/ssrApi';
+import { fetchGithubStars, fetchIntegration } from '@/lib/api/server';
 
 export default async function ResourcesByProvider({ params: { provider } }: { params: { provider: string } }) {
   const { data: integration, error } = await fetchIntegration(provider);

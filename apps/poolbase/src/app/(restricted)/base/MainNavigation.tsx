@@ -9,7 +9,7 @@ import { FiBell, FiMenu, FiPackage, FiUser } from 'react-icons/fi';
 import { Button } from 'ui';
 
 import UserMenu from '@/components/UserMenu';
-import { useLogOut, userAtom } from '@/lib/api';
+import { useLogOut, userAtom } from '@/lib/api/client';
 
 const menuLinks = [
   { href: '/base', text: 'Dashboard' },
@@ -28,8 +28,7 @@ const userLinks = [
   },
 ];
 export default function MainNavigation() {
-  const [profile] = useAtom(userAtom);
-  const userProfile = profile?.data;
+  const [userProfile] = useAtom(userAtom);
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();

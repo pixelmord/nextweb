@@ -26,7 +26,7 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
 
     console.debug(`Created in: ${Date.now() - start} ms`);
     if (error) {
-      return res.status(500).json({ error: 'Integration get error: ' + error.message });
+      return res.status(500).json({ error });
     }
     if (!integration) {
       return res.status(200).json({ total: 0, message: 'No integration found' });
@@ -86,7 +86,8 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
       .select('created_at, resource_id(id,url)')
       .eq('user_id', session.user.id);
     if (listError) {
-      return res.status(500).json({ error: listError.message });
+      console.error(listError);
+      return res.status(500).json({ error: listError });
     }
     const star2ResourceConversion = (star: any): Partial<ResourceData> => ({
       url: star.url,

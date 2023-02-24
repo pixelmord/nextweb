@@ -3,17 +3,16 @@ import { Container, H1, H2 } from 'ui';
 
 import PageHeader from '@/components/PageHeader';
 import { Hydrate } from '@/components/QueryClientProvider';
+import { fetchResources } from '@/lib/api/server';
 import getQueryClient from '@/lib/getQueryClient';
-import { fetchResources } from '@/lib/ssrApi';
 
 import ResourceList from './ResourceList';
 
+// do not cache this layout
+export const revalidate = 0;
 export default async function ResourcesList() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(['resources'], async () => {
-    const { data } = await fetchResources();
-    return data;
-  });
+  await queryClient.prefetchQuery(['resources'], fetchResources);
   const dehydratedState = dehydrate(queryClient);
 
   return (

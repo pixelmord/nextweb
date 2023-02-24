@@ -27,6 +27,6 @@
     "prettier-plugin-packagejson": "^2.4.3",
     "prettier-plugin-tailwindcss": "^0.2.3",
     "slugify": "^1.6.5",
-    "turbo": "^1.7.4"
+    "turbo": "^1.8.1"
   }
 }

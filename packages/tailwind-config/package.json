@@ -4,6 +4,6 @@
   "private": true,
   "main": "tailwind.config.js",
   "devDependencies": {
-    "tailwindcss": "^3.2.6"
+    "tailwindcss": "^3.2.7"
   }
 }

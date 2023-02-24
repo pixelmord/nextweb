@@ -162,6 +162,16 @@ export const scrapeDocument = (document: Document): Partial<ResourceData> => {
   };
 };
 
+export type ResourceProvider = 'github' | 'website' | 'linear' | 'notion';
+export const determineResourceProvider = (url: string): ResourceProvider => {
+  const urlObject = new URL(url);
+  switch (urlObject.hostname) {
+    case 'github.com':
+      return 'github';
+    default:
+      return 'website';
+  }
+};
 export const scrape = async (url): Promise<{ data: Partial<ResourceData>; screenshot: Buffer }> => {
   let start = Date.now();
   const browser = await chromium.launch();

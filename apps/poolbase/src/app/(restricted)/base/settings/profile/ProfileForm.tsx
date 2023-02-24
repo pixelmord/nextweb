@@ -3,24 +3,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
-import { Database, UserProfileData, UserProfileSchema } from 'src/types';
 import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { UpdateProfileData, updateUserProfile, userAtom } from '@/lib/api';
-
-type Profiles = Database['public']['Tables']['profiles']['Row'];
+import { updateUserProfile, userAtom } from '@/lib/api/client';
+import { UpdateProfileData } from '@/lib/api/fetchers';
+import { Database, Profile, UserProfileData, UserProfileSchema } from '@/types';
 
 export default function ProfileFormWrapper() {
-  const [profile] = useAtom(userAtom);
-  const userProfile = profile?.data;
-  if (!userProfile) {
-    return null;
-  }
+  const [userProfile] = useAtom(userAtom);
 
-  return <ProfileForm user={userProfile} />;
+  return <ProfileForm user={userProfile || {}} />;
 }
-function ProfileForm({ user }: { user: Profiles }) {
+function ProfileForm({ user }: { user: Profile }) {
   const [, mutate] = useAtom(updateUserProfile);
   const {
     register,

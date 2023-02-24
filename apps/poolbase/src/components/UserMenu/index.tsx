@@ -10,12 +10,11 @@ import { IconType } from 'react-icons';
 import { FiUser } from 'react-icons/fi';
 import { Button } from 'ui';
 
-import { useLogOut, userAtom } from '@/lib/api';
+import { useLogOut, userAtom } from '@/lib/api/client';
 
 export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
-  const [profile] = useAtom(userAtom);
-  const userProfile = profile?.data;
+  const [userProfile] = useAtom(userAtom);
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   return (
