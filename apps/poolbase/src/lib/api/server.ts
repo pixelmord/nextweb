@@ -2,19 +2,19 @@ import { Octokit } from 'octokit';
 
 import { createClient } from '../supabaseServerClient';
 import {
-  fetchIntegrationFactory,
+  fetchIntegrationByProviderFactory,
   fetchResourcesFactory,
   fetchScopesFactory,
   fetchUserProfileFactory,
 } from './fetchers';
 
 export const fetchUserProfile = fetchUserProfileFactory(createClient);
-export const fetchIntegration = fetchIntegrationFactory(createClient);
+export const fetchIntegrationByProvider = fetchIntegrationByProviderFactory(createClient);
 export const fetchResources = fetchResourcesFactory(createClient);
 export const fetchScopes = fetchScopesFactory(createClient);
 
 export const fetchGithubStars = async () => {
-  const integration = await fetchIntegration('github');
+  const integration = await fetchIntegrationByProvider('github');
   const octokit = new Octokit({ auth: integration.access_token });
   // const data = await octokit.paginate('GET /user/starred', { per_page: 100 });
   const data = await octokit.graphql<any>(

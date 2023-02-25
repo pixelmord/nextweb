@@ -31,12 +31,12 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
               height="32"
             />
           )}
-          {!avatarUrl && !!userProfile && (
+          {!avatarUrl && !!userProfile?.username && (
             <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
               <span>{userProfile?.username?.slice(0, 2)}</span>
             </div>
           )}
-          {!avatarUrl && !userProfile && (
+          {!avatarUrl && !userProfile.username && (
             <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
               <FiUser />
             </div>

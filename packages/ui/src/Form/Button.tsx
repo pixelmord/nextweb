@@ -1,9 +1,10 @@
-import React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import Link, { LinkProps } from 'next/link';
+import React from 'react';
+import { FiLoader } from 'react-icons/fi';
 
 export const buttonStyle = cva(
-  'button group inline-flex items-center border justify-center rounded font-semibold shadow-sm',
+  'button group inline-flex items-center border justify-center rounded font-semibold shadow-sm cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none',
   {
     variants: {
       intent: {
@@ -96,11 +97,18 @@ export const buttonStyle = cva(
   }
 );
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonStyle> {}
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonStyle> {
+  submitting?: boolean;
+}
 
-export const Button: React.FC<ButtonProps> = ({ className, intent, size, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ className, intent, size, children, submitting, ...props }) => {
   className = buttonStyle({ intent, size, className });
-  return <button className={className} {...props} />;
+  return (
+    <button className={className} {...props}>
+      {submitting && <FiLoader className="animate-spin h-6 w-6" />}
+      {children}
+    </button>
+  );
 };
 
 export interface LinkButtonProps extends LinkProps, VariantProps<typeof buttonStyle> {

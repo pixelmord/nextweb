@@ -5,6 +5,7 @@ import '@/styles/global.css';
 import QueryClientProvider from '@/components/QueryClientProvider';
 import SupabaseListener from '@/components/SupabaseListener';
 import SupabaseProvider from '@/components/SupabaseProvider';
+import Toaster from '@/components/Toaster';
 import { createClient } from '@/lib/supabaseServerClient';
 
 const lato = Lato({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-lato' });
@@ -22,7 +23,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="h-full flex flex-col">
         <SupabaseProvider>
           <SupabaseListener serverAccessToken={session?.access_token} />
-          <QueryClientProvider>{children}</QueryClientProvider>
+          <QueryClientProvider>
+            {children}
+            <Toaster />
+          </QueryClientProvider>
         </SupabaseProvider>
       </body>
     </html>

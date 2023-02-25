@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function IntegrationSync() {
   const [cursor, setCursor] = useState('');
@@ -14,6 +15,9 @@ export default function IntegrationSync() {
       const data = await res.json();
       if (data.hasNextPage) {
         setCursor(data.endCursor);
+      }
+      if (+data.total > 0) {
+        toast.success(`Synced ${data.total} integrations`);
       }
     };
     if (didMount.current) {

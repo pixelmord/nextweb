@@ -12,8 +12,7 @@ import { Database, Profile, UserProfileData, UserProfileSchema } from '@/types';
 
 export default function ProfileFormWrapper() {
   const [userProfile] = useAtom(userAtom);
-
-  return <ProfileForm user={userProfile || {}} />;
+  return <ProfileForm user={userProfile} />;
 }
 function ProfileForm({ user }: { user: Profile }) {
   const [, mutate] = useAtom(updateUserProfile);
@@ -36,8 +35,8 @@ function ProfileForm({ user }: { user: Profile }) {
       <FormElementText id="username" label="Username" {...register('username')} error={errors.username} />
       <FormElementText id="website" label="Website" {...register('website')} error={errors.website} />
       <div className="mt-8">
-        <Button type="submit" intent="primary" disabled={!isValid}>
-          {isSubmitting ? 'Saving...' : 'Save'}
+        <Button type="submit" intent="primary" disabled={!isValid} submitting={isSubmitting}>
+          Save
         </Button>
       </div>
     </form>

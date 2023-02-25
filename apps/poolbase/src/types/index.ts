@@ -9,6 +9,7 @@ export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type Scope = Database['public']['Tables']['scopes']['Row'];
 export type Tag = Database['public']['Tables']['tags']['Row'];
 export type Resource = Database['public']['Tables']['resources']['Row'];
+export type Integration = Database['public']['Tables']['integrations']['Row'];
 
 export type TypedSupabaseClient = SupabaseClient<Database>;
 export type IntegrationProviders = 'github' | 'linear' | 'notion';

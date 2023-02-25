@@ -33,7 +33,7 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     const octokit = new Octokit({ auth: integration.access_token });
     const { cursor } = JSON.parse(req.body);
-    console.log(cursor, typeof cursor);
+
     const starsData = await octokit.graphql<any>(
       `
       query viewerStars($cursor: String) {
