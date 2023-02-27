@@ -2,14 +2,20 @@ import { dehydrate } from '@tanstack/query-core';
 import Link from 'next/link';
 
 import { Hydrate } from '@/components/QueryClientProvider';
-import { fetchUserProfile } from '@/lib/api/server';
+import { fetchSession, fetchUserProfile } from '@/lib/api/server';
 import getQueryClient from '@/lib/getQueryClient';
 
 import MainNavigation from './MainNavigation';
 
+export const dynamic = 'force-dynamic';
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(['userProfile'], fetchUserProfile);
+  const session = await fetchSession();
+  if (session?.user.id) {
+    const userProfile = await fetchUserProfile(session.user.id);
+    await queryClient.prefetchQuery(['userProfile'], () => Promise.resolve(userProfile));
+  }
+
   const dehydratedState = dehydrate(queryClient);
 
   return (

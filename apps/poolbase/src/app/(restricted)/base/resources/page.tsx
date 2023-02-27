@@ -4,16 +4,22 @@ import { Container, H1, H2 } from 'ui';
 import PageHeader from '@/components/PageHeader';
 import { Hydrate } from '@/components/QueryClientProvider';
 import { resourceKeys } from '@/lib/api/queryKeys';
-import { fetchResources } from '@/lib/api/server';
+import { fetchResources, fetchSession } from '@/lib/api/server';
 import getQueryClient from '@/lib/getQueryClient';
 
 import ResourceList from './ResourceList';
 
+export const dynamic = 'force-dynamic';
 // do not cache this layout
 export const revalidate = 0;
 export default async function ResourcesList() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(resourceKeys.lists(), fetchResources);
+  const session = await fetchSession();
+  if (session?.user.id) {
+    const resources = await fetchResources(session.user.id);
+    await queryClient.prefetchQuery(resourceKeys.lists(), () => Promise.resolve(resources));
+  }
+
   const dehydratedState = dehydrate(queryClient);
 
   return (

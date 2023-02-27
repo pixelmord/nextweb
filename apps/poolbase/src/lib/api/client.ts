@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { Integration, Scope } from '@/types/index';
 
+import { atomsWithQueryAsync } from '../atomsWithQueryAsync';
 import { createClient } from '../supabaseBrowserClient';
 import {
   SaveIntegrationData,
@@ -14,6 +15,7 @@ import {
   fetchIntegrationsFactory,
   fetchResourcesFactory,
   fetchScopesFactory,
+  fetchSessionFactory,
   fetchUserProfileFactory,
   logoutFactory,
   saveIntegrationFactory,
@@ -21,7 +23,7 @@ import {
   saveTagFactory,
   updateProfileFactory,
 } from './fetchers';
-import { integrationKeys, resourceKeys, scopeKeys } from './queryKeys';
+import { integrationKeys, resourceKeys, scopeKeys, userKeys } from './queryKeys';
 
 export const fetchUserProfile = fetchUserProfileFactory(createClient);
 export const fetchIntegrations = fetchIntegrationsFactory(createClient);
@@ -32,11 +34,21 @@ export const logout = logoutFactory(createClient);
 export const saveScope = saveScopeFactory(createClient);
 export const saveIntegration = saveIntegrationFactory(createClient);
 export const saveTag = saveTagFactory(createClient);
+export const fetchSession = fetchSessionFactory(createClient);
 
-export const [userAtom] = atomsWithQuery(() => ({
-  queryKey: ['userProfile'],
-  queryFn: fetchUserProfile,
+export const [sessionAtom] = atomsWithQuery(() => ({
+  queryKey: ['session'],
+  queryFn: fetchSession,
 }));
+export const [userAtom] = atomsWithQueryAsync(async (get) => {
+  const session = await get(sessionAtom);
+  const uid = session?.user?.id;
+  return {
+    queryKey: userKeys.detail(uid as string),
+    queryFn: () => fetchUserProfile(uid as string),
+    enabled: !!uid,
+  };
+});
 
 export const [, updateUserProfile] = atomsWithMutation((get) => ({
   mutationKey: ['updateUserProfile'],
@@ -81,15 +93,25 @@ export function useLogOut() {
   });
 }
 
-export const [resourcesAtom] = atomsWithQuery(() => ({
-  queryKey: resourceKeys.lists(),
-  queryFn: fetchResources,
-}));
+export const [resourcesAtom] = atomsWithQueryAsync(async (get) => {
+  const session = await get(sessionAtom);
+  const uid = session?.user?.id;
+  return {
+    queryKey: resourceKeys.listsByUser(uid as string),
+    queryFn: () => fetchResources(uid as string),
+    enabled: !!uid,
+  };
+});
 
-export const [scopesAtom] = atomsWithQuery(() => ({
-  queryKey: scopeKeys.lists(),
-  queryFn: fetchScopes,
-}));
+export const [scopesAtom] = atomsWithQueryAsync(async (get) => {
+  const session = await get(sessionAtom);
+  const uid = session?.user?.id;
+  return {
+    queryKey: scopeKeys.listsByUser(uid as string),
+    queryFn: () => fetchScopes(uid as string),
+    enabled: !!uid,
+  };
+});
 
 export const [, saveScopeAtom] = atomsWithMutation((get) => ({
   mutationKey: ['saveScope'],
@@ -102,7 +124,7 @@ export const [, saveScopeAtom] = atomsWithMutation((get) => ({
     await queryClient.cancelQueries(scopeKeys.lists());
 
     // Snapshot the previous value
-    const previousScopes = queryClient.getQueryData<Scope[]>(scopeKeys.lists());
+    const previousScopes = queryClient.getQueryData<Scope[]>(scopeKeys.lists()) || [];
     const newScopes = [...previousScopes];
     const scopeIndex = previousScopes.findIndex((scope) => scope.id === newScopeData.id);
     if (scopeIndex > -1) {
@@ -129,10 +151,15 @@ export const [, saveScopeAtom] = atomsWithMutation((get) => ({
   },
 }));
 
-export const [integrationsAtom] = atomsWithQuery(() => ({
-  queryKey: integrationKeys.lists(),
-  queryFn: fetchIntegrations,
-}));
+export const [integrationsAtom] = atomsWithQueryAsync(async (get) => {
+  const session = await get(sessionAtom);
+  const uid = session?.user?.id;
+  return {
+    queryKey: integrationKeys.listsByUser(uid as string),
+    queryFn: () => fetchIntegrations(uid as string),
+    enabled: !!uid,
+  };
+});
 
 export const [, saveIntegrationAtom] = atomsWithMutation((get) => ({
   mutationKey: ['saveIntegration'],
@@ -145,7 +172,7 @@ export const [, saveIntegrationAtom] = atomsWithMutation((get) => ({
     await queryClient.cancelQueries(integrationKeys.lists());
 
     // Snapshot the previous value
-    const previousIntegrations = queryClient.getQueryData<Integration[]>(integrationKeys.lists());
+    const previousIntegrations = queryClient.getQueryData<Integration[]>(integrationKeys.lists()) || [];
     const newIntegrations = [...previousIntegrations];
     const integrationIndex = previousIntegrations.findIndex((integration) => integration.id === newIntegrationData.id);
     if (integrationIndex > -1) {

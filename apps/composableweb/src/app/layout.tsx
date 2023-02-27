@@ -1,4 +1,4 @@
-import { Archivo_Narrow, Barlow } from '@next/font/google';
+import { Archivo_Narrow, Barlow } from 'next/font/google';
 
 import '@/styles/global.css';
 

@@ -13,9 +13,9 @@ import { Profile } from '@/types';
 
 export default function AvatarFormWrapper() {
   const [userProfile] = useAtom(userAtom);
-  return <AvatarForm user={userProfile || {}} />;
+  return <AvatarForm user={userProfile} />;
 }
-function AvatarForm({ user }: { user?: Profile }) {
+function AvatarForm({ user }: { user: Profile }) {
   const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);

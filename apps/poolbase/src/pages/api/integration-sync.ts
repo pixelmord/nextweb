@@ -83,8 +83,7 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     const { data: resources, error: listError } = await supabase
       .from('resource_user')
-      .select('created_at, resource_id(id,url)')
-      .eq('user_id', session.user.id);
+      .select('created_at, resource_id(id,url)');
     if (listError) {
       console.error(listError);
       return res.status(500).json({ error: listError });
@@ -95,6 +94,9 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
       meta_description: star.description,
       meta_title: star.name,
       main_image_url: star.openGraphImageUrl,
+      creator: session.user.id,
+      provider: 'github',
+      provider_channel: 'integration',
     });
     if (resources.length === 0) {
       // Create all resources
@@ -115,7 +117,7 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
             if (Array.isArray(n2.resource_id)) {
               return n.url === n2.resource_id[0].url;
             } else {
-              return n.url === n2.resource_id.url;
+              return n.url === n2.resource_id?.url;
             }
           })
       )

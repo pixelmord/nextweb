@@ -1,5 +1,5 @@
-import { Lora } from '@next/font/google';
 import type { AppProps } from 'next/app';
+import { Lora } from 'next/font/google';
 
 import '@/styles/global.css';
 

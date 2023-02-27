@@ -1,18 +1,17 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
-import { Database } from 'src/types';
-import { IntegrationSchema } from 'src/types';
 import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { useSupabase } from '@/components/SupabaseProvider';
-
-export type Integration = Database['public']['Tables']['integrations']['Row'];
+import { saveIntegrationAtom } from '@/lib/api/client';
+import { SaveIntegrationData } from '@/lib/api/fetchers';
+import { Integration, IntegrationSchema } from '@/types';
 
 export default function IntegrationForm({ initialData }: { initialData: Integration }) {
-  const { supabase } = useSupabase();
+  const [, mutate] = useAtom(saveIntegrationAtom);
   const {
     register,
     handleSubmit,
@@ -24,11 +23,7 @@ export default function IntegrationForm({ initialData }: { initialData: Integrat
   return (
     <form
       onSubmit={handleSubmit(async (values) => {
-        console.log(values);
-        const { error } = await supabase.from('integrations').upsert(values);
-        if (error) {
-          console.error(error);
-        }
+        mutate([{ ...initialData, ...values } as SaveIntegrationData]);
       })}
     >
       <FormElementText

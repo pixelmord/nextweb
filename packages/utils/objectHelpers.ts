@@ -1,11 +1,8 @@
-export function isObject(item): boolean {
+export function isObject(item: any): boolean {
   return item && typeof item === 'object' && !Array.isArray(item);
 }
 
-export default function mergeDeep(
-  target: Record<string, unknown>,
-  source: Record<string, unknown>
-): Record<string, unknown> {
+export function mergeDeep(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
   const output = Object.assign({}, target);
   if (isObject(target) && isObject(source)) {
     Object.keys(source).forEach((key) => {

@@ -1,21 +1,20 @@
 import { Integration, Profile, Resource, Scope, Tag, TypedSupabaseClient } from '@/types';
 
 type CreateClient = () => TypedSupabaseClient;
-// TODO: think about passing the uid to the fetch functions instead of getting it from the session
-export async function createClientWithSession(createClient: CreateClient) {
+
+export const fetchSessionFactory = (createClient: CreateClient) => async () => {
   const supabase = createClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();
   if (!session) {
     console.error('No session');
-    throw new Error('No session');
   }
-  return { supabase, session };
-}
-export const fetchUserProfileFactory = (createClient: CreateClient) => async () => {
-  const { supabase, session } = await createClientWithSession(createClient);
-  const { data, error } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+  return session;
+};
+export const fetchUserProfileFactory = (createClient: CreateClient) => async (uid: string) => {
+  const supabase = createClient();
+  const { data, error } = await supabase.from('profiles').select('*').eq('id', uid).single();
   if (error) {
     console.error(error);
     return Promise.reject(error);
@@ -51,23 +50,20 @@ export const logoutFactory = (createClient: CreateClient) => async () => {
   }
 };
 
-export const fetchResourcesFactory = (createClient: CreateClient) => async () => {
-  const { supabase, session } = await createClientWithSession(createClient);
+export const fetchResourcesFactory = (createClient: CreateClient) => async (uid: string) => {
+  const supabase = createClient();
 
-  const { data, error } = await supabase
-    .from('resource_user')
-    .select('created_at, resource_id(*)')
-    .eq('user_id', session.user.id);
+  const { data, error } = await supabase.from('resource_user').select('created_at, resource_id(*)').eq('user_id', uid);
   if (error) {
     console.error(error);
     throw error;
   }
   return data as { created_at: string; resource_id: Resource }[];
 };
-export const fetchScopesFactory = (createClient: CreateClient) => async () => {
-  const { supabase, session } = await createClientWithSession(createClient);
+export const fetchScopesFactory = (createClient: CreateClient) => async (uid: string) => {
+  const supabase = createClient();
 
-  const { data, error } = await supabase.from('scopes').select('*').eq('uid', session.user.id);
+  const { data, error } = await supabase.from('scopes').select('*').eq('uid', uid);
   if (error) {
     console.error(error);
     throw error;
@@ -90,26 +86,10 @@ export const saveScopeFactory = (createClient: CreateClient) => async (data: Sav
   return scope[0];
 };
 
-export const fetchIntegrationsFactory = (createClient: CreateClient) => async () => {
-  const { supabase, session } = await createClientWithSession(createClient);
+export const fetchIntegrationsFactory = (createClient: CreateClient) => async (uid: string) => {
+  const supabase = createClient();
 
-  const { data, error } = await supabase.from('integrations').select('*').eq('uid', session.user.id);
-
-  if (error) {
-    console.error(error);
-    throw error;
-  }
-  return data;
-};
-export const fetchIntegrationByProviderFactory = (createClient: CreateClient) => async (provider: string) => {
-  const { supabase, session } = await createClientWithSession(createClient);
-
-  const { data, error } = await supabase
-    .from('integrations')
-    .select('*')
-    .eq('uid', session.user.id)
-    .eq('provider', provider)
-    .single();
+  const { data, error } = await supabase.from('integrations').select('*').eq('uid', uid);
 
   if (error) {
     console.error(error);
@@ -117,6 +97,23 @@ export const fetchIntegrationByProviderFactory = (createClient: CreateClient) =>
   }
   return data;
 };
+export const fetchIntegrationByProviderFactory =
+  (createClient: CreateClient) => async (provider: string, uid: string) => {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from('integrations')
+      .select('*')
+      .eq('uid', uid)
+      .eq('provider', provider)
+      .single();
+
+    if (error) {
+      console.error(error);
+      throw error;
+    }
+    return data;
+  };
 
 export type SaveIntegrationData = Pick<Integration, 'display_name' | 'api_username' | 'access_token'>;
 export const saveIntegrationFactory = (createClient: CreateClient) => async (data: SaveIntegrationData) => {
@@ -134,10 +131,10 @@ export const saveIntegrationFactory = (createClient: CreateClient) => async (dat
   return integration[0];
 };
 
-export const fetchTagsFactory = (createClient: CreateClient) => async () => {
-  const { supabase, session } = await createClientWithSession(createClient);
+export const fetchTagsFactory = (createClient: CreateClient) => async (uid: string) => {
+  const supabase = createClient();
 
-  const { data, error } = await supabase.from('tags').select('*').eq('uid', session.user.id);
+  const { data, error } = await supabase.from('tags').select('*').eq('uid', uid);
   if (error) {
     console.error(error);
     throw error;

@@ -1,9 +1,11 @@
 import * as zod from 'zod';
 
+import { Resource } from './index';
+
 export const ResourceSchema = zod.object({
   id: zod.string(),
   url: zod.string().url().min(1),
-  uid: zod.string(),
+  creator: zod.string(),
   title: zod.string().optional(),
   status: zod.string().nullable(),
   meta_keywords: zod.array(zod.string()).nullable().optional(),
@@ -16,6 +18,9 @@ export const ResourceSchema = zod.object({
   main_image_url: zod.string().nullable().optional(),
   screenshot_full_url: zod.string().optional(),
   screenshot_storage_path: zod.string().optional(),
+  created_at: zod.string().nullable().optional(),
+  provider: zod.string().nullable().optional(),
+  provider_channel: zod.string().nullable().optional(),
   processed: zod.string().array().nullable().optional(),
 });
 

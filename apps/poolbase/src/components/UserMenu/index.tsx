@@ -26,7 +26,7 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
             <Image
               className="h-8 w-8 rounded-full"
               src={avatarUrl}
-              alt={userProfile.full_name}
+              alt={userProfile.full_name || userProfile.username || 'User profile'}
               width="32"
               height="32"
             />
