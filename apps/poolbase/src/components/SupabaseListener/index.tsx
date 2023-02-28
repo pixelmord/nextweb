@@ -3,17 +3,19 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
+import { useSession } from '@/lib/api/client';
+
 import { useSupabase } from '../SupabaseProvider';
 
 export default function SupabaseListener({ serverAccessToken }: { serverAccessToken?: string }) {
   const { supabase } = useSupabase();
   const router = useRouter();
-
   useEffect(() => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.access_token !== serverAccessToken) {
+        console.debug('SupabaseListener: Refreshing page', session);
         router.refresh();
       }
     });

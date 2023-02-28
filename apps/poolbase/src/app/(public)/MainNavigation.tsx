@@ -1,6 +1,5 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -8,12 +7,14 @@ import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { LinkButton } from 'ui';
 
-import { userAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useUser } from '@/lib/api/client';
 
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 
 export default function MainNavigation() {
-  const [user] = useAtom(userAtom);
+  const { data: session } = useSession();
+  const { data: user } = useUser(session);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();

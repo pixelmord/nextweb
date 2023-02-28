@@ -1,17 +1,16 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { saveIntegrationAtom } from '@/lib/api/client';
+import { useSaveIntegration } from '@/lib/api/client';
 import { SaveIntegrationData } from '@/lib/api/fetchers';
 import { Integration, IntegrationSchema } from '@/types';
 
 export default function IntegrationForm({ initialData }: { initialData: Integration }) {
-  const [, mutate] = useAtom(saveIntegrationAtom);
+  const { mutate } = useSaveIntegration();
   const {
     register,
     handleSubmit,
@@ -23,7 +22,7 @@ export default function IntegrationForm({ initialData }: { initialData: Integrat
   return (
     <form
       onSubmit={handleSubmit(async (values) => {
-        mutate([{ ...initialData, ...values } as SaveIntegrationData]);
+        mutate({ ...initialData, ...values } as SaveIntegrationData);
       })}
     >
       <FormElementText

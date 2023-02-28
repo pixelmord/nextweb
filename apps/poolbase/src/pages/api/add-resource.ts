@@ -35,29 +35,27 @@ const AddResourceRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     const { error, data: resourceData } = await supabase.from('resources').insert(payload).select();
 
     console.debug(`Created in: ${Date.now() - start} ms`);
-    if (error) {
+    if (error || !resourceData) {
       return res.status(500).json({ error: error.message });
     }
-    const {
-      data: { path },
-      error: uploadError,
-    } = await supabase.storage
+    const resource = resourceData[0];
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from('resources')
-      .upload(`public/screenshots/${resourceData[0].id}.png`, screenshot, { upsert: true });
-    if (uploadError) {
+      .upload(`public/screenshots/${resource.id}.png`, screenshot, { upsert: true });
+    if (uploadError || !uploadData) {
       return res.status(500).json({ error: uploadError.message });
     }
     const {
       data: { publicUrl },
-    } = await supabase.storage.from('resources').getPublicUrl(path);
+    } = await supabase.storage.from('resources').getPublicUrl(uploadData.path);
     const { error: updateError, data } = await supabase
       .from('resources')
       .update({
-        screenshot_storage_path: path,
+        screenshot_storage_path: uploadData.path,
         screenshot_full_url: publicUrl,
-        processed: [...resourceData[0].processed, 'screenshot'],
+        processed: [...(!!resource.processed ? resource.processed : []), 'screenshot'],
       })
-      .eq('id', resourceData[0].id)
+      .eq('id', resource.id)
       .select();
     if (updateError) {
       return res.status(500).json({ error: updateError.message });

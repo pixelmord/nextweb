@@ -1,6 +1,5 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -9,7 +8,8 @@ import { FiBell, FiMenu, FiPackage, FiUser } from 'react-icons/fi';
 import { Button } from 'ui';
 
 import UserMenu from '@/components/UserMenu';
-import { useLogOut, userAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useLogOut, useUser } from '@/lib/api/client';
 
 const menuLinks = [
   { href: '/base', text: 'Dashboard' },
@@ -28,7 +28,8 @@ const userLinks = [
   },
 ];
 export default function MainNavigation() {
-  const [userProfile] = useAtom(userAtom);
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();

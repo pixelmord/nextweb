@@ -1,12 +1,12 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import { CgLinear } from 'react-icons/cg';
 import { FiEdit, FiGithub, FiPlusSquare } from 'react-icons/fi';
 import { RxNotionLogo } from 'react-icons/rx';
 import { H2 } from 'ui';
 
-import { integrationsAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useIntegrationsByUser } from '@/lib/api/client';
 
 import IntegrationListItem from './IntegrationListItem';
 
@@ -16,8 +16,9 @@ const availableIntegrations = [
   { provider: 'notion', icon: RxNotionLogo, setupUrl: 'https://', bgColor: 'bg-gray-500' },
 ];
 export default function IntegrationList() {
-  const [integrations] = useAtom(integrationsAtom);
-  const existingIntegrations = integrations.map((integration) => {
+  const { data: session } = useSession();
+  const { data: integrations } = useIntegrationsByUser(session);
+  const existingIntegrations = integrations?.map((integration) => {
     const availableIntegration = availableIntegrations.find(
       (availableIntegration) => availableIntegration.provider === integration.provider
     );
@@ -30,7 +31,7 @@ export default function IntegrationList() {
     <>
       <H2 className="mt-6">Your Integrations</H2>
       <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        {!!existingIntegrations.length ? (
+        {!!existingIntegrations?.length ? (
           existingIntegrations.map((integration) => (
             <IntegrationListItem
               key={integration.provider}
@@ -46,7 +47,9 @@ export default function IntegrationList() {
       <H2 className="mt-6">Available Integrations</H2>
       <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {availableIntegrations
-          .filter((integration) => !existingIntegrations.some((existing) => existing.provider === integration.provider))
+          .filter(
+            (integration) => !existingIntegrations?.some((existing) => existing.provider === integration.provider)
+          )
           .map((integration) => (
             <IntegrationListItem
               key={integration.provider}

@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
     data: { session },
     error,
   } = await supabase.auth.getSession();
-  // console.debug('middleware', req.nextUrl.pathname, session?.user, error);
+  console.debug('middleware', req.nextUrl.pathname, session?.user.id, error);
   // Check auth condition
   if (session?.user) {
     // Authentication successful, forward request to protected route.
@@ -26,6 +26,7 @@ export async function middleware(req: NextRequest) {
     return res;
   }
   if (req.nextUrl.pathname.includes('/base')) {
+    console.debug('redirecting');
     // Auth condition not met, redirect to login page.
     const redirectUrl = req.nextUrl.clone();
     redirectUrl.pathname = '/login';
@@ -33,3 +34,16 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 }
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/images (image optimization files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/images|_next/image|favicon.ico).*)',
+  ],
+};

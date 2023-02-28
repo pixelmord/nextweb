@@ -61,7 +61,7 @@ export const determineImageScore = (image: HTMLImageElement): number => {
 };
 
 export const findBestImage = (img: HTMLImageElement[]): string | null => {
-  const images = [];
+  const images: { img: HTMLImageElement; surface: number; score: number }[] = [];
   for (let i = 0, l = img.length; i < l; i++) {
     //Look for lazy loaded images
     if (img[i].getAttribute('data-src')) {
@@ -106,11 +106,11 @@ export const getMainImageUrlFromMainElement = (main) => {
 export const getMainImageUrl = (document: Document, main: HTMLElement): string | null => {
   let mainImage = document.querySelector('meta[property="og:image"]');
   if (mainImage && mainImage.getAttribute('content')?.trim().length) {
-    return mainImage.getAttribute('content')?.trim();
+    return mainImage.getAttribute('content');
   }
   mainImage = document.querySelector('meta[name="twitter:image"]');
   if (mainImage && mainImage.getAttribute('content')?.trim().length) {
-    return mainImage.getAttribute('content')?.trim();
+    return mainImage.getAttribute('content');
   }
   if (main) {
     const mainImageUrl = getMainImageUrlFromMainElement(main);
@@ -152,7 +152,11 @@ export const extractFromHead = (document: Document) => {
 export const scrapeDocument = (document: Document): Partial<ResourceData> => {
   const main = findMainContentElement(document);
   const main_text = main?.innerText;
-  const main_image_url = getMainImageUrl(document, main);
+  let main_image_url = '';
+  if (main) {
+    main_image_url = getMainImageUrl(document, main) || '';
+  }
+
   const headTags = extractFromHead(document);
   return {
     ...headTags,

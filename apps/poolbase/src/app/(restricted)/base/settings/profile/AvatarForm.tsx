@@ -1,25 +1,27 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import type { Database } from 'src/types/supabase';
 import { buttonStyle } from 'ui/client-only';
 
 import { useSupabase } from '@/components/SupabaseProvider';
-import { updateUserProfile, userAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useUpdateUserProfile, useUser } from '@/lib/api/client';
 import { UpdateProfileData } from '@/lib/api/fetchers';
 import { Profile } from '@/types';
 
 export default function AvatarFormWrapper() {
-  const [userProfile] = useAtom(userAtom);
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
+  if (!userProfile) return null;
   return <AvatarForm user={userProfile} />;
 }
 function AvatarForm({ user }: { user: Profile }) {
   const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);
-  const [, mutate] = useAtom(updateUserProfile);
+  const { mutate } = useUpdateUserProfile();
 
   const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
     try {
@@ -45,7 +47,7 @@ function AvatarForm({ user }: { user: Profile }) {
       if (uploadError) {
         throw uploadError;
       }
-      mutate([{ ...user, avatar_storage_path: `public/${filePath}`, avatar_url: url } as UpdateProfileData]);
+      mutate({ ...user, avatar_storage_path: `public/${filePath}`, avatar_url: url } as UpdateProfileData);
     } catch (error) {
       console.log(error);
       setUploading(false);

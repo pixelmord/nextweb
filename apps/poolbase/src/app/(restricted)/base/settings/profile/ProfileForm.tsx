@@ -1,36 +1,49 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { updateUserProfile, userAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useUpdateUserProfile, useUser } from '@/lib/api/client';
 import { UpdateProfileData } from '@/lib/api/fetchers';
 import { Database, Profile, UserProfileData, UserProfileSchema } from '@/types';
 
+function transformNullToEmpty<T extends Record<string, unknown>>(obj: T, keys: string[]): T {
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => (keys.includes(k) && v === null ? [k, ''] : [k, v]))
+  ) as T;
+}
 export default function ProfileFormWrapper() {
-  const [userProfile] = useAtom(userAtom);
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
+  if (!userProfile) {
+    return null;
+  }
+
   return <ProfileForm user={userProfile} />;
 }
-function ProfileForm({ user }: { user: Profile }) {
-  const [, mutate] = useAtom(updateUserProfile);
+function ProfileForm({ user }: { user?: Profile }) {
+  const { mutate } = useUpdateUserProfile();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(UserProfileSchema),
-    defaultValues: user as UserProfileData,
+    defaultValues: user,
   });
 
   return (
     <form
       onSubmit={handleSubmit((values) => {
-        mutate([{ ...user, ...values } as UpdateProfileData]);
+        mutate({ ...user, ...values } as UpdateProfileData);
       })}
     >
+      <pre>{JSON.stringify(errors, null, 2)}</pre>
+      <pre>{isValid + ''}</pre>
       <FormElementText id="full_name" label="Full Name" {...register('full_name')} error={errors.full_name} />
       <FormElementText id="username" label="Username" {...register('username')} error={errors.username} />
       <FormElementText id="website" label="Website" {...register('website')} error={errors.website} />

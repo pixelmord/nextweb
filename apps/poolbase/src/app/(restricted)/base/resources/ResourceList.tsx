@@ -1,12 +1,13 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import { H2 } from 'ui';
 
-import { resourcesAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useResourcesByUser } from '@/lib/api/client';
 
 export default function ResourceList() {
-  const [resources] = useAtom(resourcesAtom);
+  const { data: session } = useSession();
+  const { data: resources } = useResourcesByUser(session);
   return (
     <>
       {!!resources &&
@@ -15,7 +16,7 @@ export default function ResourceList() {
             <a href={star.resource_id.url}>{star.resource_id.title}</a>
           </H2>
         ))}
-      {resources.length === 0 && <p>No resources found</p>}
+      {resources?.length === 0 && <p>No resources found</p>}
     </>
   );
 }

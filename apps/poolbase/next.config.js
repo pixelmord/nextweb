@@ -11,7 +11,7 @@ const nextConfig = {
   transpilePackages: ['ui', 'mdx', 'utils'],
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ['shiki', 'tailwindcss'],
+    serverComponentsExternalPackages: ['shiki'],
   },
   images: {
     remotePatterns: [

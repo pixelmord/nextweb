@@ -1,3 +1,4 @@
+import { Session } from '@supabase/auth-helpers-nextjs';
 import { Octokit } from 'octokit';
 
 import { createClient } from '../supabaseServerClient';
@@ -10,12 +11,15 @@ import {
   fetchUserProfileFactory,
 } from './fetchers';
 
-export const fetchUserProfile = fetchUserProfileFactory(createClient);
-export const fetchIntegrationByProvider = fetchIntegrationByProviderFactory(createClient);
-export const fetchResources = fetchResourcesFactory(createClient);
-export const fetchScopes = fetchScopesFactory(createClient);
-export const fetchIntegrations = fetchIntegrationsFactory(createClient);
-export const fetchSession = fetchSessionFactory(createClient);
+const supabase = createClient();
+
+export const fetchUserProfile = fetchUserProfileFactory(supabase);
+export const fetchIntegrationByProvider = fetchIntegrationByProviderFactory(supabase);
+export const fetchResources = fetchResourcesFactory(supabase);
+export const fetchScopes = fetchScopesFactory(supabase);
+export const fetchIntegrations = fetchIntegrationsFactory(supabase);
+export const fetchSession = () =>
+  fetch('http://localhost:3002/api/session').then((res) => res.json()) as Promise<Session>;
 
 export const fetchGithubStars = async (uid) => {
   const integration = await fetchIntegrationByProvider('github', uid);

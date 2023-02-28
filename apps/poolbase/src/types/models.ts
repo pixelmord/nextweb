@@ -29,8 +29,8 @@ export type ResourceData = zod.infer<typeof ResourceSchema>;
 export const UserProfileSchema = zod.object({
   id: zod.string(),
   updated_at: zod.string().optional(),
+  created_at: zod.string().optional(),
   username: zod.string().min(1).max(255).nullable().optional(),
-  public_email: zod.string().email().optional(),
   full_name: zod.string().min(1).max(255).nullable().optional(),
   avatar_url: zod.string().url().nullable().optional(),
   avatar_storage_path: zod.string().nullable().optional(),

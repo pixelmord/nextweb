@@ -1,23 +1,23 @@
 import { Integration, Profile, Resource, Scope, Tag, TypedSupabaseClient } from '@/types';
 
-type CreateClient = () => TypedSupabaseClient;
-
-export const fetchSessionFactory = (createClient: CreateClient) => async () => {
-  const supabase = createClient();
+export const fetchSessionFactory = (supabase: TypedSupabaseClient) => async () => {
   const {
     data: { session },
+    error,
   } = await supabase.auth.getSession();
+  if (error) {
+    console.error(error);
+  }
   if (!session) {
     console.error('No session');
   }
   return session;
 };
-export const fetchUserProfileFactory = (createClient: CreateClient) => async (uid: string) => {
-  const supabase = createClient();
+export const fetchUserProfileFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
   const { data, error } = await supabase.from('profiles').select('*').eq('id', uid).single();
   if (error) {
-    console.error(error);
-    return Promise.reject(error);
+    console.error('fetchProfile', uid, error);
+    throw error;
   }
   return data;
 };
@@ -26,8 +26,7 @@ export type UpdateProfileData = Pick<
   Profile,
   'avatar_url' | 'avatar_storage_path' | 'full_name' | 'id' | 'username' | 'website'
 >;
-export const updateProfileFactory = (createClient: CreateClient) => async (data: UpdateProfileData) => {
-  const supabase = createClient();
+export const updateProfileFactory = (supabase: TypedSupabaseClient) => async (data: UpdateProfileData) => {
   const updates = {
     ...data,
     updated_at: new Date().toISOString(),
@@ -38,11 +37,10 @@ export const updateProfileFactory = (createClient: CreateClient) => async (data:
     console.error(error);
     throw error;
   }
-  return profile[0] || null;
+  return profile[0];
 };
 
-export const logoutFactory = (createClient: CreateClient) => async () => {
-  const supabase = createClient();
+export const logoutFactory = (supabase: TypedSupabaseClient) => async () => {
   const { error } = await supabase.auth.signOut();
   if (error) {
     console.error(error);
@@ -50,9 +48,7 @@ export const logoutFactory = (createClient: CreateClient) => async () => {
   }
 };
 
-export const fetchResourcesFactory = (createClient: CreateClient) => async (uid: string) => {
-  const supabase = createClient();
-
+export const fetchResourcesFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
   const { data, error } = await supabase.from('resource_user').select('created_at, resource_id(*)').eq('user_id', uid);
   if (error) {
     console.error(error);
@@ -60,9 +56,7 @@ export const fetchResourcesFactory = (createClient: CreateClient) => async (uid:
   }
   return data as { created_at: string; resource_id: Resource }[];
 };
-export const fetchScopesFactory = (createClient: CreateClient) => async (uid: string) => {
-  const supabase = createClient();
-
+export const fetchScopesFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
   const { data, error } = await supabase.from('scopes').select('*').eq('uid', uid);
   if (error) {
     console.error(error);
@@ -71,8 +65,7 @@ export const fetchScopesFactory = (createClient: CreateClient) => async (uid: st
   return data;
 };
 export type SaveScopeData = Pick<Scope, 'title' | 'image_storage_path' | 'image_url' | 'uid' | 'id'>;
-export const saveScopeFactory = (createClient: CreateClient) => async (data: SaveScopeData) => {
-  const supabase = createClient();
+export const saveScopeFactory = (supabase: TypedSupabaseClient) => async (data: SaveScopeData) => {
   const updates = {
     ...data,
     updated_at: new Date().toISOString(),
@@ -86,9 +79,7 @@ export const saveScopeFactory = (createClient: CreateClient) => async (data: Sav
   return scope[0];
 };
 
-export const fetchIntegrationsFactory = (createClient: CreateClient) => async (uid: string) => {
-  const supabase = createClient();
-
+export const fetchIntegrationsFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
   const { data, error } = await supabase.from('integrations').select('*').eq('uid', uid);
 
   if (error) {
@@ -98,9 +89,7 @@ export const fetchIntegrationsFactory = (createClient: CreateClient) => async (u
   return data;
 };
 export const fetchIntegrationByProviderFactory =
-  (createClient: CreateClient) => async (provider: string, uid: string) => {
-    const supabase = createClient();
-
+  (supabase: TypedSupabaseClient) => async (provider: string, uid: string) => {
     const { data, error } = await supabase
       .from('integrations')
       .select('*')
@@ -116,8 +105,7 @@ export const fetchIntegrationByProviderFactory =
   };
 
 export type SaveIntegrationData = Pick<Integration, 'display_name' | 'api_username' | 'access_token'>;
-export const saveIntegrationFactory = (createClient: CreateClient) => async (data: SaveIntegrationData) => {
-  const supabase = createClient();
+export const saveIntegrationFactory = (supabase: TypedSupabaseClient) => async (data: SaveIntegrationData) => {
   const updates = {
     ...data,
     updated_at: new Date().toISOString(),
@@ -131,9 +119,7 @@ export const saveIntegrationFactory = (createClient: CreateClient) => async (dat
   return integration[0];
 };
 
-export const fetchTagsFactory = (createClient: CreateClient) => async (uid: string) => {
-  const supabase = createClient();
-
+export const fetchTagsFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
   const { data, error } = await supabase.from('tags').select('*').eq('uid', uid);
   if (error) {
     console.error(error);
@@ -142,8 +128,7 @@ export const fetchTagsFactory = (createClient: CreateClient) => async (uid: stri
   return data;
 };
 export type SaveTagData = Pick<Tag, 'title' | 'image_storage_path' | 'image_url' | 'uid' | 'id'>;
-export const saveTagFactory = (createClient: CreateClient) => async (data: SaveTagData) => {
-  const supabase = createClient();
+export const saveTagFactory = (supabase: TypedSupabaseClient) => async (data: SaveTagData) => {
   const updates = {
     ...data,
     updated_at: new Date().toISOString(),

@@ -1,7 +1,6 @@
 'use client';
 
 import { Menu, Transition } from '@headlessui/react';
-import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -10,11 +9,13 @@ import { IconType } from 'react-icons';
 import { FiUser } from 'react-icons/fi';
 import { Button } from 'ui';
 
-import { useLogOut, userAtom } from '@/lib/api/client';
+import { useSession } from '@/lib/api/client';
+import { useLogOut, useUser } from '@/lib/api/client';
 
 export default function UserMenu({ links }: { links: { href: string; text: string; icon: IconType }[] }) {
   const pathname = usePathname();
-  const [userProfile] = useAtom(userAtom);
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
   const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   return (
@@ -36,7 +37,7 @@ export default function UserMenu({ links }: { links: { href: string; text: strin
               <span>{userProfile?.username?.slice(0, 2)}</span>
             </div>
           )}
-          {!avatarUrl && !userProfile.username && (
+          {!avatarUrl && !userProfile?.username && (
             <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
               <FiUser />
             </div>
