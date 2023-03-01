@@ -144,7 +144,7 @@ export const extractFromHead = (document: Document) => {
       meta_description: document?.querySelector('meta[name="description"]')?.getAttribute('content'),
     }),
     ...(!!document.querySelector('head > link[rel*="icon"]') && {
-      meta_icon_url: (document?.querySelector('head > link[rel*="icon"]') as HTMLLinkElement)?.href,
+      meta_icon_url: document?.querySelector('head > link[rel*="icon"]')?.getAttribute('href'),
     }),
   };
 };
@@ -158,6 +158,7 @@ export const scrapeDocument = (document: Document): Partial<ResourceData> => {
   }
 
   const headTags = extractFromHead(document);
+  console.debug(headTags);
   return {
     ...headTags,
     ...(main_text?.length && { main_text }),
