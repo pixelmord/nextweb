@@ -32,7 +32,7 @@ export default function AddResourceForm() {
         }
       })}
     >
-      <FormElementText id="url" label="URL" {...register('url')} error={errors.url} />
+      <FormElementText id="url" label="URL" {...register('url')} error={errors.url} type="url" autoComplete="on" />
       <div className="mt-8">
         <Button type="submit" intent="primary">
           Save
