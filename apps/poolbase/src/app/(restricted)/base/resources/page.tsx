@@ -1,5 +1,5 @@
 import { dehydrate } from '@tanstack/query-core';
-import { Container, H1, H2 } from 'ui';
+import { Container, H1 } from 'ui';
 
 import PageHeader from '@/components/PageHeader';
 import { Hydrate } from '@/components/QueryClientProvider';
@@ -9,6 +9,7 @@ import getQueryClient from '@/lib/getQueryClient';
 import { createClient } from '@/lib/supabaseServerClient';
 
 import ResourceList from './ResourceList';
+import ScopeList from './ScopeList';
 
 export default async function ResourcesList() {
   const queryClient = getQueryClient();
@@ -28,6 +29,7 @@ export default async function ResourcesList() {
     <>
       <PageHeader>
         <H1 vspace="none">Resources</H1>
+        <ScopeList />
       </PageHeader>
       <Container>
         <Hydrate state={dehydratedState}>
