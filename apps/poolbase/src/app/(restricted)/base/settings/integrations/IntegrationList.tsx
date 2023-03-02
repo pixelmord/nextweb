@@ -30,7 +30,7 @@ export default function IntegrationList() {
   return (
     <>
       <H2 className="mt-6">Your Integrations</H2>
-      <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+      <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {!!existingIntegrations?.length ? (
           existingIntegrations.map((integration) => (
             <IntegrationListItem
@@ -45,7 +45,7 @@ export default function IntegrationList() {
         )}
       </ul>
       <H2 className="mt-6">Available Integrations</H2>
-      <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+      <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {availableIntegrations
           .filter(
             (integration) => !existingIntegrations?.some((existing) => existing.provider === integration.provider)

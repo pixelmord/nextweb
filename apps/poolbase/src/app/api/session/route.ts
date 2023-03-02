@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { createClient } from '@/lib/supabaseServerClient';
 
-export async function GET(request: Request) {
+export async function GET() {
   const supabase = createClient();
   const {
     data: { session },

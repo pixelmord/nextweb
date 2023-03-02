@@ -7,7 +7,6 @@ import {
   fetchIntegrationsFactory,
   fetchResourcesFactory,
   fetchScopesFactory,
-  fetchSessionFactory,
   fetchUserProfileFactory,
 } from './fetchers';
 

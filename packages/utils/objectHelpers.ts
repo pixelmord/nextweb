@@ -16,3 +16,8 @@ export function mergeDeep(target: Record<string, unknown>, source: Record<string
   }
   return output;
 }
+export function transformNullToEmpty<T extends Record<string, unknown>>(obj: T, keys: string[]): T {
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => (keys.includes(k) && v === null ? [k, ''] : [k, v]))
+  ) as T;
+}

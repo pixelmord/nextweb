@@ -2,12 +2,11 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react';
-import type { Database } from 'src/types/supabase';
 import { buttonStyle } from 'ui/client-only';
 
 import { useSupabase } from '@/components/SupabaseProvider';
 import { useSession } from '@/lib/api/client';
-import { useUpdateUserProfile, useUser } from '@/lib/api/client';
+import { useUser } from '@/lib/api/client';
 import { UpdateProfileData } from '@/lib/api/fetchers';
 import { Profile } from '@/types';
 
@@ -21,7 +20,6 @@ function AvatarForm({ user }: { user: Profile }) {
   const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);
-  const { mutate } = useUpdateUserProfile();
 
   const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
     try {
@@ -37,7 +35,7 @@ function AvatarForm({ user }: { user: Profile }) {
       const fileName = `${uid}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      let { data, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('avatars')
         .upload(`public/${filePath}`, file, { upsert: true });
       const {

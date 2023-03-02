@@ -23,7 +23,7 @@ export default function MainNavigation() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="border-base-100 dark:border-base-700 flex items-center justify-between border-b-2 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="sr-only">Poolbase</span>
               <Image className="h-8 w-8" width="32" height="32" src="/images/icons/poolbase-icon.svg" alt="Poolbase" />
             </a>
@@ -99,7 +99,7 @@ export default function MainNavigation() {
             </div>
             <div className="mt-6">
               <nav className="grid gap-y-8">
-                <a href="#" className="hover:bg-base-50 -m-3 flex items-center rounded-md p-3">
+                <a href="/" className="hover:bg-base-50 -m-3 flex items-center rounded-md p-3">
                   <span className="text-base-900 ml-3 text-base font-medium">Analytics</span>
                 </a>
               </nav>

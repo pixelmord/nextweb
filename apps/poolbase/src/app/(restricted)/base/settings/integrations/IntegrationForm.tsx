@@ -45,7 +45,7 @@ export default function IntegrationForm({ initialData }: { initialData: Integrat
         error={errors.access_token}
       />
       <div className="mt-8">
-        <Button type="submit" intent="primary">
+        <Button type="submit" intent="primary" disabled={!isValid}>
           Save
         </Button>
       </div>

@@ -3,7 +3,6 @@ import { Container, H1 } from 'ui';
 
 import PageHeader from '@/components/PageHeader';
 import { fetchIntegrationsFactory } from '@/lib/api/fetchers';
-import { fetchIntegrations } from '@/lib/api/server';
 import { createClient } from '@/lib/supabaseServerClient';
 
 import IntegrationForm from '../IntegrationForm';

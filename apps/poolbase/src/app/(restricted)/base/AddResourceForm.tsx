@@ -4,8 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Database } from 'src/types';
 import { ResourceSchema } from 'src/types';
-import { Button, H2 } from 'ui';
-import { z } from 'zod';
+import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
 
@@ -34,7 +33,7 @@ export default function AddResourceForm() {
     >
       <FormElementText id="url" label="URL" {...register('url')} error={errors.url} type="url" autoComplete="on" />
       <div className="mt-8">
-        <Button type="submit" intent="primary">
+        <Button type="submit" intent="primary" disabled={!isValid}>
           Save
         </Button>
       </div>

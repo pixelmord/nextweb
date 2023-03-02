@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useProcessResource, useSession } from '@/lib/api/client';
 import { useResourcesByUser } from '@/lib/api/client';

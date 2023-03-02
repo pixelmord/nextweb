@@ -8,13 +8,8 @@ import { FormElementText } from '@/components/Form';
 import { useSession } from '@/lib/api/client';
 import { useUpdateUserProfile, useUser } from '@/lib/api/client';
 import { UpdateProfileData } from '@/lib/api/fetchers';
-import { Database, Profile, UserProfileData, UserProfileSchema } from '@/types';
+import { Profile, UserProfileSchema } from '@/types';
 
-function transformNullToEmpty<T extends Record<string, unknown>>(obj: T, keys: string[]): T {
-  return Object.fromEntries(
-    Object.entries(obj).map(([k, v]) => (keys.includes(k) && v === null ? [k, ''] : [k, v]))
-  ) as T;
-}
 export default function ProfileFormWrapper() {
   const { data: session } = useSession();
   const { data: userProfile } = useUser(session);

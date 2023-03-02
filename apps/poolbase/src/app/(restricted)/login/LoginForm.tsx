@@ -2,13 +2,11 @@
 
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { useSupabase } from '@/components/SupabaseProvider';
 
 export default function LoginForm() {
-  const router = useRouter();
   const { supabase } = useSupabase();
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -20,10 +18,6 @@ export default function LoginForm() {
     return null;
   }
 
-  // if (session) {
-  //   router.push('/base');
-  //   return null;
-  // }
   return (
     <Auth
       redirectTo="/base"

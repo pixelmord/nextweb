@@ -11,7 +11,6 @@ export async function middleware(req: NextRequest) {
   // Check if we have a session
   const {
     data: { session },
-    error,
   } = await supabase.auth.getSession();
   // console.debug('middleware', req.nextUrl.pathname, session?.user.id, error);
   // Check auth condition

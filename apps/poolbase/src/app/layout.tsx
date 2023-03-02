@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <html className={`${lato.variable} h-full dark:text-base-200`}>
+    <html className={`${lato.variable} h-full dark:text-base-200`} lang="en">
       <body className="h-full flex flex-col">
         <SupabaseProvider>
           <SupabaseListener serverAccessToken={session?.access_token} />

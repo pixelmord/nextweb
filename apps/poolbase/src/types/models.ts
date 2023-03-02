@@ -1,7 +1,5 @@
 import * as zod from 'zod';
 
-import { Resource } from './index';
-
 export const ResourceSchema = zod.object({
   id: zod.string(),
   url: zod.string().url().min(1),

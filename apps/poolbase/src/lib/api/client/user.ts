@@ -1,9 +1,7 @@
 'use client';
 
-import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-
-import { UserProfileSchema } from '@/types/index';
 
 import { createClient } from '../../supabaseBrowserClient';
 import { UpdateProfileData, fetchUserProfileFactory, logoutFactory, updateProfileFactory } from '../fetchers';
