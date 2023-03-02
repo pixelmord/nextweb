@@ -3,8 +3,8 @@ import { Container, H1, H2 } from 'ui';
 
 import PageHeader from '@/components/PageHeader';
 import { Hydrate } from '@/components/QueryClientProvider';
+import { resourceKeys } from '@/lib/api/client/queryKeys';
 import { fetchResourcesFactory } from '@/lib/api/fetchers';
-import { resourceKeys } from '@/lib/api/queryKeys';
 import getQueryClient from '@/lib/getQueryClient';
 import { createClient } from '@/lib/supabaseServerClient';
 

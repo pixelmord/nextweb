@@ -2,8 +2,8 @@ import { dehydrate } from '@tanstack/query-core';
 
 import IntegrationSync from '@/components/IntegrationSync';
 import { Hydrate } from '@/components/QueryClientProvider';
+import { integrationKeys, userKeys } from '@/lib/api/client/queryKeys';
 import { fetchIntegrationsFactory, fetchUserProfileFactory } from '@/lib/api/fetchers';
-import { integrationKeys, userKeys } from '@/lib/api/queryKeys';
 import getQueryClient from '@/lib/getQueryClient';
 import { createClient } from '@/lib/supabaseServerClient';
 import { Integration } from '@/types';

@@ -2,8 +2,8 @@ import { dehydrate } from '@tanstack/query-core';
 import Link from 'next/link';
 
 import { Hydrate } from '@/components/QueryClientProvider';
+import { userKeys } from '@/lib/api/client/queryKeys';
 import { fetchUserProfileFactory } from '@/lib/api/fetchers';
-import { userKeys } from '@/lib/api/queryKeys';
 import getQueryClient from '@/lib/getQueryClient';
 import { createClient } from '@/lib/supabaseServerClient';
 

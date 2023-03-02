@@ -54,10 +54,22 @@ export const fetchResourcesFactory = (supabase: TypedSupabaseClient) => async (u
     console.error(error);
     throw error;
   }
-  return data as { created_at: string; resource_id: Resource }[];
+  return data.map((datum) => datum.resource_id) as Resource[];
 };
-export const fetchScopesFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
-  const { data, error } = await supabase.from('scopes').select('*').eq('uid', uid);
+export type ProcessResourceData = Pick<Resource, 'url' | 'processed' | 'id'>;
+export const fetchProcessedResource = async (resource: ProcessResourceData) => {
+  const res = await fetch('/api/process-resource', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(resource),
+  });
+  if (res.status === 200) {
+    return res.json().then((data) => data.resourceDataResult[0]);
+  }
+  throw new Error('Failed to process resource');
+};
+export const fetchScopesFactory = (supabase: TypedSupabaseClient) => async () => {
+  const { data, error } = await supabase.from('scopes').select('*');
   if (error) {
     console.error(error);
     throw error;
