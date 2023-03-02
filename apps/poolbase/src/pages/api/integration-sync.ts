@@ -90,7 +90,7 @@ const IntegrationSync = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     const star2ResourceConversion = (star: any): Partial<ResourceData> => ({
       url: star.url,
-      title: star.nameWithOwner,
+      title: 'github stared repo: ' + star.nameWithOwner,
       meta_description: star.description,
       meta_title: star.name,
       main_image_url: star.openGraphImageUrl,

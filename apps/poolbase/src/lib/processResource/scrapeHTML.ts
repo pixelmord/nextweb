@@ -2,6 +2,20 @@ import { parse } from 'node-html-parser';
 import { chromium, devices } from 'playwright';
 import { ResourceData } from 'src/types';
 
+export const prefixHref = (href: string, url: string): string => {
+  const urlObj = new URL(url);
+  if (href.startsWith('http')) {
+    return href;
+  }
+  if (href.startsWith('//')) {
+    return urlObj.protocol + href;
+  }
+  if (href.startsWith('/')) {
+    return urlObj.protocol + '//' + urlObj.host + href;
+  }
+  return url + href;
+};
+
 export const findMainContentElement = (document: Document): HTMLElement | null => {
   const body = document.querySelector('body');
   const bodyText = document.querySelector('body')?.innerText;
@@ -103,7 +117,7 @@ export const getMainImageUrlFromMainElement = (main) => {
   return findBestImage(img);
 };
 
-export const getMainImageUrl = (document: Document, main: HTMLElement): string | null => {
+export const getMainImageUrl = (document: Document, main: HTMLElement, url: string): string | null => {
   let mainImage = document.querySelector('meta[property="og:image"]');
   if (mainImage && mainImage.getAttribute('content')?.trim().length) {
     return mainImage.getAttribute('content');
@@ -115,14 +129,15 @@ export const getMainImageUrl = (document: Document, main: HTMLElement): string |
   if (main) {
     const mainImageUrl = getMainImageUrlFromMainElement(main);
     if (mainImageUrl) {
-      return mainImageUrl;
+      return prefixHref(mainImageUrl, url);
     }
   }
   return null;
 };
 
-export const extractFromHead = (document: Document) => {
-  return {
+export const extractFromHead = (document: Document, url: string) => {
+  const urlObj = new URL(url);
+  let headData = {
     ...(!!document.querySelector('title') && {
       meta_title: document?.querySelector('title')?.innerText.trim(),
       title: document?.querySelector('title')?.innerText.trim(),
@@ -144,21 +159,34 @@ export const extractFromHead = (document: Document) => {
       meta_description: document?.querySelector('meta[name="description"]')?.getAttribute('content'),
     }),
     ...(!!document.querySelector('head > link[rel*="icon"]') && {
-      meta_icon_url: document?.querySelector('head > link[rel*="icon"]')?.getAttribute('href'),
+      meta_icon_url: prefixHref(
+        document!.querySelector('head > link[rel*="icon"]')!.getAttribute('href') as string,
+        url
+      ),
     }),
   };
+  if (urlObj.hostname === 'github.com') {
+    const tags: HTMLAnchorElement[] = Array.from(document.querySelectorAll('a.topic-tag'));
+    if (tags.length) {
+      headData = {
+        ...headData,
+        meta_keywords: tags.map((tag) => tag.innerText),
+      };
+    }
+  }
+  return headData;
 };
 
-export const scrapeDocument = (document: Document): Partial<ResourceData> => {
+export const scrapeDocument = (document: Document, url: string): Partial<ResourceData> => {
   const main = findMainContentElement(document);
   const main_text = main?.innerText;
   let main_image_url = '';
   if (main) {
-    main_image_url = getMainImageUrl(document, main) || '';
+    main_image_url = getMainImageUrl(document, main, url) || '';
   }
 
-  const headTags = extractFromHead(document);
-  console.debug(headTags);
+  const headTags = extractFromHead(document, url);
+
   return {
     ...headTags,
     ...(main_text?.length && { main_text }),
@@ -194,7 +222,7 @@ export const scrape = async (url): Promise<{ data: Partial<ResourceData>; screen
   start = Date.now();
   const content = await page.content();
   const document = parse(content) as unknown as Document;
-  const data = scrapeDocument(document);
+  const data = scrapeDocument(document, url);
   end = Date.now();
   console.debug(`processed parsing in: ${end - start} ms`);
   start = Date.now();
