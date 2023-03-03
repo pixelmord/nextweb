@@ -8,6 +8,7 @@ module.exports = {
       2,
       {
         argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
       },
     ],
   },

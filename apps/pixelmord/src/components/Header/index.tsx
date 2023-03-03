@@ -1,16 +1,12 @@
 'use client';
 
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 const menuLinks = [{ href: '/recipes', text: 'Kochrezepte' }];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
 
 export default function Head() {
   const pathname = usePathname();

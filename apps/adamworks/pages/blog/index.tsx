@@ -30,7 +30,7 @@ export default function BlogPage({ posts }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const posts = await Blog.getAllMdxNodes();
   return {
     props: { posts },
