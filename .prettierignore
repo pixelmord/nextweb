@@ -1,9 +1,11 @@
 node_modules
 .next
-public
-**/**/node_modules
-**/**/.next
-**/**/public
+/public
+!/public/manifest.json
+/**/**/node_modules
+/**/**/.next
+/**/**/public
+!/**/**/public/manifest.json
 
 *.lock
 *.log
