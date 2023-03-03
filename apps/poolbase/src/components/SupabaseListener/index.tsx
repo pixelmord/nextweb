@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useSupabase } from '../SupabaseProvider';
 
@@ -15,8 +15,9 @@ export default function SupabaseListener({ serverAccessToken }: { serverAccessTo
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT') {
         router.push('/login');
-      }
-      if (session?.access_token !== serverAccessToken) {
+      } else if (event === 'SIGNED_IN') {
+        router.push('/base');
+      } else if (session?.access_token !== serverAccessToken) {
         console.debug('SupabaseListener: Refreshing page', session);
         router.refresh();
       }
