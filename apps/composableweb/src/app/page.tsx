@@ -1,4 +1,4 @@
-import { Container, H1 } from 'ui';
+import { Container } from 'ui';
 import fetchLocalFile from 'utils/fetch-local-file';
 
 import Section from '@/components/blocks/Section';

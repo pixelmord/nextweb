@@ -1,5 +1,4 @@
 import { BaseFrontmatterSchema, createSource } from 'mdx';
-import * as z from 'zod';
 
 export const Blog = createSource({
   contentPath: 'src/content/blog',

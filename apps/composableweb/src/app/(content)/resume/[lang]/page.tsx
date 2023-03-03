@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FiGithub, FiLink, FiLinkedin, FiMail, FiPhone, FiTwitter } from 'react-icons/fi';
-import { Container, H2, H3 } from 'ui';
+import { H2, H3 } from 'ui';
 import fetchLocalFile from 'utils/fetch-local-file';
 
 import { Locale, i18n } from '@/config/i18n-config';
