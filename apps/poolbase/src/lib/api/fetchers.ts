@@ -76,14 +76,17 @@ export const fetchScopesFactory = (supabase: TypedSupabaseClient) => async () =>
   }
   return data;
 };
-export type SaveScopeData = Pick<Scope, 'title' | 'image_storage_path' | 'image_url' | 'uid' | 'id'>;
+export type SaveScopeData = Partial<Scope>;
 export const saveScopeFactory = (supabase: TypedSupabaseClient) => async (data: SaveScopeData) => {
   const updates = {
     ...data,
     updated_at: new Date().toISOString(),
   };
 
-  const { data: scope, error } = await supabase.from('scopes').upsert(updates).select();
+  const { data: scope, error } = await supabase
+    .from('scopes')
+    .upsert(updates as Scope)
+    .select();
   if (error) {
     console.error(error);
     throw error;
