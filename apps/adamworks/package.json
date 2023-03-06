@@ -26,12 +26,12 @@
     "shiki": "^0.14.1",
     "ui": "workspace:*",
     "utils": "workspace:*",
-    "zod": "^3.20.6"
+    "zod": "^3.21.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/node": "^18.14.4",
+    "@types/node": "^18.14.6",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/sharp": "^0.31.1",

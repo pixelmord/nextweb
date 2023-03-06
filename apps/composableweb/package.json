@@ -10,7 +10,7 @@
     "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.12",
+    "@headlessui/react": "^1.7.13",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -23,18 +23,18 @@
     "next-seo": "^5.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
+    "react-icons": "^4.8.0",
     "sharp": "^0.31.3",
     "shiki": "^0.14.1",
     "tailwind-config": "workspace:*",
     "ui": "workspace:*",
     "utils": "workspace:*",
-    "zod": "^3.20.6"
+    "zod": "^3.21.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/node": "^18.14.4",
+    "@types/node": "^18.14.6",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/sharp": "^0.31.1",
