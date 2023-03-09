@@ -13,7 +13,7 @@ export const FormElementText = ({ type = 'text', ...rest }: FormElementTextProps
   } = useTsController<string>();
   const state = error ? 'error' : 'default';
   return (
-    <div className="my-4">
+    <div className="">
       {!!label && (
         <Label htmlFor={fieldProps.name} state={state} className="px-1">
           {label}

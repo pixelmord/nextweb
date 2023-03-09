@@ -49,7 +49,11 @@ export const logoutFactory = (supabase: TypedSupabaseClient) => async () => {
 };
 
 export const fetchResourcesFactory = (supabase: TypedSupabaseClient) => async (uid: string) => {
-  const { data, error } = await supabase.from('resource_user').select('created_at, resource_id(*)').eq('user_id', uid);
+  const { data, error } = await supabase
+    .from('resource_user')
+    .select('created_at, resource_id(*)')
+    .eq('user_id', uid)
+    .range(0, 100);
   if (error) {
     console.error(error);
     throw error;

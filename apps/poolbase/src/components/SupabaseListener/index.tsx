@@ -13,11 +13,7 @@ export default function SupabaseListener({ serverAccessToken }: { serverAccessTo
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT') {
-        router.push('/login');
-      } else if (event === 'SIGNED_IN') {
-        router.push('/base');
-      } else if (session?.access_token !== serverAccessToken) {
+      if (session?.access_token !== serverAccessToken) {
         console.debug('SupabaseListener: Refreshing page', session);
         router.refresh();
       }

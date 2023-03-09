@@ -33,7 +33,7 @@ export default async function BaseLayout({ children }: React.PropsWithChildren) 
   const dehydratedState = dehydrate(queryClient);
   return (
     <Hydrate state={dehydratedState}>
-      {!!integrations.length && <IntegrationSync />}
+      {/* {!!integrations.length && <IntegrationSync />} */}
       <div className=" flex flex-col flex-grow">
         <header>
           <MainNavigation />

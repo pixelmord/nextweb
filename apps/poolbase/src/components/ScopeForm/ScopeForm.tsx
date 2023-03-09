@@ -1,5 +1,7 @@
 'use client';
 
+import { FiSave } from 'react-icons/fi';
+import { Button } from 'ui';
 import { z } from 'zod';
 
 import { useSaveScope } from '@/lib/api/client';
@@ -20,8 +22,14 @@ export const ScopeForm: React.FC = () => {
   return (
     <BaseForm
       schema={ScopeSchema}
+      formProps={{ className: 'flex' }}
       onSubmit={onSubmit}
-      renderAfter={() => <button type="submit">Submit</button>}
+      renderAfter={() => (
+        <Button type="submit" className="ml-3 flex-grow-0">
+          <span className="sr-only">Save</span>
+          <FiSave aria-hidden />
+        </Button>
+      )}
       // optional typesafe props forwarded to your components
     />
   );

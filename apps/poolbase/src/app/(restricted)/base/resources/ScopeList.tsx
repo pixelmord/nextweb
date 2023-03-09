@@ -9,7 +9,7 @@ import { useScopes } from '@/lib/api/client';
 export default function ScopeList() {
   const { data: scopes } = useScopes();
   return (
-    <div className="flex items-center">
+    <div className="flex items-center h-11">
       {!!scopes && scopes.map((scope) => <span key={scope.id}>{scope.title}</span>)}
       {scopes?.length === 0 && <span>No scopes found</span>}
       <Disclosure>
