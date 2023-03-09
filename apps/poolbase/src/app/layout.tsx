@@ -50,6 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </html>
   );
 }
+// TODO: complete the set of meta defaults
 export const metadata: Metadata = {
   title: {
     default: 'Poolbase',
