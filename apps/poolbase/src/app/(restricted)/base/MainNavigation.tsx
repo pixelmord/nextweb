@@ -49,7 +49,7 @@ export default function MainNavigation() {
                 className="h-8 w-8"
                 width="32"
                 height="32"
-                src="/images/icons/poolbase-icon.svg"
+                src="/static/icons/poolbase-icon.svg"
                 alt="Your Company"
               />
             </div>

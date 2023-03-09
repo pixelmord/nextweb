@@ -25,7 +25,7 @@ export default function MainNavigation() {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="/">
               <span className="sr-only">Poolbase</span>
-              <Image className="h-8 w-8" width="32" height="32" src="/images/icons/poolbase-icon.svg" alt="Poolbase" />
+              <Image className="h-8 w-8" width="32" height="32" src="/static/icons/poolbase-icon.svg" alt="Poolbase" />
             </a>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -81,7 +81,7 @@ export default function MainNavigation() {
                   className="h-8 w-auto"
                   width="32"
                   height="32"
-                  src="/images/icons/poolbase-icon.svg"
+                  src="/static/icons/poolbase-icon.svg"
                   alt="Poolbase"
                 />
               </div>
