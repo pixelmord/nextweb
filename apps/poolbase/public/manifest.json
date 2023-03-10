@@ -1,15 +1,13 @@
 {
-  "name": "poolbase",
+  "name": "poolbase for your information",
   "short_name": "poolbase",
   "theme_color": "#1887ED",
   "background_color": "#2d3748",
-  "display": "browser",
   "orientation": "portrait",
-  "Scope": "/",
   "start_url": "/",
   "share_target": {
-    "action": "/add-url",
-    "method": "GET",
+    "action": "/api/add-resource",
+    "method": "post",
     "params": {
       "title": "title",
       "url": "url"
@@ -17,45 +15,37 @@
   },
   "icons": [
     {
-      "src": "images/icons/ico72.png",
+      "src": "/static/icons/ico72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "images/icons/ico96.png",
+      "src": "/static/icons/ico96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "images/icons/icon128.png",
+      "src": "/static/icons/icon128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "images/icons/icon144.png",
+      "src": "/static/icons/icon144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "images/icons/icon152.png",
+      "src": "/static/icons/icon152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
+    { "src": "/static/icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/static/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
     {
-      "src": "images/icons/icon192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icons/icon384.png",
+      "src": "/static/icons/icon384.png",
       "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "images/icons/icon512.png",
-      "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "splash_pages": null
+  "display": "standalone"
 }

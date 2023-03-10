@@ -1,4 +1,4 @@
-import { Archivo_Narrow, Barlow } from '@next/font/google';
+import { Archivo_Narrow, Barlow } from 'next/font/google';
 
 import '@/styles/global.css';
 
@@ -15,7 +15,7 @@ const archivo = Archivo_Narrow({ subsets: ['latin'], variable: '--font-archivo' 
 const barlow = Barlow({ weight: '400', subsets: ['latin'], variable: '--font-barlow' });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={`${archivo.variable} ${barlow.variable} h-full`}>
+    <html className={`${archivo.variable} ${barlow.variable} h-full`} lang="de">
       <body className="flex flex-col lg:flex-row bg-base-100 dark:bg-base-800 h-full">
         <header className="relative shrink-0 w-full lg:w-[350px] xl:w-[450px]">
           <div className="bg-primary-200 dark:bg-primary-900/25 flex flex-col relative lg:fixed justify-start lg:justify-between  h-full top-0 left-0 bottom-0 z-10  w-full lg:w-[350px] xl:w-[450px] px-4 sm:px-6 lg:px-8">

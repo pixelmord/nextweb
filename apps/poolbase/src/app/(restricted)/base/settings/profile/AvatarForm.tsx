@@ -2,27 +2,24 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react';
-import type { Database } from 'src/types/supabase';
 import { buttonStyle } from 'ui/client-only';
 
-import { useProfileImage } from '@/lib/api';
-import supabase from '@/lib/supabaseBrowserClient';
+import { useSupabase } from '@/components/SupabaseProvider';
+import { useSession, useUpdateUserProfile, useUser } from '@/lib/api/client';
+import { UpdateProfileData } from '@/lib/api/fetchers';
+import { Profile } from '@/types';
 
-type Profiles = Database['public']['Tables']['profiles']['Row'];
-
-export default function AvatarForm({
-  uid,
-  url,
-  size,
-  onUpload,
-}: {
-  uid: string;
-  url?: Profiles['avatar_url'];
-  size: number;
-  onUpload: (url: string) => void;
-}) {
+export default function AvatarFormWrapper() {
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
+  if (!userProfile) return null;
+  return <AvatarForm user={userProfile} />;
+}
+function AvatarForm({ user }: { user: Profile }) {
+  const { supabase } = useSupabase();
+  const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);
-  const avatarUrl = useProfileImage(url);
+  const { mutate } = useUpdateUserProfile();
 
   const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
     try {
@@ -33,23 +30,25 @@ export default function AvatarForm({
       }
 
       const file = event.target.files[0];
-      console.log(file);
+
       const fileExt = file.name.split('.').pop();
       const fileName = `${uid}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      let { data, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('avatars')
         .upload(`public/${filePath}`, file, { upsert: true });
-      console.log(data);
+      const {
+        data: { publicUrl: url },
+      } = await supabase.storage.from('avatars').getPublicUrl(`public/${filePath}`);
 
       if (uploadError) {
         throw uploadError;
       }
-      onUpload(`public/${filePath}`);
+      mutate({ ...user, avatar_storage_path: `public/${filePath}`, avatar_url: url } as UpdateProfileData);
     } catch (error) {
-      alert('Error uploading avatar!');
       console.log(error);
+      setUploading(false);
     } finally {
       setUploading(false);
     }
@@ -60,22 +59,23 @@ export default function AvatarForm({
         <Image
           src={avatarUrl}
           alt="Avatar"
-          className="mb-6 rounded-full border border-pink-900 bg-gray-400"
-          width={size}
-          height={size}
+          className="mb-6 rounded-full border border-accent-900 bg-gray-400 w-40 h-40"
+          width={160}
+          height={160}
         />
       ) : (
-        <div className="mb-6 rounded-full border border-pink-900 bg-gray-400" style={{ height: size, width: size }} />
+        <div className="mb-6 rounded-full border border-accent-900 bg-gray-400 w-40 h-40" />
       )}
-      <div style={{ width: size }}>
-        <label className={buttonStyle({ intent: 'secondary', size: 'medium', className: 'block' })} htmlFor="single">
-          {uploading ? 'Uploading ...' : 'Upload'}
+
+      <div className="w-40">
+        <label
+          className={buttonStyle({ intent: 'secondary', size: 'medium', className: 'block text-center' })}
+          htmlFor="single"
+        >
+          {uploading ? 'Uploading ...' : 'Select new avatar image'}
         </label>
         <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
+          className="sr-only absolute"
           type="file"
           id="single"
           accept="image/*"

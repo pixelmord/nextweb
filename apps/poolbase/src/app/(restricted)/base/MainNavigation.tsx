@@ -5,15 +5,16 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FiBell, FiMenu, FiPackage, FiUser } from 'react-icons/fi';
-import type { Database } from 'src/types/supabase';
 import { Button } from 'ui';
 
 import UserMenu from '@/components/UserMenu';
-import { useLogOut, useProfileImage, useUserProfile } from '@/lib/api';
+import { useSession } from '@/lib/api/client';
+import { useLogOut, useUser } from '@/lib/api/client';
 
-type Profile = Database['public']['Tables']['profiles']['Row'];
-
-const menuLinks = [{ href: '/base', text: 'Dashboard' }];
+const menuLinks = [
+  { href: '/base', text: 'Dashboard' },
+  { href: '/base/resources', text: 'Resources' },
+];
 const userLinks = [
   {
     href: '/base/settings/profile',
@@ -26,9 +27,10 @@ const userLinks = [
     icon: FiPackage,
   },
 ];
-export default function MainNavigation({ user }: { user: Profile }) {
-  const { data: userProfile, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
-  const avatarUrl = useProfileImage(userProfile?.avatar_url as string);
+export default function MainNavigation() {
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
+  const avatarUrl = userProfile?.avatar_url;
   const logoutMutation = useLogOut();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -38,7 +40,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
   }
   const pathname = usePathname();
   return (
-    <nav className="bg-base-800 dark:bg-base-200">
+    <nav className="bg-base-800 dark:bg-base-600 shadow-md z-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -47,7 +49,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
                 className="h-8 w-8"
                 width="32"
                 height="32"
-                src="/images/icons/poolbase-icon.svg"
+                src="/static/icons/poolbase-icon.svg"
                 alt="Your Company"
               />
             </div>
@@ -60,7 +62,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
                     className={`${
                       pathname === link.href
                         ? 'bg-base-900 text-white'
-                        : 'text-base-300 hover:bg-base-700 hover:text-white'
+                        : 'text-base-200 hover:bg-base-700 hover:text-white'
                     } rounded-md px-3 py-2 text-sm font-medium`}
                   >
                     {link.text}
@@ -80,7 +82,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
               </button>
 
               <div className="relative ml-3">
-                <UserMenu links={userLinks} user={user} />
+                <UserMenu links={userLinks} />
               </div>
             </div>
           </div>
@@ -119,7 +121,7 @@ export default function MainNavigation({ user }: { user: Profile }) {
             {!!userProfile && (
               <>
                 <div className="flex-shrink-0">
-                  {!!avatarUrl && (
+                  {!!avatarUrl ? (
                     <Image
                       width="40"
                       height="40"
@@ -128,6 +130,10 @@ export default function MainNavigation({ user }: { user: Profile }) {
                       src={avatarUrl}
                       alt={userProfile.full_name || ''}
                     />
+                  ) : (
+                    <div className="h-8 w-8 rounded-full bg-base-600 text-center text-base font-bold flex flex-col text-base-50 uppercase items-center justify-center">
+                      <span>{userProfile?.username?.slice(0, 2)}</span>
+                    </div>
                   )}
                 </div>
                 <div className="ml-3">

@@ -5,13 +5,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
-import type { Database } from 'src/types/supabase';
 import { LinkButton } from 'ui';
 
-type Profile = Database['public']['Tables']['profiles']['Row'];
+import { useSession } from '@/lib/api/client';
+import { useUser } from '@/lib/api/client';
+
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 
-export default function MainNavigation({ user }: { user: null | Profile }) {
+export default function MainNavigation() {
+  const { data: session } = useSession();
+  const { data: user } = useUser(session);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (
@@ -19,15 +23,9 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="border-base-100 dark:border-base-700 flex items-center justify-between border-b-2 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="sr-only">Poolbase</span>
-              <Image
-                className="h-8 w-8"
-                width="32"
-                height="32"
-                src="/images/icons/poolbase-icon.svg"
-                alt="Your Company"
-              />
+              <Image className="h-8 w-8" width="32" height="32" src="/static/icons/poolbase-icon.svg" alt="Poolbase" />
             </a>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -83,8 +81,8 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
                   className="h-8 w-auto"
                   width="32"
                   height="32"
-                  src="/images/icons/poolbase-icon.svg"
-                  alt="Your Company"
+                  src="/static/icons/poolbase-icon.svg"
+                  alt="Poolbase"
                 />
               </div>
               <div className="-mr-2">
@@ -101,7 +99,7 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
             </div>
             <div className="mt-6">
               <nav className="grid gap-y-8">
-                <a href="#" className="hover:bg-base-50 -m-3 flex items-center rounded-md p-3">
+                <a href="/" className="hover:bg-base-50 -m-3 flex items-center rounded-md p-3">
                   <span className="text-base-900 ml-3 text-base font-medium">Analytics</span>
                 </a>
               </nav>
@@ -124,18 +122,26 @@ export default function MainNavigation({ user }: { user: null | Profile }) {
               ))}
             </div>
             <div>
-              <Link
-                href="/#join-waitlist"
-                className="bg-accent-600 hover:bg-accent-700 flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm"
-              >
-                Join Waitlist
-              </Link>
-              <p className="text-base-500 mt-6 text-center text-base font-medium">
-                Existing customer?
-                <Link href="/login" className="text-accent-600 hover:text-accent-500">
-                  Sign in
-                </Link>
-              </p>
+              {!user ? (
+                <>
+                  <Link
+                    href="/#join-waitlist"
+                    className="bg-accent-600 hover:bg-accent-700 flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm"
+                  >
+                    Join Waitlist
+                  </Link>
+                  <p className="text-base-500 mt-6 text-center text-base font-medium">
+                    Existing customer?
+                    <Link href="/login" className="text-accent-600 hover:text-accent-500">
+                      Sign in
+                    </Link>
+                  </p>
+                </>
+              ) : (
+                <LinkButton href="/base" intent="primary">
+                  Dashboard
+                </LinkButton>
+              )}
             </div>
           </div>
         </div>

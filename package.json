@@ -18,15 +18,16 @@
     "type-check": "turbo run type-check"
   },
   "devDependencies": {
-    "@plasmohq/prettier-plugin-sort-imports": "^3.6.1",
-    "@types/eslint": "8.21.0",
+    "@plasmohq/prettier-plugin-sort-imports": "^3.6.3",
+    "@types/eslint": "8.21.1",
     "@types/prettier": "^2.7.2",
-    "eslint": "8.34.0",
+    "eslint": "8.35.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.8.4",
     "prettier-plugin-packagejson": "^2.4.3",
-    "prettier-plugin-tailwindcss": "^0.2.2",
+    "prettier-plugin-tailwindcss": "^0.2.4",
     "slugify": "^1.6.5",
-    "turbo": "^1.7.4"
+    "turbo": "^1.8.3",
+    "typescript": "^4.9.5"
   }
 }

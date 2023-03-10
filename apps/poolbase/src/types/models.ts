@@ -3,7 +3,7 @@ import * as zod from 'zod';
 export const ResourceSchema = zod.object({
   id: zod.string(),
   url: zod.string().url().min(1),
-  uid: zod.string(),
+  creator: zod.string(),
   title: zod.string().optional(),
   status: zod.string().nullable(),
   meta_keywords: zod.array(zod.string()).nullable().optional(),
@@ -16,6 +16,9 @@ export const ResourceSchema = zod.object({
   main_image_url: zod.string().nullable().optional(),
   screenshot_full_url: zod.string().optional(),
   screenshot_storage_path: zod.string().optional(),
+  created_at: zod.string().nullable().optional(),
+  provider: zod.string().nullable().optional(),
+  provider_channel: zod.string().nullable().optional(),
   processed: zod.string().array().nullable().optional(),
 });
 
@@ -24,10 +27,11 @@ export type ResourceData = zod.infer<typeof ResourceSchema>;
 export const UserProfileSchema = zod.object({
   id: zod.string(),
   updated_at: zod.string().optional(),
+  created_at: zod.string().optional(),
   username: zod.string().min(1).max(255).nullable().optional(),
-  public_email: zod.string().email().optional(),
   full_name: zod.string().min(1).max(255).nullable().optional(),
-  avatar_url: zod.string().url().optional(),
+  avatar_url: zod.string().url().nullable().optional(),
+  avatar_storage_path: zod.string().nullable().optional(),
   website: zod.string().url().nullable().optional(),
 });
 

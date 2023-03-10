@@ -1,4 +1,4 @@
-import { Lato } from '@next/font/google';
+import { Lato } from 'next/font/google';
 
 import '@/styles/global.css';
 import 'focus-visible';
@@ -6,7 +6,7 @@ import 'focus-visible';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
-const modeScript = `
+const _modeScript = `
   let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
   updateMode()

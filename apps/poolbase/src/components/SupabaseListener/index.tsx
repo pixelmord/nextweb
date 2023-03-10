@@ -2,25 +2,27 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import supabase from '../../lib/supabaseBrowserClient';
 
-// this component handles refreshing server data when the user logs in or out
-// this method avoids the need to pass a session down to child components
-// in order to re-render when the user's session changes
-// #elegant!
-export default function SupabaseListener({ accessToken }: { accessToken?: string }) {
+import { useSupabase } from '../SupabaseProvider';
+
+export default function SupabaseListener({ serverAccessToken }: { serverAccessToken?: string }) {
+  const { supabase } = useSupabase();
   const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.access_token !== accessToken) {
-        // server and client are out of sync
-        // reload the page to fetch fresh server data
-        // https://beta.nextjs.org/docs/data-fetching/mutating
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.access_token !== serverAccessToken) {
+        console.debug('SupabaseListener: Refreshing page', session);
         router.refresh();
       }
     });
-  }, [accessToken]);
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [serverAccessToken, router, supabase]);
 
   return null;
 }

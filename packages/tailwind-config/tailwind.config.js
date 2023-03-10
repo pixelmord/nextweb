@@ -1,18 +1,21 @@
 const colors = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['src/**/*.{ts,tsx}', '../../packages/**/*.{ts,tsx}'],
   theme: {
-    colors: {
-      ...colors,
-      base: colors.zinc,
-      primary: colors.indigo,
-      secondary: colors.orange,
-      accent: colors.pink,
-      success: colors.green,
-      warning: colors.yellow,
-      danger: colors.red,
+    extend: {
+      colors: {
+        base: colors.zinc,
+        primary: colors.indigo,
+        secondary: colors.orange,
+        accent: colors.pink,
+        success: colors.green,
+        warning: colors.yellow,
+        danger: colors.red,
+      },
     },
+
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],
       sm: ['0.875rem', { lineHeight: '1.5rem' }],

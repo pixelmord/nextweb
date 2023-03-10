@@ -1,11 +1,11 @@
 import React from 'react';
 import { FieldError } from 'react-hook-form';
-import { Label, FormFieldText } from 'ui';
+import { FormFieldText, Label } from 'ui';
 
 export type FormElementTextProps = {
   label?: string;
   id: string;
-  type?: 'text' | 'number';
+  type?: 'text' | 'number' | 'email' | 'url' | 'password';
   error?: FieldError | any;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 export const FormElementText = React.forwardRef<HTMLInputElement, FormElementTextProps>(

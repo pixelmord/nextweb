@@ -2,3 +2,17 @@
 
 @tailwind components;
 @tailwind utilities;
+.grainy-bg:after {
+  content: '';
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3C!-- svg: first layer --%3E%0A%3Csvg viewBox='0 0 2500 2500' xmlns='http://www.w3.org/2000/svg'%3E%0A  %3Cfilter id='noiseFilter'%3E%0A    %3CfeTurbulence %0A      type='fractalNoise' %0A      baseFrequency='0.65' %0A      numOctaves='3' %0A      stitchTiles='stitch'/%3E%0A  %3C/filter%3E%0A  %0A  %3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%0A%3C/svg%3E");
+}
+.grainy-bg {
+  position: relative;
+}

@@ -2,17 +2,15 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Database } from 'src/types';
-import { IntegrationSchema } from 'src/types';
-import { Button, H2 } from 'ui';
-import { z } from 'zod';
+import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import supabase from '@/lib/supabaseBrowserClient';
-
-export type Integration = Database['public']['Tables']['integrations']['Row'];
+import { useSaveIntegration } from '@/lib/api/client';
+import { SaveIntegrationData } from '@/lib/api/fetchers';
+import { Integration, IntegrationSchema } from '@/types';
 
 export default function IntegrationForm({ initialData }: { initialData: Integration }) {
+  const { mutate } = useSaveIntegration();
   const {
     register,
     handleSubmit,
@@ -24,11 +22,7 @@ export default function IntegrationForm({ initialData }: { initialData: Integrat
   return (
     <form
       onSubmit={handleSubmit(async (values) => {
-        console.log(values);
-        const { error } = await supabase.from('integrations').upsert(values);
-        if (error) {
-          console.error(error);
-        }
+        mutate({ ...initialData, ...values } as SaveIntegrationData);
       })}
     >
       <FormElementText
@@ -51,7 +45,7 @@ export default function IntegrationForm({ initialData }: { initialData: Integrat
         error={errors.access_token}
       />
       <div className="mt-8">
-        <Button type="submit" intent="primary">
+        <Button type="submit" intent="primary" disabled={!isValid}>
           Save
         </Button>
       </div>

@@ -17,15 +17,18 @@ export interface Database {
     Functions: {
       graphql: {
         Args: {
-          operationName: string
-          query: string
-          variables: Json
-          extensions: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
         }
         Returns: Json
       }
     }
     Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
       [_ in never]: never
     }
   }
@@ -68,6 +71,7 @@ export interface Database {
       }
       profiles: {
         Row: {
+          avatar_storage_path: string | null
           avatar_url: string | null
           created_at: string | null
           full_name: string | null
@@ -77,6 +81,7 @@ export interface Database {
           website: string | null
         }
         Insert: {
+          avatar_storage_path?: string | null
           avatar_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -86,6 +91,7 @@ export interface Database {
           website?: string | null
         }
         Update: {
+          avatar_storage_path?: string | null
           avatar_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -93,6 +99,46 @@ export interface Database {
           updated_at?: string | null
           username?: string | null
           website?: string | null
+        }
+      }
+      resource_tag: {
+        Row: {
+          created_at: string | null
+          id: string
+          resource_id: string | null
+          tag_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          resource_id?: string | null
+          tag_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          resource_id?: string | null
+          tag_id?: string | null
+        }
+      }
+      resource_user: {
+        Row: {
+          created_at: string | null
+          id: string
+          resource_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          resource_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          resource_id?: string | null
+          user_id?: string | null
         }
       }
       resources: {
@@ -169,6 +215,84 @@ export interface Database {
           url?: string
         }
       }
+      scope_tag: {
+        Row: {
+          created_at: string | null
+          id: string
+          scope_id: string | null
+          tag_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          scope_id?: string | null
+          tag_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          scope_id?: string | null
+          tag_id?: string | null
+        }
+      }
+      scopes: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_storage_path: string | null
+          image_url: string | null
+          title: string | null
+          uid: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+      }
+      tags: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_storage_path: string | null
+          image_url: string | null
+          title: string | null
+          uid: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_storage_path?: string | null
+          image_url?: string | null
+          title?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+      }
     }
     Views: {
       [_ in never]: never
@@ -177,6 +301,9 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
       [_ in never]: never
     }
   }
@@ -269,31 +396,40 @@ export interface Database {
     }
     Functions: {
       extension: {
-        Args: { name: string }
+        Args: {
+          name: string
+        }
         Returns: string
       }
       filename: {
-        Args: { name: string }
+        Args: {
+          name: string
+        }
         Returns: string
       }
       foldername: {
-        Args: { name: string }
+        Args: {
+          name: string
+        }
         Returns: string[]
       }
       get_size_by_bucket: {
         Args: Record<PropertyKey, never>
-        Returns: { size: number; bucket_id: string }[]
+        Returns: {
+          size: number
+          bucket_id: string
+        }[]
       }
       search: {
         Args: {
           prefix: string
           bucketname: string
-          limits: number
-          levels: number
-          offsets: number
-          search: string
-          sortcolumn: string
-          sortorder: string
+          limits?: number
+          levels?: number
+          offsets?: number
+          search?: string
+          sortcolumn?: string
+          sortorder?: string
         }
         Returns: {
           name: string
@@ -308,5 +444,9 @@ export interface Database {
     Enums: {
       [_ in never]: never
     }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
 }
+

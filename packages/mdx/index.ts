@@ -1,7 +1,7 @@
 import glob from 'fast-glob';
 import { promises as fs } from 'fs';
 import hasha from 'hasha';
-import { MDXRemoteSerializeResult, SerializeOptions } from 'next-mdx-remote/dist/types';
+import { SerializeOptions } from 'next-mdx-remote/dist/types';
 import { serialize } from 'next-mdx-remote/serialize';
 import NodeCache from 'node-cache';
 import path from 'path';
@@ -62,6 +62,7 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
     const mdx = await serialize(raw, {
       parseFrontmatter: true,
       mdxOptions: {
+        ...mdxOptions,
         remarkPlugins: [remarkGfm],
         rehypePlugins: [
           rehypeSlug,

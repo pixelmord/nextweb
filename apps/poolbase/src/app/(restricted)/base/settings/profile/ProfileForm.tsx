@@ -2,58 +2,51 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Database, UserProfileData, UserProfileSchema } from 'src/types';
-import { Button, H2 } from 'ui/client-only';
+import { Button } from 'ui';
 
 import { FormElementText } from '@/components/Form';
-import { UpdateProfileData, useUpdateProfile, useUserProfile } from '@/lib/api';
+import { useSession } from '@/lib/api/client';
+import { useUpdateUserProfile, useUser } from '@/lib/api/client';
+import { UpdateProfileData } from '@/lib/api/fetchers';
+import { Profile, UserProfileSchema } from '@/types';
 
-import AvatarForm from './AvatarForm';
+export default function ProfileFormWrapper() {
+  const { data: session } = useSession();
+  const { data: userProfile } = useUser(session);
+  if (!userProfile) {
+    return null;
+  }
 
-type Profiles = Database['public']['Tables']['profiles']['Row'];
+  return <ProfileForm user={userProfile} />;
+}
+function ProfileForm({ user }: { user?: Profile }) {
+  const { mutate } = useUpdateUserProfile();
 
-export default function ProfileForm({ user }: { user: Profiles }) {
-  const { data, isLoading, isIdle, isError } = useUserProfile({ initialData: user });
-  const mutation = useUpdateProfile();
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(UserProfileSchema),
-    defaultValues: user as UserProfileData,
+    defaultValues: user,
   });
-  if (isLoading || isIdle) {
-    return <div>Loading</div>;
-  }
-  if (isError) {
-    return <div>Error</div>;
-  }
 
   return (
-    <>
-      <AvatarForm
-        url={data.avatar_url as string}
-        uid={data.id as string}
-        size={150}
-        onUpload={(url) => {
-          mutation.mutate({ ...data, avatar_url: url } as UpdateProfileData);
-        }}
-      />
-      <form
-        onSubmit={handleSubmit((values) => {
-          mutation.mutate({ ...data, ...values } as UpdateProfileData);
-        })}
-      >
-        <FormElementText id="full_name" label="Full Name" {...register('full_name')} error={errors.full_name} />
-        <FormElementText id="username" label="Username" {...register('username')} error={errors.username} />
-        <FormElementText id="website" label="Website" {...register('website')} error={errors.website} />
-        <div className="mt-8">
-          <Button type="submit" intent="primary" disabled={!isValid}>
-            Save
-          </Button>
-        </div>
-      </form>
-    </>
+    <form
+      onSubmit={handleSubmit((values) => {
+        mutate({ ...user, ...values } as UpdateProfileData);
+      })}
+    >
+      <pre>{JSON.stringify(errors, null, 2)}</pre>
+      <pre>{isValid + ''}</pre>
+      <FormElementText id="full_name" label="Full Name" {...register('full_name')} error={errors.full_name} />
+      <FormElementText id="username" label="Username" {...register('username')} error={errors.username} />
+      <FormElementText id="website" label="Website" {...register('website')} error={errors.website} />
+      <div className="mt-8">
+        <Button type="submit" intent="primary" disabled={!isValid} submitting={isSubmitting}>
+          Save
+        </Button>
+      </div>
+    </form>
   );
 }
