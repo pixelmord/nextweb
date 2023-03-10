@@ -1,6 +1,6 @@
 import { dehydrate } from '@tanstack/query-core';
 
-import IntegrationSync from '@/components/IntegrationSync';
+// import IntegrationSync from '@/components/IntegrationSync';
 import { Hydrate } from '@/components/QueryClientProvider';
 import { integrationKeys, userKeys } from '@/lib/api/client/queryKeys';
 import { fetchIntegrationsFactory, fetchUserProfileFactory } from '@/lib/api/fetchers';
