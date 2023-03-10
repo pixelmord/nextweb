@@ -5,8 +5,7 @@ import React, { useState } from 'react';
 import { buttonStyle } from 'ui/client-only';
 
 import { useSupabase } from '@/components/SupabaseProvider';
-import { useSession } from '@/lib/api/client';
-import { useUser } from '@/lib/api/client';
+import { useSession, useUpdateUserProfile, useUser } from '@/lib/api/client';
 import { UpdateProfileData } from '@/lib/api/fetchers';
 import { Profile } from '@/types';
 
@@ -20,6 +19,7 @@ function AvatarForm({ user }: { user: Profile }) {
   const { supabase } = useSupabase();
   const { id: uid, avatar_url: avatarUrl } = user;
   const [uploading, setUploading] = useState(false);
+  const { mutate } = useUpdateUserProfile();
 
   const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
     try {
