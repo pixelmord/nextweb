@@ -1,0 +1,12 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "env": ["PLASMO_PUBLIC_SUPABASE_URL", "PLASMO_PUBLIC_SUPABASE_ANON_KEY", "NODE_ENV"],
+      "outputs": ["build/**"]
+    },
+    "dev": {
+      "env": ["PLASMO_PUBLIC_SUPABASE_URL", "PLASMO_PUBLIC_SUPABASE_ANON_KEY", "NODE_ENV"]
+    }
+  }
+}
