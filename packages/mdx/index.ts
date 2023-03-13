@@ -2,7 +2,7 @@ import glob from 'fast-glob';
 import { promises as fs } from 'fs';
 import hasha from 'hasha';
 import { SerializeOptions } from 'next-mdx-remote/dist/types';
-import { serialize } from 'next-mdx-remote/serialize';
+import { compileMDX } from 'next-mdx-remote/rsc';
 import NodeCache from 'node-cache';
 import path from 'path';
 import readingTime from 'reading-time';
@@ -27,7 +27,7 @@ export const enhanceFrontmatterReadingTime = (
   };
 };
 export function createSource<T extends z.ZodType>(source: Source<T>) {
-  const { contentPath, basePath, sortBy, sortOrder } = source;
+  const { contentPath, basePath, sortBy, sortOrder, mdxOptions } = source;
 
   async function getMdxFiles() {
     const files = await glob(`${contentPath}/**/*.{md,mdx}`);
@@ -50,8 +50,9 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
     });
   }
 
-  async function getFileData(file: MdxFile, mdxOptions?: SerializeOptions): Promise<MdxFileData<z.infer<T>>> {
+  async function getFileData(file: MdxFile, mdxNodeOptions?: SerializeOptions): Promise<MdxFileData<z.infer<T>>> {
     const raw = await fs.readFile(file.filepath, 'utf-8');
+    const ReactDOMServer = (await import('react-dom/server')).default;
     const hash = hasha(raw.toString());
 
     const cachedContent = mdxCache.get<MdxFileData<z.infer<T>>>(hash);
@@ -59,49 +60,52 @@ export function createSource<T extends z.ZodType>(source: Source<T>) {
       return cachedContent;
     }
 
-    const mdx = await serialize(raw, {
-      parseFrontmatter: true,
-      mdxOptions: {
-        ...mdxOptions,
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [
-          rehypeSlug,
-          rehypeCodeTitles,
-          [
-            rehypePrettyCode,
-            {
-              theme: 'one-dark-pro',
-              onVisitLine(node: any) {
-                // Prevent lines from collapsing in `display: grid` mode, and allow empty
-                // lines to be copy/pasted
-                if (node.children.length === 0) {
-                  node.children = [{ type: 'text', value: ' ' }];
-                }
+    const mdx = await compileMDX<z.infer<T>>({
+      source: raw,
+      options: {
+        parseFrontmatter: true,
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            rehypeSlug,
+            rehypeCodeTitles,
+            [
+              rehypePrettyCode,
+              {
+                theme: 'one-dark-pro',
+                onVisitLine(node: any) {
+                  // Prevent lines from collapsing in `display: grid` mode, and allow empty
+                  // lines to be copy/pasted
+                  if (node.children.length === 0) {
+                    node.children = [{ type: 'text', value: ' ' }];
+                  }
+                },
+                onVisitHighlightedLine(node: any) {
+                  node.properties.className.push('line--highlighted');
+                },
+                onVisitHighlightedWord(node: any) {
+                  node.properties.className = ['word--highlighted'];
+                },
               },
-              onVisitHighlightedLine(node: any) {
-                node.properties.className.push('line--highlighted');
-              },
-              onVisitHighlightedWord(node: any) {
-                node.properties.className = ['word--highlighted'];
-              },
-            },
+            ],
+            rehypeAutolinkHeadings,
           ],
-          rehypeAutolinkHeadings,
-        ],
+          ...mdxOptions,
+          ...mdxNodeOptions,
+        },
       },
-      // ...mdxOptions,
     });
     let frontMatter = mdx.frontmatter ? (source.frontMatter.parse(mdx.frontmatter) as z.infer<T>) : null;
     frontMatter = {
       ...frontMatter,
-      ...enhanceFrontmatterReadingTime(mdx.compiledSource),
+      ...enhanceFrontmatterReadingTime(ReactDOMServer.renderToString(mdx.content)),
     };
 
     const fileData = {
       raw,
       frontMatter,
       hash,
-      mdx,
+      content: mdx.content,
     };
 
     mdxCache.set(hash, fileData);

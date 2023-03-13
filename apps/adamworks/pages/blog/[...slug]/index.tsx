@@ -1,14 +1,8 @@
-import { MdxContent } from 'mdx/MdxContent';
+import { InferGetStaticPropsType } from 'next';
 import { H1 } from 'ui';
 import { formatDate } from 'utils';
 
 import { Blog } from '@/lib/mdx-sources';
-
-// TODO: Properly type this file once the following fix lands.
-// @see https://github.com/vercel/next.js/pull/42019
-interface PostPageProps {
-  post: any;
-}
 
 // export async function generateStaticParams() {
 //   const files = await Blog.getMdxFiles();
@@ -18,7 +12,7 @@ interface PostPageProps {
 //   }));
 // }
 
-export default function PostPage({ post }: PostPageProps) {
+export default function PostPage({ post }: InferGetStaticPropsType<typeof getStaticProps>) {
   //
   if (!post) return null;
 
@@ -31,9 +25,7 @@ export default function PostPage({ post }: PostPageProps) {
         )}
       </div>
       <hr className="my-6" />
-      <div className="prose max-w-none">
-        <MdxContent source={post.mdx} />
-      </div>
+      <div className="prose max-w-none">{post.content}</div>
     </article>
   );
 }

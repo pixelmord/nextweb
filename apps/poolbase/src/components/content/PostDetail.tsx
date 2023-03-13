@@ -1,6 +1,3 @@
-'use client';
-
-import { MdxContent } from 'mdx/MdxContent';
 import { formatDate } from 'utils';
 
 export default function PostDetail({ post }) {
@@ -11,9 +8,7 @@ export default function PostDetail({ post }) {
         {post.frontMatter.dateCreated && <p className="text-sm ">{formatDate(post.frontMatter.dateCreated)}</p>}
       </div>
       <hr className="my-6" />
-      <div className="">
-        <MdxContent source={post.mdx} />
-      </div>
+      <div className="">{post.content}</div>
     </article>
   );
 }

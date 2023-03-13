@@ -3,7 +3,7 @@ import { Blog } from 'src/lib/mdx-sources';
 
 import PostDetail from '@/components/content/PostDetail';
 
-export const dynamic = 'force-static';
+// export const dynamic = 'force-static';
 // TODO: Properly type this file once the following fix lands.
 // @see https://github.com/vercel/next.js/pull/42019
 interface PostPageProps {

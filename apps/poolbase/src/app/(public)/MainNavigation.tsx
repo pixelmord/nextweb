@@ -1,21 +1,25 @@
 'use client';
 
+import { Session } from '@supabase/supabase-js';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { LinkButton } from 'ui';
 
-import { useSession } from '@/lib/api/client';
-import { useUser } from '@/lib/api/client';
+import { createClient } from '@/lib/supabaseBrowserClient';
 
 const menuLinks = [{ href: '/#features', text: 'Features' }];
 
 export default function MainNavigation() {
-  const { data: session } = useSession();
-  const { data: user } = useUser(session);
-
+  const supabase = createClient();
+  const [session, setSession] = useState<Session | null>(null);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) setSession(data.session);
+    });
+  }, [supabase.auth]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   return (
@@ -55,7 +59,7 @@ export default function MainNavigation() {
             ))}
           </nav>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            {!user ? (
+            {!session?.user ? (
               <LinkButton href="/#join-waitlist" intent="primary">
                 Join Waitlist
               </LinkButton>
@@ -122,7 +126,7 @@ export default function MainNavigation() {
               ))}
             </div>
             <div>
-              {!user ? (
+              {!session?.user ? (
                 <>
                   <Link
                     href="/#join-waitlist"

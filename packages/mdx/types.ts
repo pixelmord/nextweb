@@ -1,4 +1,4 @@
-import { MDXRemoteSerializeResult } from 'next-mdx-remote/dist/types';
+import { SerializeOptions } from 'next-mdx-remote/dist/types';
 import { z } from 'zod';
 
 export interface Source<T> {
@@ -7,6 +7,7 @@ export interface Source<T> {
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   frontMatter: T;
+  mdxOptions?: SerializeOptions;
 }
 
 export interface MdxFile {
@@ -19,7 +20,7 @@ export interface MdxFileData<TFrontmatter = MarkdownFrontmatter> {
   raw: string;
   hash: string;
   frontMatter: TFrontmatter;
-  mdx: MDXRemoteSerializeResult;
+  content: React.ReactElement;
 }
 export type MarkdownObject = {
   [name: string]: string | string[] | number | number[] | boolean | MarkdownObject;
