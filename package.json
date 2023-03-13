@@ -14,8 +14,21 @@
     "dev:poolbase": "turbo run dev --no-cache --scope='poolbase' --continue",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
     "lint": "turbo run lint",
+    "prepare": "husky install",
     "test": "turbo run test",
     "type-check": "turbo run type-check"
+  },
+  "lint-staged": {
+    "apps/**/*.{js,ts,tsx,json,md,mdx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "packages/**/*.{js,ts,tsx,json,md,mdx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@plasmohq/prettier-plugin-sort-imports": "^3.6.3",
@@ -23,6 +36,8 @@
     "@types/prettier": "^2.7.2",
     "eslint": "8.36.0",
     "eslint-config-custom": "workspace:*",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
     "prettier-plugin-packagejson": "^2.4.3",
     "prettier-plugin-tailwindcss": "^0.2.4",
