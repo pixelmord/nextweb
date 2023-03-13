@@ -3,6 +3,8 @@ import { Lato } from 'next/font/google';
 import '@/styles/global.css';
 import 'focus-visible';
 
+import { Metadata } from 'next';
+
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
@@ -59,3 +61,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+export const metadata: Metadata = {
+  title: {
+    default: 'Andreas Adam - @pixelmord',
+    template: '%s | Andreas Adam - @pixelmord',
+  },
+  description: 'Private Homepage von Andreas Adam mit Rezepten, Fotos und kreativen Experimenten',
+  icons: [
+    { rel: 'shortcut icon', url: '/favicon.ico' },
+    { rel: 'icon', url: '/static/icons/favicon-32x32.png', sizes: '32x32' },
+    { rel: 'icon', url: '/static/icons/favicon-16x16.png', sizes: '16x16' },
+    { rel: 'apple-touch-icon', url: '/static/icons/apple-touch-icon.png', sizes: '180x180' },
+  ],
+  manifest: '/manifest.json',
+};
