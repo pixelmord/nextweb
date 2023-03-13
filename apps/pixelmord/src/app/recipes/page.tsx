@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Recipes } from 'src/lib/mdx-sources';
 
 import PostListPage from '@/components/content/PostListPage';
@@ -13,3 +14,7 @@ export default async function BlogPage() {
     />
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Kochrezepte',
+};

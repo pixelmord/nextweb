@@ -25,3 +25,8 @@ export default async function PostPage({ params }: PostPageProps) {
   }
   return <PostDetail post={post} />;
 }
+
+export async function generateMetadata({ params }) {
+  const post = await Recipes.getMdxNode(params?.slug?.join('/'));
+  return { title: `Kochrezept: ${post.frontMatter.title}` };
+}
